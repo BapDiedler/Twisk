@@ -1,5 +1,7 @@
 package monde;
 
+import java.util.Iterator;
+
 /**
  * @author Diedler Litchner
  * classe qui va représenter les activités de notre monde
@@ -14,6 +16,13 @@ public class Activite extends Etape {
      * variance de la durée de temps de l'activité
      */
     private int ecartTemps;
+
+    /**
+     * constructeur de la classe Activité
+     */
+    public Activite(String nom){
+        super(nom);
+    }
 
     /**
      * constructeur de la classe Activite
@@ -35,11 +44,15 @@ public class Activite extends Etape {
         this("activité", 0, 0);
     }
 
-    public void setTemps(int temps) {
-        this.temps = temps;
+    /**
+     * getter qui nous permet de savoir si une etape est une activité
+     *
+     * @return vrai si l'étape est une activité sinon faux
+     */
+    @Override
+    public boolean estUneActivite() {
+        return true;
     }
 
-    public void setEcartTemps(int ecartTemps) {
-        this.ecartTemps = ecartTemps;
-    }
+
 }
