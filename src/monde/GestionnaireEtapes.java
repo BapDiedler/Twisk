@@ -10,6 +10,11 @@ import java.util.List;
  * classe permettant de gérer les collections d'étapes
  */
 public class GestionnaireEtapes implements Iterable<Etape>{
+
+    /**
+     * etapes correspond à la liste d'étapes qui représente les successeurs
+     *                          d'une étape ou les éléments du monde.
+     */
     private ArrayList<Etape> etapes;
 
     /**
