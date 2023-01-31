@@ -1,10 +1,14 @@
 package twisk.monde;
 
+import twisk.outils.FabriqueNumero;
+
 public class Guichet extends Etape{
     /**
      * nombre de jetons que possède le guichet
      */
     private int nbJetons;
+
+    private int cptSemaphore;
 
     /**
      * constructeur de la classe Guichet
@@ -34,5 +38,21 @@ public class Guichet extends Etape{
     @Override
     public boolean estUnGuichet() {
         return true;
+    }
+
+    /**
+     * setter sur le nombre de jetons que possède le guichet
+     * @param nbJetons qui est le nombre de jetons actuel
+     */
+    public void setNbJetons(int nbJetons){
+        this.nbJetons = nbJetons;
+    }
+
+    /**
+     * méthode qui permet de connaître le numéro du guichet
+     * @return int qui est le numéro du guichet
+     */
+    public int getNumeroSemaphore(){
+        return cptSemaphore;
     }
 }

@@ -9,18 +9,17 @@ public class FabriqueNumero {
     /**
      * Compteur d'étapes
      */
-    private int cptEtapes;
+    private static int cptEtapes = 0;
 
     /**
      * Instance de FabriqueNumero
      */
-    private static FabriqueNumero instance = new FabriqueNumero();
+    private static final FabriqueNumero instance = new FabriqueNumero();
 
     /**
-     *
+     * constructeur de la fabrique de nombres
      */
     private FabriqueNumero(){
-        this.cptEtapes = 0;
     }
 
     /**
@@ -28,6 +27,7 @@ public class FabriqueNumero {
      * @return l'instance
      */
     public static FabriqueNumero getInstance(){
+        cptEtapes++;
         return instance;
     }
 
@@ -39,8 +39,11 @@ public class FabriqueNumero {
         return cptEtapes;
     }
 
+    /**
+     * méthode qui remet à 0 le compteur de nombre
+     */
     public void reset(){
-        this.cptEtapes = 0;
+        cptEtapes = 0;
     }
     
 }
