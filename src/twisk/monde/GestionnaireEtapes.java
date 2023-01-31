@@ -40,6 +40,16 @@ public class GestionnaireEtapes implements Iterable<Etape>{
         return etapes.size();
     }
 
+    public int nbGuichet(){
+        int cpt = 0;
+        for(Etape e: etapes){
+            if(e.estUnGuichet()){
+                cpt++;
+            }
+        }
+        return cpt;
+    }
+
     /**
      * methode qui nous permet d'itérer sur étapes
      * @return un iterator d'Etape

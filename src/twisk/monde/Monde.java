@@ -16,18 +16,23 @@ public class Monde implements Iterable<Etape>{
         this.sortie = new SasSortie();
     }
 
-    public void aCommeEntree(Etape... etapes){}
+    public void aCommeEntree(Etape... etapes){entree.ajouterSuccesseur(etapes);}
 
-    public void aCommeSortie(Etape... etapes){}
+    public void aCommeSortie(Etape... etapes){
+        for(Etape e: etapes){
+            e.ajouterSuccesseur(sortie);
+        }
+    }
 
-    public void ajouter(Etape... etapes){}
+    public void ajouter(Etape... etapes){lesEtapes.ajouter(etapes);}
 
-    int nbEtapes(){return 0;}
+    int nbEtapes(){return lesEtapes.nbEtapes();}
 
-    int nbGuichet(){return 0;}
+    int nbGuichet(){
+        return lesEtapes.nbGuichet();}
 
     @Override
     public Iterator<Etape> iterator() {
-        return null;
+        return lesEtapes.iterator();
     }
 }
