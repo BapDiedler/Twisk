@@ -1,4 +1,4 @@
-package monde;
+package twisk.monde;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -13,7 +13,7 @@ public class GestionnaireEtapes implements Iterable<Etape>{
 
     /**
      * etapes correspond à la liste d'étapes qui représente les successeurs
-     *                          d'une étape ou les éléments du monde.
+     *                          d'une étape ou les éléments du twist. Monde.
      */
     private ArrayList<Etape> etapes;
 

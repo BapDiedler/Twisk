@@ -1,10 +1,8 @@
-package monde;
-
-import java.util.Iterator;
+package twisk.monde;
 
 /**
  * @author Diedler Litchner
- * classe qui va représenter les activités de notre monde
+ * classe qui va représenter les activités de notre twisk.monde
  */
 public class Activite extends Etape {
 

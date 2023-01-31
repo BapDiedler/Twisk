@@ -1,13 +1,11 @@
-package monde.tests;
+package twisk.monde.tests;
 
-import monde.Activite;
-import monde.Etape;
-import monde.GestionnaireEtapes;
+import twisk.monde.Activite;
+import twisk.monde.Etape;
+import twisk.monde.GestionnaireEtapes;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import java.util.Iterator;
 
 class GestionnaireEtapesTest {
 
@@ -47,4 +45,6 @@ class GestionnaireEtapesTest {
         }
         Assertions.assertEquals(cpt, 3);
     }
+
+
 }

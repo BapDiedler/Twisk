@@ -1,10 +1,10 @@
-package monde;
+package twisk.monde;
 
 import java.util.Iterator;
 
 /**
  * @author Diedler et Litchner
- * classe représentant une étape du monde
+ * classe représentant une étape du twisk.monde
  */
 public abstract class Etape implements Iterable<Etape>{
 
@@ -44,7 +44,19 @@ public abstract class Etape implements Iterable<Etape>{
         return false;
     }
 
+    /**
+     * methode qui permet d'avoir un iterator sur les successeurs
+     * @return un iterator de successeur
+     */
     public Iterator<Etape> iterator(){
         return etapes.iterator();
+    }
+
+    /**
+     * methode qui donne le nombre de successeurs que possède l'étape
+     * @return un int
+     */
+    public int nbSuccesseurs(){
+        return etapes.nbEtapes();
     }
 }
