@@ -8,14 +8,16 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class EtapeTest {
-    private Etape activite;
-    private Etape guichet;
-    private Etape[] successeurs;
+    protected Etape activite;
+    protected Etape guichet;
+    protected Etape activiteRestreinte;
+    protected Etape[] successeurs;
 
     @BeforeEach
     public void setUp(){
         guichet = new Guichet("guichet",0);
         activite = new Activite("main");
+        activiteRestreinte = new ActiviteRestreinte("restreinte");
         successeurs = new Etape[]{new Activite("1"), new Activite("2"), new Activite("3")};
     }
 

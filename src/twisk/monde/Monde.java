@@ -40,7 +40,7 @@ public class Monde implements Iterable<Etape>{
     public void aCommeEntree(Etape... etapes){entree.ajouterSuccesseur(etapes);}
 
     /**
-     * Définit les sorties du monde qui seront définit comme ayant comme successeur la sortie
+     * Définit les sorties du monde qui seront défini comme ayant comme successeur la sortie
      * @param etapes
      */
     public void aCommeSortie(Etape... etapes){
@@ -57,13 +57,13 @@ public class Monde implements Iterable<Etape>{
 
     /**
      * Donne le nombre d'étapes dans le monde
-     * @return le nombre d'étape dans le monde
+     * @return le nombre d'étapes dans le monde
      */
-    int nbEtapes(){return lesEtapes.nbEtapes();}
+    int nbEtapes(){return lesEtapes.nbEtapes()-2;}
 
     /**
-     * Donne le nombre de guichet dans le monde
-     * @return le nombre de guichet dans le monde
+     * Donne le nombre de guichets dans le monde
+     * @return le nombre de guichets dans le monde
      */
     int nbGuichet(){
         int cpt = 0;
@@ -75,8 +75,8 @@ public class Monde implements Iterable<Etape>{
         return cpt;}
 
     /**
-     * Redéfinition de l'iterator d'Etape
-     * @return l'itérator du gestionnaire d'étape
+     * Redéfinition de iterator d'Etape
+     * @return l'iterator du gestionnaire d'étape
      */
     @Override
     public Iterator<Etape> iterator() {

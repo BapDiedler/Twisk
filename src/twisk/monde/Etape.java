@@ -27,7 +27,11 @@ public abstract class Etape implements Iterable<Etape> {
      * @param etapes étapes à ajouter
      */
     public void ajouterSuccesseur(Etape... etapes) {
-        this.etapes.ajouter(etapes);
+        if(estUnGuichet() && nbSuccesseurs()==0) {
+            this.etapes.ajouter(etapes[0]);
+        }else if(estUneActivite()){
+            this.etapes.ajouter(etapes);
+        }
     }
 
     /**
