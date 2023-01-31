@@ -12,7 +12,7 @@ import java.util.List;
 public class GestionnaireEtapes implements Iterable<Etape>{
 
     /**
-     * etapes correspond à la liste d'étapes qui représente les successeurs
+     * Étapes correspond à la liste d'étapes qui représente les successeurs
      *                          d'une étape ou les éléments du twist. Monde.
      */
     private ArrayList<Etape> etapes;
@@ -34,7 +34,7 @@ public class GestionnaireEtapes implements Iterable<Etape>{
 
     /**
      * methode qui nous don ne le nombre d'étapes
-     * @return la taille de l'attribut etapes
+     * @return la taille de l'attribut étapes
      */
     public int nbEtapes(){
         return etapes.size();
@@ -42,10 +42,23 @@ public class GestionnaireEtapes implements Iterable<Etape>{
 
     /**
      * methode qui nous permet d'itérer sur étapes
-     * @return un iterator d'Etape
+     * @return un iterator d'étape
      */
     @Override
     public Iterator<Etape> iterator() {
         return etapes.iterator();
+    }
+
+    /**
+     * methode qui affiche toutes les étapes d'un gestionnaire d'étapes
+     * @return le string d'un
+     */
+    public String toString(){
+        StringBuilder builder = new StringBuilder("les étapes sont : {");
+        for(Etape etape: etapes){
+            builder.append(etape);
+        }
+        builder.append("}");
+        return builder.toString();
     }
 }

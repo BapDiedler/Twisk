@@ -59,4 +59,6 @@ public abstract class Etape implements Iterable<Etape>{
     public int nbSuccesseurs(){
         return etapes.nbEtapes();
     }
+
+    public String toString
 }
