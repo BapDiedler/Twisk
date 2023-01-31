@@ -6,72 +6,80 @@ import java.util.Iterator;
  * @author Diedler et Litchner
  * classe représentant une étape du twisk.monde
  */
-public abstract class Etape implements Iterable<Etape>{
+public abstract class Etape implements Iterable<Etape> {
 
     protected String nom;
     protected GestionnaireEtapes etapes;
 
     /**
      * constructeur de la classe Etape
+     *
      * @param nom le nom de l'Etape
      */
-    public Etape(String nom){
+    public Etape(String nom) {
         this.nom = nom;
         this.etapes = new GestionnaireEtapes();
     }
 
     /**
      * methode qui permet d'ajouter des successeurs à notre Etape
+     *
      * @param etapes étapes à ajouter
      */
-    public void ajouterSuccesseur(Etape... etapes){
+    public void ajouterSuccesseur(Etape... etapes) {
         this.etapes.ajouter(etapes);
     }
 
     /**
      * getter qui nous permet de savoir si une etape est une activité
+     *
      * @return vrai si l'étape est une activité sinon faux
      */
-    public boolean estUneActivite(){
+    public boolean estUneActivite() {
         return false;
     }
 
     /**
      * getter qui nous permet de savoir si une etape est un guichet
+     *
      * @return vrai si l'étape est un guichet sinon faux
      */
-    public boolean estUnGuichet(){
+    public boolean estUnGuichet() {
         return false;
     }
 
     /**
      * methode qui permet d'avoir un iterator sur les successeurs
+     *
      * @return un iterator de successeur
      */
-    public Iterator<Etape> iterator(){
+    public Iterator<Etape> iterator() {
         return etapes.iterator();
     }
 
     /**
      * methode qui donne le nombre de successeurs que possède l'étape
+     *
      * @return un int
      */
-    public int nbSuccesseurs(){
+    public int nbSuccesseurs() {
         return etapes.nbEtapes();
     }
 
     /**
      * methode qui affiche une étape et ses successeurs
+     *
      * @return le string d'une étape
      */
-    public String toString(){
+    public String toString() {
         StringBuilder builder = new StringBuilder();
-        builder.append(this.nom);
-        if(this.etapes.nbEtapes() > 0){
-            builder.append(" --> ");
-        }
-        for(Etape etape: etapes){
-            builder.append(etape.nom);
+        builder.append(this.nom)
+                .append(" : ")
+                .append(nbSuccesseurs())
+                .append(" successeur(s)");
+        for (Etape etape : etapes) {
+            builder.append("-")
+                    .append(etape.nom);
         }
         return builder.toString();
     }

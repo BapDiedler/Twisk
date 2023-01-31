@@ -54,11 +54,10 @@ public class GestionnaireEtapes implements Iterable<Etape>{
      * @return le string d'un
      */
     public String toString(){
-        StringBuilder builder = new StringBuilder("les étapes sont : { ");
+        StringBuilder builder = new StringBuilder();
         for(Etape etape: etapes){
-            builder.append(etape).append(" ");
+            builder.append(etape).append("\n");
         }
-        builder.append("}");
         return builder.toString();
     }
 }
