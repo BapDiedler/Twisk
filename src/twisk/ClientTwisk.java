@@ -1,7 +1,10 @@
 package twisk;
 
+import twisk.monde.Monde;
+
 public class ClientTwisk {
     public static void main(String[] args) {
-        System.out.println("test");
+        Monde monde = new Monde();
+        System.out.println(monde);
     }
 }

@@ -30,6 +30,7 @@ public class Monde implements Iterable<Etape>{
         this.lesEtapes = new GestionnaireEtapes();
         this.entree = new SasEntree();
         this.sortie = new SasSortie();
+        lesEtapes.ajouter(entree,sortie);
     }
 
     /**
@@ -80,5 +81,13 @@ public class Monde implements Iterable<Etape>{
     @Override
     public Iterator<Etape> iterator() {
         return lesEtapes.iterator();
+    }
+
+    /**
+     * methode qui affiche le monde
+     * @return le monde
+     */
+    public String toString(){
+        return lesEtapes.toString();
     }
 }

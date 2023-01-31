@@ -60,8 +60,19 @@ public abstract class Etape implements Iterable<Etape>{
         return etapes.nbEtapes();
     }
 
+    /**
+     * methode qui affiche une étape et ses successeurs
+     * @return le string d'une étape
+     */
     public String toString(){
         StringBuilder builder = new StringBuilder();
+        builder.append(this.nom);
+        if(this.etapes.nbEtapes() > 0){
+            builder.append(" --> ");
+        }
+        for(Etape etape: etapes){
+            builder.append(etape.nom);
+        }
         return builder.toString();
     }
 }
