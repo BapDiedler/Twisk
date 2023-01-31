@@ -60,5 +60,8 @@ public abstract class Etape implements Iterable<Etape>{
         return etapes.nbEtapes();
     }
 
-    public String toString
+    public String toString(){
+        StringBuilder builder = new StringBuilder();
+        return builder.toString();
+    }
 }
