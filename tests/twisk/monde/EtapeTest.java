@@ -1,8 +1,5 @@
 package twisk.monde;
 
-import twisk.monde.Activite;
-import twisk.monde.Etape;
-import twisk.monde.Guichet;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
@@ -17,7 +14,6 @@ class EtapeTest {
     public void setUp(){
         guichet = new Guichet("guichet",0);
         activite = new Activite("main");
-
         activiteRestreinte = new ActiviteRestreinte("restreinte");
         successeurs = new Etape[]{new Activite("1"), new Activite("2"), new Activite("3")};
     }
@@ -41,5 +37,13 @@ class EtapeTest {
     void estUnGuichet() {
         assertTrue(guichet.estUnGuichet());
         assertFalse(activite.estUnGuichet());
+    }
+
+    /**
+     * test du conteur d'étape
+     */
+    @Test
+    void conteur(){
+        assertEquals(2,activiteRestreinte.getNumero());
     }
 }

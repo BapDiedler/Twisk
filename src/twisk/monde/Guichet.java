@@ -8,7 +8,7 @@ public class Guichet extends Etape{
      */
     private int nbJetons;
 
-    private int cptSemaphore;
+    private final int cptSemaphore;
 
     /**
      * constructeur de la classe Guichet
@@ -19,6 +19,7 @@ public class Guichet extends Etape{
     public Guichet(String nom, int nbJetons){
         super(nom);
         this.nbJetons = nbJetons;
+        this.cptSemaphore = FabriqueNumero.getInstance().getNumeroEtape();
     }
 
     /**

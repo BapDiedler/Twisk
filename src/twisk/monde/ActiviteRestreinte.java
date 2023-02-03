@@ -1,5 +1,6 @@
 package twisk.monde;
 
+
 public class ActiviteRestreinte extends Activite{
     /**
      * Constructeur de la classe ActivitéRestreinte

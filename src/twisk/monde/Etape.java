@@ -31,10 +31,12 @@ public abstract class Etape implements Iterable<Etape> {
      * @param etapes étapes à ajouter
      */
     public void ajouterSuccesseur(Etape... etapes) {
-        if(estUnGuichet() && nbSuccesseurs()==0) {
-            this.etapes.ajouter(etapes[0]);
-        }else if(estUneActivite()){
-            this.etapes.ajouter(etapes);
+        if(etapes != null) {
+            if (estUnGuichet() && nbSuccesseurs() == 0 && etapes[0].estUneActivite()) {
+                this.etapes.ajouter(etapes[0]);
+            } else if (estUneActivite()) {
+                this.etapes.ajouter(etapes);
+            }
         }
     }
 
@@ -72,6 +74,14 @@ public abstract class Etape implements Iterable<Etape> {
      */
     public int nbSuccesseurs() {
         return etapes.nbEtapes();
+    }
+
+    /**
+     * getter du numéro de l'étape
+     * @return le numéro de l'étape
+     */
+    public int getNumero(){
+        return numero;
     }
 
     public int getNumeroSemaphore(){
