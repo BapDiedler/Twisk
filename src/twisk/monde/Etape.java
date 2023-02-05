@@ -21,7 +21,7 @@ public abstract class Etape implements Iterable<Etape> {
      */
     public Etape(String nom) {
         this.nom = nom;
-        this.numero = FabriqueNumero.getInstance().getNumeroEtape();
+        this.numero = FabriqueNumero.getInstance().getNumeroEtape()-1;
         this.etapes = new GestionnaireEtapes();
     }
 
@@ -84,6 +84,10 @@ public abstract class Etape implements Iterable<Etape> {
         return numero;
     }
 
+    /**
+     * méthode qui retourne le numéro de semaphore
+     * @return 0 si c'est une activité sinon le numéro du sémaphore
+     */
     public int getNumeroSemaphore(){
         return 0;
     }

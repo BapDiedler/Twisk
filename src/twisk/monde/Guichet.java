@@ -53,7 +53,7 @@ public class Guichet extends Etape{
      * méthode qui permet de connaître le numéro du guichet
      * @return int qui est le numéro du guichet
      */
-    public int getNumeroSemaphore(){
+    public int getNumeroSemaphore() {
         return cptSemaphore;
     }
 }

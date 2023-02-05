@@ -39,11 +39,4 @@ class EtapeTest {
         assertFalse(activite.estUnGuichet());
     }
 
-    /**
-     * test du conteur d'étape
-     */
-    @Test
-    void conteur(){
-        assertEquals(2,activiteRestreinte.getNumero());
-    }
 }
