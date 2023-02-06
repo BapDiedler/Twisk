@@ -5,8 +5,10 @@ import twisk.outils.FabriqueNumero;
 import java.util.Iterator;
 
 /**
- * @author Diedler et Litchner
  * classe représentant une étape du twisk.monde
+ * cette classe permet de représenter et factoriser le comportement d'une étape du monde
+ *
+ * @author Diedler et Litchner
  */
 public abstract class Etape implements Iterable<Etape> {
 
@@ -21,7 +23,7 @@ public abstract class Etape implements Iterable<Etape> {
      */
     public Etape(String nom) {
         this.nom = nom;
-        this.numero = FabriqueNumero.getInstance().getNumeroEtape()-1;
+        this.numero = FabriqueNumero.getNumeroEtape()-1;
         this.etapes = new GestionnaireEtapes();
     }
 

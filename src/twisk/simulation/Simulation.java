@@ -2,6 +2,12 @@ package twisk.simulation;
 
 import twisk.monde.Monde;
 
+/**
+ * @author Diedler et Litchner
+ *
+ * cette classe permet de simuler le monde cré par le client dans un premier temps l'affichage se
+ *                      fait sur la sortie standard.
+ */
 public class Simulation {
 
     /**

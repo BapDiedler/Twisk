@@ -4,8 +4,7 @@ package twisk.outils;
  * Classe représentant une fabrique de numéros.
  * Cette classe implémente un modèle Singleton pour garantir qu'il n'y ait qu'une seule instance de cette classe à tout moment.
  *
- * @author Diedler
- * @author Litchner
+ * @author Diedler et Litchner
  */
 public class FabriqueNumero {
 

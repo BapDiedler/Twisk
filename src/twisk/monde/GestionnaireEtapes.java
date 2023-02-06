@@ -5,9 +5,9 @@ import java.util.Iterator;
 import java.util.List;
 
 /**
- * @author Diedler et Litchner
- *
  * classe permettant de gérer les collections d'étapes
+ *
+ * @author Diedler et Litchner
  */
 public class GestionnaireEtapes implements Iterable<Etape>{
 

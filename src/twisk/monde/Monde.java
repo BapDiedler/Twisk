@@ -5,7 +5,7 @@ import java.util.Iterator;
 /**
  * @author Diedler et Lichtner
  *
- * Classe qui représente le monde
+ * Classe qui se trouve dans le package twisk.monde et qui représente le monde
  */
 public class Monde implements Iterable<Etape>{
     /**

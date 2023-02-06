@@ -23,25 +23,25 @@ public class Activite extends Etape {
      * Initialise une activité vide avec un nom "activité", une durée de 0 minutes et une variance de 0 minutes.
      */
     public Activite() {
-        this("activité", 0, 0);
+        this("Activité", 0, 0);
     }
 
     /**
      * Constructeur de la classe Activité avec un nom spécifié.
      * Initialise une activité avec le nom spécifié et une durée de 0 minutes et une variance de 0 minutes.
      *
-     * @param nom nom de l'activité
+     * @param nom le nom de l'activité
      */
     public Activite(String nom) {
-        super(nom);
+        this(nom, 0, 0);
     }
 
     /**
      * Constructeur de la classe Activité avec toutes les informations spécifiées.
      *
-     * @param nom        nom de l'activité
-     * @param temps      durée de l'activité en minutes
-     * @param ecartTemps variance de la durée de l'activité en minutes
+     * @param nom        le nom de l'activité
+     * @param temps      la durée de l'activité en minutes
+     * @param ecartTemps la variance de la durée de l'activité en minutes
      */
     public Activite(String nom, int temps, int ecartTemps) {
         super(nom);
@@ -50,10 +50,10 @@ public class Activite extends Etape {
     }
 
     /**
-     * Retourne vrai si l'étape est une activité, sinon faux.
+     * Retourne si l'étape est une activité.
      * Cette méthode redéfinit la méthode de la classe mère Etape.
      *
-     * @return vrai si l'étape est une activité, sinon faux
+     * @return toujours vrai, car cette classe représente une activité
      */
     @Override
     public boolean estUneActivite() {

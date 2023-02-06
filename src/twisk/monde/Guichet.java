@@ -2,6 +2,13 @@ package twisk.monde;
 
 import twisk.outils.FabriqueNumero;
 
+/**
+ * cette classe se trouve dans le package twisk.monde.
+ * permet de représenter un guichet (file d'attente).
+ *
+ * @author Diedler et Litchner
+ */
+
 public class Guichet extends Etape{
     /**
      * nombre de jetons que possède le guichet
@@ -19,7 +26,7 @@ public class Guichet extends Etape{
     public Guichet(String nom, int nbJetons){
         super(nom);
         this.nbJetons = nbJetons;
-        this.cptSemaphore = FabriqueNumero.getInstance().getNumeroEtape();
+        this.cptSemaphore = FabriqueNumero.getNumeroEtape();
     }
 
     /**
