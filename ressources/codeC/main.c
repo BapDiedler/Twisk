@@ -7,7 +7,7 @@ int main(int argc, char** argv) {
     pid = start_simulation(3, 0, 10, NULL);
     int* tab = ou_sont_les_clients(3, 10) ;
     printf("les clients :  ");
-    for(int i=0; i<6; i++){
+    for(int i=1; i<11; i++){
         printf("%d,",tab[i]);
     }
     printf("\n");
