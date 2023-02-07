@@ -26,7 +26,7 @@ public class Guichet extends Etape{
     public Guichet(String nom, int nbJetons){
         super(nom);
         this.nbJetons = nbJetons;
-        this.cptSemaphore = FabriqueNumero.getNumeroEtape();
+        this.cptSemaphore = FabriqueNumero.getCptSemaphore();
     }
 
     /**

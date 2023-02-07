@@ -19,10 +19,16 @@ public class FabriqueNumero {
     private static final FabriqueNumero instance = new FabriqueNumero();
 
     /**
+     * Compteur de sémaphore
+     */
+    private static int cptSemaphore;
+
+    /**
      * Constructeur privé pour empêcher la création d'une autre instance de la classe en dehors de celle déjà déclarée.
      */
     private FabriqueNumero() {
         cptEtapes = 0;
+        cptSemaphore = 1;
     }
 
     /**
@@ -41,6 +47,10 @@ public class FabriqueNumero {
      */
     public static int getNumeroEtape() {
         return cptEtapes++;
+    }
+
+    public static int getCptSemaphore(){
+        return cptSemaphore++;
     }
 
     /**
