@@ -5,10 +5,20 @@
 int main(int argc, char** argv) {
     int* pid;
     pid = start_simulation(3, 0, 10, NULL);
-    int* tab = ou_sont_les_clients(3, 10) ;
     printf("les clients :  ");
-    for(int i=1; i<11; i++){
-        printf("%d,",tab[i]);
+    for(int i=0; i<10; i++){
+        printf("%d,",pid[i]);
+    }
+    printf("\n");
+    int* tab = ou_sont_les_clients(3, 10) ;
+    for(int i=0; i<33; i+=11){
+        printf("étape : %d client(s)     ",tab[i]);
+        if(tab[i]>0){
+            for(int j=0; j<tab[i]; j++){
+                printf("%d,",tab[i+j+1]);
+            }
+        }
+        printf("\n");
     }
     printf("\n");
     nettoyage();
