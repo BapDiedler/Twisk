@@ -4,7 +4,13 @@
 
 int main(int argc, char** argv) {
     int* pid;
-    pid = start_simulation(1, 0, 10, NULL);
+    pid = start_simulation(3, 0, 10, NULL);
+    int* tab = ou_sont_les_clients(3, 10) ;
+    printf("les clients :  ");
+    for(int i=0; i<6; i++){
+        printf("%d,",tab[i]);
+    }
+    printf("\n");
     nettoyage();
     return 0 ;
 }

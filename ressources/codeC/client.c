@@ -8,8 +8,8 @@
 
 void simulation(int ids){
     entrer(sasEntree);//on commence par entrée dans le sasEntrée
-    delai(6,2);
+    delai(4,2);
     transfert(sasEntree,activite);//l'étape d'après est une activité
-    delai(8,3);
+    delai(5,3);
     transfert(activite,sasSortie);//on finit par la sortie
 }
