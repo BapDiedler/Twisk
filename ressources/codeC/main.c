@@ -34,10 +34,9 @@ void afficherActivity(int* tab, int numero, int nbClients){
 int main(int argc, char** argv) {
     int* pid = NULL;
     int nbClients = 10;
-    int nbEtapes = 3;
+    int nbEtapes = 5;
     int nbGuichets = 0;
     int* tab = malloc(sizeof(int) * (nbClients+1)*(nbEtapes+nbGuichets) );
-    int cpt = 1; //compteur pour le nombre d'activité
 
     //affichage des clients du monde (les PID)
     pid = start_simulation(nbEtapes, nbGuichets, nbClients, NULL);
@@ -51,11 +50,11 @@ int main(int argc, char** argv) {
     while(tab[nbClients+1] != nbClients){//on regarde tab[nbClients+1] car la sortie se trouve à la place nb+1
         tab = ou_sont_les_clients(nbEtapes, nbClients) ;
         afficherEntree(tab);
-        afficherActivity(tab,cpt,nbClients);
+        for(int i = 1; i<nbEtapes-1; i++)//affichage de toutes les étapes
+            afficherActivity(tab,i,nbClients);
         afficherSortie(tab,nbClients);
         printf("\n");
         sleep(1);
-        //cpt++;
     }
     printf("\n");
     nettoyage();
