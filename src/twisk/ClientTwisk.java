@@ -20,9 +20,9 @@ public class ClientTwisk {
 
         etape1.ajouterSuccesseur(etape2) ;
         etape2.ajouterSuccesseur(guichet) ;
-        guichet.ajouterSuccesseur(etape2);
-        etape1.ajouterSuccesseur(act1);
-        guichet.ajouterSuccesseur(etape1);
+        //guichet.ajouterSuccesseur(etape2);
+        //etape1.ajouterSuccesseur(act1);
+        guichet.ajouterSuccesseur(act1);
 
         monde.ajouter(etape1, etape2) ;
         monde.ajouter(act1) ;
@@ -30,6 +30,6 @@ public class ClientTwisk {
 
         monde.aCommeEntree(etape1);
         monde.aCommeSortie(act1) ;
-        System.out.println(guichet.toC());
+        System.out.println(monde.toC());
     }
 }
