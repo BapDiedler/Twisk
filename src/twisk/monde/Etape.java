@@ -138,8 +138,7 @@ public abstract class Etape implements Iterable<Etape> {
     protected String transfert(){
         Etape successeur = getSuccesseur();
         return "//Passage de mon activité au successeur\n" +
-                "transfert("+ nom + "," + successeur.nom + ");\n"
-                + successeur.toC();
+                "transfert("+ nom + "," + successeur.nom + ");\n";
     }
     public abstract String toC();
 }
