@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include "def.h"
 
+//etapes du monde
 #define sasEntree 0
 #define sasSortie 1
 #define guichet1 2
@@ -9,10 +10,12 @@
 #define guichet2 4
 #define activite2 5
 #define activite3 6
-
+//semaphores des guichets
 #define semaphoreGuichet1 1
 #define semaphoreGuichet2 2
 
+
+//méthode simulation pour simuler un monde
 void simulation(int ids){
     entrer(sasEntree);//on commence par entrée dans le sasEntrée
     delai(5,2);
@@ -21,12 +24,12 @@ void simulation(int ids){
     transfert(guichet1,activite1);
     delai(4,2);
     V(ids,semaphoreGuichet1);
-    transfert(activite1,activite3);
-    delai(5,2);
-    transfert(activite3,guichet2);
+    transfert(activite1,guichet2);
     P(ids, semaphoreGuichet2);
     transfert(guichet2,activite2);
     delai(5,3);
     V(ids,semaphoreGuichet2);
-    transfert(activite2,sasSortie);
+    transfert(activite2,activite3);
+    delai(4,2);
+    transfert(activite3,sasSortie);
 }
