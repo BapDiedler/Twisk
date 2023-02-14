@@ -95,6 +95,16 @@ public abstract class Etape implements Iterable<Etape> {
     }
 
     /**
+     * Dans le cas où dans notre monde, chanque étape connait un unique successeur (sauf la sortie)
+     * donne le successeur de l'étape
+     * @return le successeur de l'étape
+     */
+    public Etape getSuccesseur(){
+        Iterator<Etape> ite = iterator();
+        return ite.next();
+    }
+
+    /**
      * methode qui affiche une étape et ses successeurs
      *
      * @return le string d'une étape
@@ -118,10 +128,10 @@ public abstract class Etape implements Iterable<Etape> {
      * @return la chaîne de caractère du transfert
      */
     protected String transfert(){
-        Iterator<Etape> ite = iterator();
-        Etape successeur = ite.next();
+        Etape successeur = getSuccesseur();
         return "//Passage de mon activité au successeur\n" +
-                "transfert("+ nom + "," + successeur.nom + ");\n";
+                "transfert("+ nom + "," + successeur.nom + ");\n"
+                + successeur.toC();
     }
     public abstract String toC();
 }

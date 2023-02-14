@@ -1,5 +1,7 @@
 package twisk.monde;
 
+import java.util.Iterator;
+
 /**
  * @author Diedler et Litchner
  *
@@ -19,12 +21,13 @@ class SasEntree extends Activite {
 
     @Override
     public String toC(){
+        Etape successeur = getSuccesseur();
         String profil = """
                 //méthode simulation pour simuler un monde
                 void simulation(int ids){
                 \t//on commence par entrée dans le sasEntrée
                 \tentrer(sasEntree);
                 """;
-        return profil + delai() + transfert();
+        return profil + delai() + transfert() + successeur.toC();
     }
 }
