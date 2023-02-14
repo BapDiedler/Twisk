@@ -1,5 +1,7 @@
 package twisk.monde;
 
+import java.util.Iterator;
+
 /**
  * Classe représentant une activité dans le monde de Twisk.
  * Cette classe étend la classe `Etape` et ajoute des informations supplémentaires sur la durée et la variance de la durée d'une activité.
@@ -60,8 +62,31 @@ public class Activite extends Etape {
         return true;
     }
 
+    /**
+     * Donne le temps de l'activité
+     * @return le temps
+     */
+    public int getTemps(){return temps;}
+
+    /**
+     * Donne l'écart temps de l'activité
+     * @return l'écart temps
+     */
+    public int getEcartTemps(){return ecartTemps;}
+
+    /**
+     * Donne la chaîne de caractère correspondante au delai de l'activité
+     * @return le délai de l'activité
+     */
+    protected String delai(){
+            String tmp = Integer.toString(getTemps());
+            String delta = Integer.toString(getEcartTemps());
+            return "//Met du délai\n" +
+                    "delai(" + tmp + "," + delta + ");\n";
+    }
+
     @Override
     public String toC() {
-        return null;
+        return transfert() + delai();
     }
 }

@@ -112,5 +112,16 @@ public abstract class Etape implements Iterable<Etape> {
         return builder.toString();
     }
 
+    /**
+     * Donne la chaîne de caractère qui correspondant à la fonction du transfert de l'Etape actuelle
+     * au successeur
+     * @return la chaîne de caractère du transfert
+     */
+    protected String transfert(){
+        Iterator<Etape> ite = iterator();
+        Etape successeur = ite.next();
+        return "//Passage de mon activité au successeur\n" +
+                "transfert("+ nom + "," + successeur.nom + ");\n";
+    }
     public abstract String toC();
 }
