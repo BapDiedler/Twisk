@@ -16,4 +16,15 @@ class SasEntree extends Activite {
     public SasEntree(){
         super("SasEntree");
     }
+
+    @Override
+    public String toC(){
+        String profil = """
+                //méthode simulation pour simuler un monde
+                void simulation(int ids){
+                \t//on commence par entrée dans le sasEntrée
+                \tentrer(sasEntree);
+                """;
+        return profil + delai() + transfert();
+    }
 }
