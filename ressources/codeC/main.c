@@ -34,7 +34,7 @@ void afficherActivity(int* tab, int numero, int nbClients){
 int main(int argc, char** argv) {
     int* pid = NULL;
     int nbClients = 10;
-    int nbEtapes = 6;
+    int nbEtapes = 7;
     int nbGuichets = 2;
     int* tab = malloc(sizeof(int) * (nbClients+1)*(nbEtapes+nbGuichets) );
     int* tabJetonsGuichet = malloc(sizeof(int)*nbGuichets);

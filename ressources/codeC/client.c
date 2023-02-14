@@ -8,6 +8,7 @@
 #define activite1 3
 #define guichet2 4
 #define activite2 5
+#define activite3 6
 
 #define semaphoreGuichet1 1
 #define semaphoreGuichet2 2
@@ -20,7 +21,9 @@ void simulation(int ids){
     transfert(guichet1,activite1);
     delai(4,2);
     V(ids,semaphoreGuichet1);
-    transfert(activite1,guichet2);
+    transfert(activite1,activite3);
+    delai(5,2);
+    transfert(activite3,guichet2);
     P(ids, semaphoreGuichet2);
     transfert(guichet2,activite2);
     delai(5,3);
