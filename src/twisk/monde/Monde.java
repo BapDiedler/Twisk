@@ -90,4 +90,8 @@ public class Monde implements Iterable<Etape>{
     public String toString(){
         return lesEtapes.toString();
     }
+
+    public String toC(){
+
+    }
 }
