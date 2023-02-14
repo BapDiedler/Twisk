@@ -9,10 +9,13 @@
 #define activite1 3
 #define guichet2 4
 #define activite2 5
+#define activite3 6
 //semaphores des guichets
 #define semaphoreGuichet1 1
 #define semaphoreGuichet2 2
 
+
+//méthode simulation pour simuler un monde
 void simulation(int ids){
     entrer(sasEntree);//on commence par entrée dans le sasEntrée
     delai(5,2);
@@ -26,5 +29,7 @@ void simulation(int ids){
     transfert(guichet2,activite2);
     delai(5,3);
     V(ids,semaphoreGuichet2);
-    transfert(activite2,sasSortie);
+    transfert(activite2,activite3);
+    delai(4,2);
+    transfert(activite3,sasSortie);
 }
