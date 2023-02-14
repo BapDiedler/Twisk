@@ -64,8 +64,9 @@ public class Guichet extends Etape{
         return cptSemaphore;
     }
 
+    @Override
     public String toC() {
-        StringBuilder builder = new StringBuilder();
+        /**StringBuilder builder = new StringBuilder();
         Etape successeur = iterator().next();
 
         //ajout de la methode P pour les semaphores
@@ -83,6 +84,11 @@ public class Guichet extends Etape{
                 .append(", ")
                 .append(successeur.numero)
                 .append(");");
-        return builder.toString();
+        return builder.toString();*/
+        Etape successeur = getSuccesseur();
+        return "P(ids," + cptSemaphore + ";\n"
+            + transfert() + delai()
+            + "V(ids," + cptSemaphore + ");\n"
+            + successeur.toC();
     }
 }
