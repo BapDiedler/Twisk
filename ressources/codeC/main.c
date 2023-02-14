@@ -34,13 +34,11 @@ void afficherActivity(int* tab, int numero, int nbClients){
 int main(int argc, char** argv) {
     int* pid = NULL;
     int nbClients = 10;
-    int nbEtapes = 4;
-    int nbGuichets = 1;
+    int nbEtapes = 6;
+    int nbGuichets = 2;
     int* tab = malloc(sizeof(int) * (nbClients+1)*(nbEtapes+nbGuichets) );
     int* tabJetonsGuichet = malloc(sizeof(int)*nbGuichets);
-
-    //init jetons des guichets
-    for(int i=0; i<nbGuichets; i++){
+    for(int i = 0;i<nbGuichets;i++){
         tabJetonsGuichet[i] = 2;
     }
 

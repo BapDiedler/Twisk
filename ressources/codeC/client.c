@@ -2,29 +2,28 @@
 #include <stdio.h>
 #include "def.h"
 
-//etapes
 #define sasEntree 0
 #define sasSortie 1
-#define guichet 2
-#define activite 3
+#define guichet1 2
+#define activite1 3
 #define guichet2 4
 #define activite2 5
-//semaphore
-#define semaphoreGuichet 1
+
+#define semaphoreGuichet1 1
 #define semaphoreGuichet2 2
 
 void simulation(int ids){
     entrer(sasEntree);//on commence par entrée dans le sasEntrée
     delai(5,2);
-    transfert(sasEntree,guichet);//l'étape d'après est une activité
-    P(ids,semaphoreGuichet);
-        transfert(guichet,activite);
-        delai(4,2);
-    V(ids,semaphoreGuichet);
-    transfert(activite,guichet2);
-    P(ids,semaphoreGuichet);
-        transfert(guichet,activite);
-        delai(4,2);
-        V(ids,semaphoreGuichet);
-    transfert(activite,sasSortie);
+    transfert(sasEntree,guichet1);//l'étape d'après est une activité
+    P(ids,semaphoreGuichet1);
+    transfert(guichet1,activite1);
+    delai(4,2);
+    V(ids,semaphoreGuichet1);
+    transfert(activite1,guichet2);
+    P(ids, semaphoreGuichet2);
+    transfert(guichet2,activite2);
+    delai(5,3);
+    V(ids,semaphoreGuichet2);
+    transfert(activite2,sasSortie);
 }
