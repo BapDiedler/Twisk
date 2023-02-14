@@ -38,6 +38,8 @@ int main(int argc, char** argv) {
     int nbGuichets = 2;
     int* tab = malloc(sizeof(int) * (nbClients+1)*(nbEtapes+nbGuichets) );
     int* tabJetonsGuichet = malloc(sizeof(int)*nbGuichets);
+
+    //initialisation des jetons de guichet
     for(int i = 0;i<nbGuichets;i++){
         tabJetonsGuichet[i] = 2;
     }

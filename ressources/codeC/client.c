@@ -2,13 +2,14 @@
 #include <stdio.h>
 #include "def.h"
 
+//etapes du monde
 #define sasEntree 0
 #define sasSortie 1
 #define guichet1 2
 #define activite1 3
 #define guichet2 4
 #define activite2 5
-
+//semaphores des guichets
 #define semaphoreGuichet1 1
 #define semaphoreGuichet2 2
 
