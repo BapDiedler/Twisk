@@ -20,6 +20,9 @@ public class Simulation {
      * @param monde mode qui est simulé
      */
     public void simuler(Monde monde){
+        System.out.println("Le monde:");
         System.out.println(monde);
+        System.out.println("Le code C généré:");
+        System.out.println(monde.toC());
     }
 }
