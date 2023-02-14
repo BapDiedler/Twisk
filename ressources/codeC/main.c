@@ -34,11 +34,13 @@ void afficherActivity(int* tab, int numero, int nbClients){
 int main(int argc, char** argv) {
     int* pid = NULL;
     int nbClients = 10;
-    int nbEtapes = 4;
-    int nbGuichets = 1;
+    int nbEtapes = 6;
+    int nbGuichets = 2;
     int* tab = malloc(sizeof(int) * (nbClients+1)*(nbEtapes+nbGuichets) );
     int* tabJetonsGuichet = malloc(sizeof(int)*nbGuichets);
-    tabJetonsGuichet[0] = 1;
+    for(int i = 0;i<nbGuichets;i++){
+        tabJetonsGuichet[i] = 2;
+    }
 
     //affichage des clients du monde (les PID)
     pid = start_simulation(nbEtapes, nbGuichets, nbClients, tabJetonsGuichet);
