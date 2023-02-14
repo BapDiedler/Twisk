@@ -113,6 +113,14 @@ public abstract class Etape implements Iterable<Etape> {
     }
 
     /**
+     * Donne la chaîne de caractère qui a la fonction de delai en c.
+     * @return une chaîne de caractère
+     */
+    public String delai(){
+        return "";
+    }
+
+    /**
      * Donne la chaîne de caractère qui correspondant à la fonction du transfert de l'Etape actuelle
      * au successeur
      * @return la chaîne de caractère du transfert

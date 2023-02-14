@@ -78,7 +78,7 @@ public class Activite extends Etape {
      * Donne la chaîne de caractère correspondante au delai de l'activité
      * @return le délai de l'activité
      */
-    protected String delai(){
+    public String delai(){
             String tmp = Integer.toString(getTemps());
             String delta = Integer.toString(getEcartTemps());
             return "//Met du délai\n" +

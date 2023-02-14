@@ -3,8 +3,8 @@ package twisk.monde;
 import twisk.outils.FabriqueNumero;
 
 /**
- * cette classe se trouve dans le package twisk.monde.
- * permet de représenter un guichet (file d'attente).
+ * Cette classe se trouve dans le package twisk. Monde.
+ * Permet de représenter un guichet (file d'attente).
  *
  * @author Diedler et Litchner
  */
@@ -62,5 +62,27 @@ public class Guichet extends Etape{
      */
     public int getNumeroSemaphore() {
         return cptSemaphore;
+    }
+
+    public String toC() {
+        StringBuilder builder = new StringBuilder();
+        Etape successeur = iterator().next();
+
+        //ajout de la methode P pour les semaphores
+        builder.append("P( ids, ")
+                .append(cptSemaphore)
+                .append(", ")
+                .append(successeur.numero)
+                .append(");\n");
+        //ajout du transfert
+        builder.append(transfert());
+        builder.append(successeur.delai());
+        //ajout de la methode V pour les semaphores
+        builder.append("V( ids, ")
+                .append(cptSemaphore)
+                .append(", ")
+                .append(successeur.numero)
+                .append(");");
+        return builder.toString();
     }
 }
