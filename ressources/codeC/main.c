@@ -38,7 +38,11 @@ int main(int argc, char** argv) {
     int nbGuichets = 1;
     int* tab = malloc(sizeof(int) * (nbClients+1)*(nbEtapes+nbGuichets) );
     int* tabJetonsGuichet = malloc(sizeof(int)*nbGuichets);
-    tabJetonsGuichet[0] = 1;
+
+    //init jetons des guichets
+    for(int i=0; i<nbGuichets; i++){
+        tabJetonsGuichet[i] = 2;
+    }
 
     //affichage des clients du monde (les PID)
     pid = start_simulation(nbEtapes, nbGuichets, nbClients, tabJetonsGuichet);
