@@ -63,4 +63,9 @@ public class Guichet extends Etape{
     public int getNumeroSemaphore() {
         return cptSemaphore;
     }
+
+    @Override
+    public String toC() {
+        return null;
+    }
 }
