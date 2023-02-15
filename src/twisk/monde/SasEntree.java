@@ -24,6 +24,6 @@ class SasEntree extends Activite {
                 "void simulation(int ids){\n" +
                 "//on commence par entrer dans le sasEntrée\n" +
                 "entrer(sasEntree);\n";
-        return profil + delai() + transfert() + successeur.toC();
+        return profil + delai() + transfert() + "\n" + successeur.toC();
     }
 }

@@ -88,6 +88,6 @@ public class Activite extends Etape {
     @Override
     public String toC() {
         Etape successeur = getSuccesseur();
-        return transfert() + delai() + successeur.toC();
+        return transfert() + delai() + "\n" + successeur.toC();
     }
 }
