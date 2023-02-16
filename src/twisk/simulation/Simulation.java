@@ -1,6 +1,7 @@
 package twisk.simulation;
 
 import twisk.monde.Monde;
+import twisk.outils.KitC;
 
 /**
  * @author Diedler et Litchner
@@ -13,7 +14,9 @@ public class Simulation {
     /**
      * constructeur de la simulation
      */
-    public Simulation(){}
+    public Simulation(){
+        new KitC().creerEnvironment();
+    }
 
     /**
      * méthode qui permet de faire une simulation du monde
