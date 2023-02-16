@@ -1,6 +1,7 @@
 package twisk;
 
 import twisk.monde.*;
+import twisk.simulation.Simulation;
 
 /**
  * cette classe se trouve dans le package twisk et représente la partie client du projet
@@ -30,6 +31,6 @@ public class ClientTwisk {
 
         monde.aCommeEntree(etape1);
         monde.aCommeSortie(act1) ;
-        System.out.println(monde.toC());
+        new Simulation().simuler(monde);
     }
 }
