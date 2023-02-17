@@ -20,10 +20,10 @@ class SasEntree extends Activite {
     @Override
     public String toC(){
         Etape successeur = getSuccesseur();
-        String profil = "//méthode simulation pour simuler un monde\n" +
-                "void simulation(int ids){\n" +
-                "//on commence par entrer dans le sasEntrée\n" +
-                "entrer(sasEntree);\n";
-        return profil + delai() + transfert() + "\n" + successeur.toC();
+        String profil = "//méthode simulation pour simuler un monde" +
+                "void simulation(int ids){" +
+                "//on commence par entrer dans le sasEntrée" +
+                "entrer(sasEntree);";
+        return profil + delai() + transfert() + successeur.toC();
     }
 }

@@ -1,6 +1,7 @@
 package twisk;
 
 import twisk.monde.*;
+import twisk.outils.KitC;
 import twisk.simulation.Simulation;
 
 /**
@@ -32,5 +33,7 @@ public class ClientTwisk {
         monde.aCommeEntree(etape1);
         monde.aCommeSortie(act1) ;
         new Simulation().simuler(monde);
+        String codeC = monde.toC();
+        new KitC().creerFichier(codeC);
     }
 }

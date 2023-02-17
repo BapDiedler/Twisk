@@ -1,5 +1,8 @@
 package twisk.outils;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -26,5 +29,24 @@ public class KitC {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    /**
+     * Crée le fichier client.C
+     * @param codeC le code c généré par le toC() de la classe Monde
+     */
+    public void creerFichier(String codeC){
+        FileWriter client = null;
+        try {
+            client = new FileWriter("/tmp/twisk/client.c");
+            BufferedWriter filtre = new BufferedWriter(client);
+            filtre.write(codeC);
+            filtre.close();
+        } catch (IOException e) {
+            // Si la création du client génére une erreur, on l'affiche puis on quitte le programme
+            System.err.println(e.getMessage());
+            System.exit(1);
+        }
+
     }
 }
