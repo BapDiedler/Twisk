@@ -90,4 +90,10 @@ public class Activite extends Etape {
         Etape successeur = getSuccesseur();
         return transfert() + delai()  + successeur.toC();
     }
+
+    @Override
+    public String constantes() {
+        Etape successeur = getSuccesseur();
+        return "#define " + getNom() + " " + getNumero() + "\n" + successeur.constantes();
+    }
 }

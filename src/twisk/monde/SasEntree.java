@@ -23,15 +23,16 @@ class SasEntree extends Activite {
      * @return le String contenant les includes
      */
     private String includes(){
-        return "#include <stdlib.h>\n#include <stdio.h>\n#include \"def.h\"";
+        return "#include <stdlib.h>\n#include <stdio.h>\n#include \"def.h\"\n";
     }
+
     @Override
     public String toC(){
         Etape successeur = getSuccesseur();
         String profil = "//méthode simulation pour simuler un monde\n" +
                 "void simulation(int ids){\n" +
                 "//on commence par entrer dans le sasEntrée\n" +
-                "entrer(sasEntree);\n";
-        return includes() + profil + delai() + transfert() + successeur.toC();
+                "entrer(" + getNom() + ");\n";
+        return includes() + constantes() + profil + delai() + transfert() + successeur.toC();
     }
 }

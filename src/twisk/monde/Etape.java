@@ -95,6 +95,12 @@ public abstract class Etape implements Iterable<Etape> {
     }
 
     /**
+     * Donne le nom de l'étape
+     * @return Le nom de l'étape
+     */
+    public String getNom(){ return nom;}
+
+    /**
      * Dans le cas où dans notre monde, chanque étape connait un unique successeur (sauf la sortie)
      * donne le successeur de l'étape
      * @return le successeur de l'étape
@@ -140,5 +146,17 @@ public abstract class Etape implements Iterable<Etape> {
         return "//Passage de mon activité au successeur\n" +
                 "transfert("+ nom + "," + successeur.nom + ");\n";
     }
+
+    /**
+     * Donne le code C correspondant à l'étape sous forme de String
+     * @return Le code C correspondant à l'étape sous forme de String
+     */
     public abstract String toC();
+
+    /**
+     * Méthode qui renvoie le String correspondant aux constantes définies après les includes
+     * dans le code C généré
+     * @return le String contenant les constantes
+     */
+    public abstract String constantes();
 }

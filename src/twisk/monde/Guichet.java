@@ -91,4 +91,10 @@ public class Guichet extends Etape{
             + "V(ids," + cptSemaphore + ");\n"
             + successeur.toC();
     }
+
+    @Override
+    public String constantes() {
+        Etape successeur = getSuccesseur();
+        return "#define " + getNom() + " " + getNumero() + "\n" + successeur.constantes();
+    }
 }
