@@ -17,6 +17,14 @@ class SasEntree extends Activite {
         super("SasEntree");
     }
 
+    /**
+     * Méthode qui renvoie le String correspondant aux includes nécessaires à inclure dans le code C
+     * généré
+     * @return le String contenant les includes
+     */
+    private String includes(){
+        return "#include <stdlib.h>\n#include <stdio.h>\n#include \"def.h\"";
+    }
     @Override
     public String toC(){
         Etape successeur = getSuccesseur();
@@ -24,6 +32,6 @@ class SasEntree extends Activite {
                 "void simulation(int ids){\n" +
                 "//on commence par entrer dans le sasEntrée\n" +
                 "entrer(sasEntree);\n";
-        return profil + delai() + transfert() + successeur.toC();
+        return includes() + profil + delai() + transfert() + successeur.toC();
     }
 }
