@@ -51,6 +51,19 @@ class KitCTest {
     }
 
     @Test
+    void construireLaLibrairie(){
+        File lib = new File("/tmp/twisk/libTwisk.so");
+        // Pour être sûr que le fichier client n'existait pas déjà
+        lib.delete();
+        assertFalse(lib.exists());
+        KitC kit = new KitC();
+        kit.creerFichier(monde.toC());
+        kit.compilation();
+        kit.construireLaLibrairie();
+        assertTrue(lib.exists());
+    }
+
+    @Test
     void creerEnvironment() {
         File programmeC = new File("/tmp/twisk/programmeC.o");
         File def = new File("/tmp/twisk/def.h");
