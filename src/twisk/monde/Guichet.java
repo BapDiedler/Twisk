@@ -86,9 +86,9 @@ public class Guichet extends Etape{
                 .append(");");
         return builder.toString();*/
         Etape successeur = getSuccesseur();
-        return "P(ids," + cptSemaphore + ");"
+        return "P(ids," + cptSemaphore + ");\n"
             + transfert() + delai()
-            + "V(ids," + cptSemaphore + ");"
+            + "V(ids," + cptSemaphore + ");\n"
             + successeur.toC();
     }
 }

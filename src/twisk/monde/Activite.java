@@ -81,8 +81,8 @@ public class Activite extends Etape {
     public String delai(){
             String tmp = Integer.toString(getTemps());
             String delta = Integer.toString(getEcartTemps());
-            return "//Met du délai" +
-                    "delai(" + tmp + "," + delta + ");";
+            return "//Met du délai\n" +
+                    "delai(" + tmp + "," + delta + ");\n";
     }
 
     @Override
