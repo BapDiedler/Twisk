@@ -15,7 +15,9 @@ public class Simulation {
      * constructeur de la simulation
      */
     public Simulation(){
-        new KitC().creerEnvironment();
+        KitC kit = new KitC();
+        kit.creerEnvironment();
+        kit.compilation();
     }
 
     /**

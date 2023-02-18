@@ -1,5 +1,6 @@
 package twisk.outils;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import twisk.monde.*;
 import twisk.simulation.Simulation;
@@ -13,26 +14,12 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class KitCTest {
 
-    @Test
-    void creerEnvironment() {
-        File programmeC = new File("/tmp/twisk/programmeC.o");
-        File def = new File("/tmp/twisk/def.h");
-        programmeC.delete();
-        def.delete();
-        assertFalse(programmeC.exists() && def.exists());
-        new KitC().creerEnvironment();
-        assertTrue(programmeC.exists() && def.exists());
-    }
+    private Monde monde;
 
-    @Test
-    void creerFichier() {
-        File client = new File("/tmp/twisk/client.c");
-        // Pour être sur que le fichier client n'existait pas déjà
-        client.delete();
-        assertFalse(client.exists());
-        // Crée le monde
-        Monde monde = new Monde() ;
-
+    @BeforeEach
+    public void setUp(){
+        //creation du monde
+        monde = new Monde();
         Guichet guichet = new Guichet("ticket", 2) ;
         Activite act1 = new ActiviteRestreinte("toboggan", 2, 1) ;
 
@@ -49,12 +36,46 @@ class KitCTest {
 
         monde.aCommeEntree(etape1);
         monde.aCommeSortie(act1) ;
+    }
+
+    @Test
+    void compilation(){
+        File client = new File("/tmp/twisk/client.o");
+        // Pour être sûr que le fichier client n'existait pas déjà
+        client.delete();
+        assertFalse(client.exists());
+        KitC kit = new KitC();
+        kit.creerFichier(monde.toC());
+        kit.compilation();
+        assertTrue(client.exists());
+    }
+
+    @Test
+    void creerEnvironment() {
+        File programmeC = new File("/tmp/twisk/programmeC.o");
+        File def = new File("/tmp/twisk/def.h");
+        programmeC.delete();
+        def.delete();
+        assertFalse(programmeC.exists() && def.exists());
+        KitC kit = new KitC();
+        kit.creerEnvironment();
+        assertTrue(programmeC.exists() && def.exists());
+    }
+
+    @Test
+    void creerFichier() {
+        File client = new File("/tmp/twisk/client.c");
+        // Pour être sur que le fichier client n'existait pas déjà
+        client.delete();
+        assertFalse(client.exists());
+        // Crée le monde
 
         // Appel de la fonction creerFichier
         String codeC = monde.toC();
-        new KitC().creerFichier(codeC);
+        KitC kit = new KitC();
+        kit.creerFichier(codeC);
 
-        // Vérifie que le fichier client a bien été crée
+        // Vérifie que le fichier client a bien été créé
         assertTrue(client.exists());
         // On récupère le contenu du fichier dans un StringBuilder
         FileReader clientReader = null;
