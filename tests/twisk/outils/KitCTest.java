@@ -99,6 +99,7 @@ class KitCTest {
             String line = reader.readLine();
             while(line != null){
                 contenu.append(line);
+                contenu.append("\n");
                 line = reader.readLine();
             }
             // On compare maintenant le contenu avec le toC() du monde
