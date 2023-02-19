@@ -34,6 +34,8 @@ public class ClientTwisk {
         monde.aCommeSortie(act1) ;
         new Simulation().simuler(monde);
         String codeC = monde.toC();
-        new KitC().creerFichier(codeC);
+        KitC kit = new KitC();
+        kit.creerFichier(codeC);
+        kit.construireLaLibrairie();
     }
 }

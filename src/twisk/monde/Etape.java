@@ -23,7 +23,7 @@ public abstract class Etape implements Iterable<Etape> {
      */
     public Etape(String nom) {
         this.nom = nom;
-        this.numero = FabriqueNumero.getNumeroEtape()-1;
+        this.numero = FabriqueNumero.getNumeroEtape();
         this.etapes = new GestionnaireEtapes();
     }
 
