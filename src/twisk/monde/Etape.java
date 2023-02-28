@@ -111,6 +111,14 @@ public abstract class Etape implements Iterable<Etape> {
     }
 
     /**
+     * getter du nombre de jetons dans le guichet
+     * @return le nombre de jetons
+     */
+    public int getNbJetons(){
+        return 0;
+    }
+
+    /**
      * methode qui affiche une étape et ses successeurs
      *
      * @return le string d'une étape
