@@ -30,6 +30,7 @@ public class Simulation {
         System.out.println(monde);
         System.out.println("Le code C généré:");
         System.out.println(monde.toC());
+        System.load("/tmp/twisk/libTwisk.so") ;
     }
 
     /**
