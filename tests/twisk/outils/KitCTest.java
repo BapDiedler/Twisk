@@ -67,12 +67,14 @@ class KitCTest {
     void creerEnvironment() {
         File programmeC = new File("/tmp/twisk/programmeC.o");
         File def = new File("/tmp/twisk/def.h");
+        File natif = new File("/tmp/twisk/codeNatif.o");
         programmeC.delete();
         def.delete();
-        assertFalse(programmeC.exists() && def.exists());
+        natif.delete();
+        assertFalse(programmeC.exists() && def.exists() && natif.exists());
         KitC kit = new KitC();
         kit.creerEnvironment();
-        assertTrue(programmeC.exists() && def.exists());
+        assertTrue(programmeC.exists() && def.exists() && natif.exists());
     }
 
     @Test
