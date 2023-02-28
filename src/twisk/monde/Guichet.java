@@ -64,6 +64,14 @@ public class Guichet extends Etape{
         return numSemaphore;
     }
 
+    /**
+     * getter du nombre de jetons dans le guichet
+     * @return le nombre de jetons
+     */
+    public int getNbJetons(){
+        return nbJetons;
+    }
+
     @Override
     public String toC() {
         Etape successeur = getSuccesseur();
