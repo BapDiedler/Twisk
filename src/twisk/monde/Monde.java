@@ -59,13 +59,13 @@ public class Monde implements Iterable<Etape>{
      * Donne le nombre d'étapes dans le monde
      * @return le nombre d'étapes dans le monde
      */
-    int nbEtapes(){return lesEtapes.nbEtapes()-2;}
+    public int nbEtapes(){return lesEtapes.nbEtapes()-2;}
 
     /**
      * Donne le nombre de guichets dans le monde
      * @return le nombre de guichets dans le monde
      */
-    int nbGuichet(){
+    public int nbGuichet(){
         int cpt = 0;
         for(Etape e: lesEtapes){
            if(e.estUnGuichet()){
