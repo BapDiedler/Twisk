@@ -24,6 +24,6 @@ class SasSortie extends Activite{
 
     @Override
     public String constantes() {
-        return "#define " + getNom() + " " + getNumero() + "\n";
+        return "#define " + getNom() + getNumero() +  " " + getNumero() + "\n";
     }
 }

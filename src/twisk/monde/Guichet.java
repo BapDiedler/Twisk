@@ -26,7 +26,7 @@ public class Guichet extends Etape{
     public Guichet(String nom, int nbJetons){
         super(nom);
         this.nbJetons = nbJetons;
-        this.numSemaphore = FabriqueNumero.getCptSemaphore();
+        this.numSemaphore = FabriqueNumero.getNumSemaphore();
     }
 
     /**
@@ -67,18 +67,18 @@ public class Guichet extends Etape{
     @Override
     public String toC() {
         Etape successeur = getSuccesseur();
-        String semaphore = "SEM_" + getNom();
-        return "P(ids," + semaphore + ");\n"
+        String semaphore = "SEM_" + getNom() + getNumeroSemaphore();
+        return "\tP(ids," + semaphore + ");\n"
             + transfert() + delai()
-            + "V(ids," + semaphore + ");\n"
+            + "\tV(ids," + semaphore + ");\n"
             + successeur.toC();
     }
 
     @Override
     public String constantes() {
         Etape successeur = getSuccesseur();
-        String semaphore = "SEM_" + getNom() + " ";
-        return "#define " + getNom() + " \n#define " + semaphore + getNumeroSemaphore() + "\n"
-                + successeur.constantes();
+        String semaphore = "SEM_" + getNom() + getNumeroSemaphore() + " ";
+        return "#define " + getNom() + getNumero() + " " + getNumero() +" \n#define " + semaphore + getNumeroSemaphore()
+                + "\n" + successeur.constantes();
     }
 }

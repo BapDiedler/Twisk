@@ -25,7 +25,7 @@ public class Activite extends Etape {
      * Initialise une activité vide avec un nom "activité", une durée de 0 minutes et une variance de 0 minutes.
      */
     public Activite() {
-        this("Activité", 0, 0);
+        this("Activité", 2, 1);
     }
 
     /**
@@ -35,7 +35,7 @@ public class Activite extends Etape {
      * @param nom le nom de l'activité
      */
     public Activite(String nom) {
-        this(nom, 0, 0);
+        this(nom, 2, 1);
     }
 
     /**
@@ -81,8 +81,8 @@ public class Activite extends Etape {
     public String delai(){
             String tmp = Integer.toString(getTemps());
             String delta = Integer.toString(getEcartTemps());
-            return "//Met du délai\n" +
-                    "delai(" + tmp + "," + delta + ");\n";
+            return "\n\t//Met du délai\n" +
+                    "\tdelai(" + tmp + "," + delta + ");\n";
     }
 
     @Override
@@ -94,6 +94,6 @@ public class Activite extends Etape {
     @Override
     public String constantes() {
         Etape successeur = getSuccesseur();
-        return "#define " + getNom() + " " + getNumero() + "\n" + successeur.constantes();
+        return "#define " + getNom() + getNumero() + " " + getNumero() + "\n" + successeur.constantes();
     }
 }
