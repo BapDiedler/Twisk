@@ -15,7 +15,7 @@ public class Guichet extends Etape{
      */
     private int nbJetons;
 
-    private final int cptSemaphore;
+    private final int numSemaphore;
 
     /**
      * constructeur de la classe Guichet
@@ -26,7 +26,7 @@ public class Guichet extends Etape{
     public Guichet(String nom, int nbJetons){
         super(nom);
         this.nbJetons = nbJetons;
-        this.cptSemaphore = FabriqueNumero.getCptSemaphore();
+        this.numSemaphore = FabriqueNumero.getCptSemaphore();
     }
 
     /**
@@ -61,40 +61,24 @@ public class Guichet extends Etape{
      * @return int qui est le numéro du guichet
      */
     public int getNumeroSemaphore() {
-        return cptSemaphore;
+        return numSemaphore;
     }
 
     @Override
     public String toC() {
-        /**StringBuilder builder = new StringBuilder();
-        Etape successeur = iterator().next();
-
-        //ajout de la methode P pour les semaphores
-        builder.append("P( ids, ")
-                .append(cptSemaphore)
-                .append(", ")
-                .append(successeur.numero)
-                .append(");\n");
-        //ajout du transfert
-        builder.append(transfert());
-        builder.append(successeur.delai());
-        //ajout de la methode V pour les semaphores
-        builder.append("V( ids, ")
-                .append(cptSemaphore)
-                .append(", ")
-                .append(successeur.numero)
-                .append(");");
-        return builder.toString();*/
         Etape successeur = getSuccesseur();
-        return "P(ids," + cptSemaphore + ");\n"
+        String semaphore = "SEM_" + getNom();
+        return "P(ids," + semaphore + ");\n"
             + transfert() + delai()
-            + "V(ids," + cptSemaphore + ");\n"
+            + "V(ids," + semaphore + ");\n"
             + successeur.toC();
     }
 
     @Override
     public String constantes() {
         Etape successeur = getSuccesseur();
-        return "#define " + getNom() + " " + getNumero() + "\n" + successeur.constantes();
+        String semaphore = "SEM_" + getNom() + " ";
+        return "#define " + getNom() + " \n#define " + semaphore + getNumeroSemaphore() + "\n"
+                + successeur.constantes();
     }
 }

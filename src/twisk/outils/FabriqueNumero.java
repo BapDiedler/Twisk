@@ -21,14 +21,14 @@ public class FabriqueNumero {
     /**
      * Compteur de sémaphore
      */
-    private static int cptSemaphore;
+    private static int numSemaphore;
 
     /**
      * Constructeur privé pour empêcher la création d'une autre instance de la classe en dehors de celle déjà déclarée.
      */
     private FabriqueNumero() {
         cptEtapes = 0;
-        cptSemaphore = 1;
+        numSemaphore = 1;
     }
 
     /**
@@ -49,8 +49,8 @@ public class FabriqueNumero {
         return cptEtapes++;
     }
 
-    public static int getCptSemaphore(){
-        return cptSemaphore++;
+    public static int getNumSemaphore(){
+        return numSemaphore++;
     }
 
     /**
