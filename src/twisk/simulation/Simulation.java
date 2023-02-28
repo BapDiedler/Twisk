@@ -33,6 +33,16 @@ public class Simulation {
         System.load("/tmp/twisk/libTwisk.so") ;
     }
 
+    private void appel_main(Monde monde){
+        int nbCLients = 10;
+        int nbEtapes = monde.nbEtapes();
+        int nbGuichets = monde.nbGuichet();
+        int[] pid = new int[nbCLients];
+        int[] tab = new int[nbEtapes];
+        int[] tabJetonsGuichets = new int[nbGuichets];
+
+    }
+
     /**
      * méthode permettant de lancer la simulation
      * @param nbEtapes nombre d'étapes
