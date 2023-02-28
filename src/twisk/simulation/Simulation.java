@@ -55,4 +55,44 @@ public class Simulation {
      * méthode qui permet de nettoyer le monde
      */
     public native void nettoyage() ;
+
+    /**
+     * fonction qui affiche une sortie
+     * @param tab tableau de clients
+     * @param nbClients nombre de clients
+     */
+    private void afficherSortie(int[] tab, int nbClients){
+        System.out.println("SasSortie : "+tab[nbClients+1]+" client(s)");
+        for(int i=0; i<tab[nbClients+1]; i++){
+            System.out.println(tab[nbClients+2+i]+" | ");
+        }
+        System.out.println("\n");
+    }
+
+    /**
+     * fonction qui affiche une entrée
+     * @param tab tableau d'étapes
+     */
+    private void afficherEntree(int[] tab){
+        System.out.println("SasEntree : "+tab[0]+" client(s)    ");
+        for(int i=0; i<tab[0]; i++){
+            System.out.println(tab[1+i]+" | ");
+        }
+        System.out.println("\n");
+    }
+
+    /**
+     * fonction qui affiche une activité
+     * @param tab tableau d'étapes
+     * @param numero numéro de l'activité
+     * @param nbClients nombre de clients
+     */
+    void afficherActivity(int[] tab, int numero, int nbClients){
+        int positionEtape = (nbClients+1)*(1+numero);
+        System.out.println("Activité "+numero+": "+tab[positionEtape]+" client(s)    ");
+        for(int i=0; i<tab[positionEtape]; i++){
+            System.out.println(tab[positionEtape]+" | ");
+        }
+        System.out.println("\n");
+    }
 }
