@@ -77,7 +77,7 @@ public class Guichet extends Etape{
         Etape successeur = getSuccesseur();
         String semaphore = "SEM_" + getNom() + getNumeroSemaphore();
         return "\tP(ids," + semaphore + ");\n"
-            + transfert() + delai()
+            + transfert() + successeur.delai()
             + "\tV(ids," + semaphore + ");\n"
             + successeur.toC();
     }

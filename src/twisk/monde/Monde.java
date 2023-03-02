@@ -59,7 +59,7 @@ public class Monde implements Iterable<Etape>{
      * Donne le nombre d'étapes dans le monde
      * @return le nombre d'étapes dans le monde
      */
-    public int nbEtapes(){return lesEtapes.nbEtapes()-2;}
+    public int nbEtapes(){return lesEtapes.nbEtapes();}
 
     /**
      * Donne le nombre de guichets dans le monde

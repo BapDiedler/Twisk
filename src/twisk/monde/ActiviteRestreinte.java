@@ -27,4 +27,10 @@ public class ActiviteRestreinte extends Activite {
     public ActiviteRestreinte(String nom) {
         this(nom, 0, 0);
     }
+
+    @Override
+    public String toC() {
+        Etape successeur = getSuccesseur();
+        return transfert() + successeur.toC();
+    }
 }
