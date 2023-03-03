@@ -1,5 +1,6 @@
 package twisk.simulation;
 
+import twisk.monde.Etape;
 import twisk.monde.Monde;
 import twisk.outils.KitC;
 
@@ -31,16 +32,47 @@ public class Simulation {
         System.out.println("Le code C généré:");
         System.out.println(monde.toC());
         System.load("/tmp/twisk/libTwisk.so") ;
+        appel_main(monde);
     }
 
     private void appel_main(Monde monde){
         int nbCLients = 10;
-        int nbEtapes = monde.nbEtapes();
+        int nbEtapes = monde.nbEtapes() +2;
         int nbGuichets = monde.nbGuichet();
-        int[] pid = new int[nbCLients];
-        int[] tab = new int[nbEtapes];
+        int[] pid;
+        int[] tab = new int[(nbEtapes)*(nbCLients+1)];
         int[] tabJetonsGuichets = new int[nbGuichets];
 
+        int k = 0;
+        for(Etape e: monde){
+            if(e.estUnGuichet()){
+                tabJetonsGuichets[k] = e.getNbJetons();
+                k++;
+            }
+        }
+        pid = start_simulation(nbEtapes, nbGuichets, nbCLients, tabJetonsGuichets);
+        System.out.println("les clients :  ");
+        for(int i=0; i < nbCLients; i++){
+            System.out.println(pid[i] + ",");
+        }
+        System.out.println("\n");
+
+        //affichage du monde au cours du temps
+        while(tab[nbCLients+1] != nbCLients){//on regarde tab[nbClients+1] car la sortie se trouve à la place nb+1
+            tab = ou_sont_les_clients(nbEtapes, nbCLients) ;
+            afficherEntree(tab);
+            for(int i = 1; i<nbEtapes-1; i++)//affichage de toutes les étapes
+                afficherActivity(tab,i,nbCLients);
+            afficherSortie(tab,nbCLients);
+            System.out.println("\n");
+            try {
+                Thread.sleep(1);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+        }
+        System.out.println("\n");
+        nettoyage();
     }
 
     /**
