@@ -92,6 +92,6 @@ public class Monde implements Iterable<Etape>{
     }
 
     public String toC(){
-        return entree.toC();
+        return entree.toC()+"}";
     }
 }

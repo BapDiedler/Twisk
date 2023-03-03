@@ -18,7 +18,7 @@ public class KitC {
     public void compilation(){
         Runtime runtime = Runtime.getRuntime();
         try {
-            Process process = runtime.exec("cc -Wall -fPIC -c /tmp/twisk/client.c -o /tmp/twisk/client.o");
+            Process process = runtime.exec("gcc -Wall -fPIC -c /tmp/twisk/client.c -o /tmp/twisk/client.o");
             // récupération des messages sur la sortie standard et la sortie d’erreur de la commande exécutée
             // à reprendre éventuellement et à adapter à votre code
             BufferedReader output = new BufferedReader(new InputStreamReader(process.getInputStream()));

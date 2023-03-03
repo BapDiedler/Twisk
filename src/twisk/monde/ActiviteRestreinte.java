@@ -28,9 +28,12 @@ public class ActiviteRestreinte extends Activite {
         this(nom, 0, 0);
     }
 
-    @Override
-    public String toC() {
-        Etape successeur = getSuccesseur();
-        return transfert() + successeur.toC();
+    /**
+     * méthode qui permet d'afficher le delay et le transfère avec un successeur précis
+     * @param successeur successeur de l'étape
+     * @return le toC
+     */
+    protected String complementToC(Etape successeur){
+        return transfert(successeur) + successeur.toC();
     }
 }

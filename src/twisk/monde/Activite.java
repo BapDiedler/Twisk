@@ -1,6 +1,7 @@
 package twisk.monde;
 
 import java.util.Iterator;
+import java.util.Random;
 
 /**
  * Classe représentant une activité dans le monde de Twisk.
@@ -85,15 +86,52 @@ public class Activite extends Etape {
                     "\tdelai(" + tmp + "," + delta + ");\n";
     }
 
+    public String transfert(Etape successeur){
+        int numSuccesseur = successeur.getNumero();
+        return "\n\t//Passage de mon activité au successeur\n" +
+                "\ttransfert("+ nom + getNumero() + "," + successeur.nom + numSuccesseur + ");\n";
+    }
+
+    /**
+     * méthode qui permet d'afficher le delay et le transfère avec un successeur précis
+     * @param successeur successeur de l'étape
+     * @return le toC
+     */
+    protected String complementToC(Etape successeur){
+        return delai() + transfert(successeur) + successeur.toC();
+    }
+
     @Override
     public String toC() {
-        Etape successeur = getSuccesseur();
-        return delai() + transfert() + successeur.toC();
+        if(nbSuccesseurs()>1) {//si l'activité pointe vers plusieurs étapes
+            String currentC;
+            StringBuilder code = new StringBuilder("\n\tint nb = (int)(rand() % ")
+                    .append(nbSuccesseurs())
+                    .append(");\n");
+            int count = 0;
+            for (Etape etp : etapes){
+                currentC = complementToC(etp);
+                code.append("\tif (nb == ")
+                        .append(count)
+                        .append("){\n")
+                        .append(currentC)
+                        .append("\t}");
+                count++;
+            }
+            return code.toString();
+        }else{
+            Etape successeur = getSuccesseur();
+            return complementToC(successeur);
+        }
     }
 
     @Override
     public String constantes() {
         Etape successeur = getSuccesseur();
-        return "#define " + getNom() + getNumero() + " " + getNumero() + "\n" + successeur.constantes();
+        String val = "#define " + getNom() + getNumero() + " " + getNumero() + "\n";
+        for(Etape suc: etapes){
+            val+=suc.constantes();
+        }
+        return val;
     }
 }
