@@ -12,10 +12,17 @@ import twisk.outils.KitC;
  */
 public class Simulation {
 
+    private int nbClients;
+
     /**
      * constructeur de la simulation
      */
     public Simulation(){
+        nbClients = 0;
+    }
+
+    public void setNbClients(int nbClients) {
+        this.nbClients = nbClients;
     }
 
     /**
@@ -23,6 +30,16 @@ public class Simulation {
      * @param monde mode qui est simulé
      */
     public void simuler(Monde monde){
+
+        String codeC = monde.toC();
+
+        KitC kit = new KitC();
+        kit.creerEnvironment();
+        kit.creerFichier(codeC);
+        kit.compilation();
+        kit.construireLaLibrairie();
+
+
         System.out.println("Le monde:");
         System.out.println(monde);
         System.out.println("Le code C généré:");
@@ -30,7 +47,6 @@ public class Simulation {
         System.load("/tmp/twisk/libTwisk.so") ;
 
         int[] pid = null;
-        int nbClients = 10;
         int nbEtapes = monde.nbEtapes();
         int nbGuichets = monde.nbGuichet();
         int[] tab = new int[(nbClients+1)*nbEtapes];

@@ -23,8 +23,19 @@ public abstract class Etape implements Iterable<Etape> {
      */
     public Etape(String nom) {
         this.nom = nom;
+        passNom();
         this.numero = FabriqueNumero.getNumeroEtape();
         this.etapes = new GestionnaireEtapes();
+    }
+
+    /**
+     * méthode qui transforme le nom en un nom valide
+     */
+    private void passNom(){
+        nom = nom.replaceAll("[ :;./?,!*µ$£}=+){'#~&(]","_");
+        nom = nom.replaceAll("[éèê]","e");
+        nom = nom.replaceAll("[ûù]","u");
+        nom = nom.replaceAll("ï","i");
     }
 
     /**
