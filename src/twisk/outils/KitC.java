@@ -70,9 +70,12 @@ public class KitC {
             // copie des deux fichiers programmeC.o et def.h depuis le projet sous /tmp/twisk
             String[] liste = {"programmeC.o", "def.h", "codeNatif.o"};
             for (String nom : liste) {
-                Path source = Paths.get(getClass().getResource("/codeC/" + nom).getPath());
-                Path newdir = Paths.get("/tmp/twisk/");
-                Files.copy(source, newdir.resolve(source.getFileName()), REPLACE_EXISTING);
+                InputStream source = getClass().getResource("/codeC/" + nom).openStream() ;
+                File destination = new File("/tmp/twisk/" + nom) ;
+                //Path source = Paths.get(getClass().getResource("/codeC/" + nom).getPath());
+                //Path newdir = Paths.get("/tmp/twisk/");
+                //Files.copy(source, newdir.resolve(source.getFileName()), REPLACE_EXISTING);
+                copier(source,destination);
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -96,5 +99,19 @@ public class KitC {
             System.exit(1);
         }
 
+    }
+
+
+    private void copier(InputStream source, File dest) throws IOException {
+        InputStream sourceFile = source;
+        OutputStream destinationFile = new FileOutputStream(dest) ;
+        // Lecture par segment de 0.5Mo
+        byte buffer[] = new byte[512 * 1024];
+        int nbLecture;
+        while ((nbLecture = sourceFile.read(buffer)) != -1){
+            destinationFile.write(buffer, 0, nbLecture);
+        }
+        destinationFile.close();
+        sourceFile.close();
     }
 }
