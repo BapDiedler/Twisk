@@ -28,6 +28,17 @@ public abstract class Etape implements Iterable<Etape> {
     }
 
     /**
+     * méthode qui transforme le nom en un nom valide
+     */
+    protected String passNom(){
+        String val = nom.replaceAll(" ","_")
+                .replaceAll("[éèê]","e")
+                .replaceAll("[ûù]","u")
+                .replaceAll("ï","i");
+        return val;
+    }
+
+    /**
      * methode qui permet d'ajouter des successeurs à notre Etape
      *
      * @param etapes étapes à ajouter
@@ -153,7 +164,7 @@ public abstract class Etape implements Iterable<Etape> {
         Etape successeur = getSuccesseur();
         int numSuccesseur = successeur.getNumero();
         return "\n\t//Passage de mon activité au successeur\n" +
-                "\ttransfert("+ nom + getNumero() + "," + successeur.nom + numSuccesseur + ");\n";
+                "\ttransfert("+ passNom() + getNumero() + "," + successeur.nom + numSuccesseur + ");\n";
     }
 
     /**

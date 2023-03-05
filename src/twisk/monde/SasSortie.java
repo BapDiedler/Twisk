@@ -19,7 +19,7 @@ class SasSortie extends Activite{
 
     @Override
     public String toC(){
-        return "}\n";
+        return "\n";
     }
 
     @Override

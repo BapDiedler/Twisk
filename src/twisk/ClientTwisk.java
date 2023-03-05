@@ -12,29 +12,25 @@ import twisk.simulation.Simulation;
 
 public class ClientTwisk {
     public static void main(String[] args) {
-        Monde monde = new Monde() ;
-
-        Etape etape1 = new Activite("musee",6,2) ;
-        Etape guichet = new Guichet("guichet",2);
-        Etape etape2 = new ActiviteRestreinte("boutique",5,2) ;
-
-        monde.aCommeEntree(etape1);
-
-        etape1.ajouterSuccesseur(guichet) ;
-
-        guichet.ajouterSuccesseur(etape2);
-
-        monde.ajouter(etape1, guichet, etape2) ;
-
-        monde.aCommeSortie(etape2) ;
 
 
-        String codeC = monde.toC();
-        KitC kit = new KitC();
-        kit.creerEnvironment();
-        kit.creerFichier(codeC);
-        kit.construireLaLibrairie();
 
-        new Simulation().simuler(monde);
+        Monde monde = new Monde();
+
+        Activite zoo = new Activite("balade au zoo", 3, 1);
+        Guichet guichet = new Guichet("accès au toboggan", 2);
+        Activite tob = new ActiviteRestreinte("toboggan", 2, 1);
+
+        zoo.ajouterSuccesseur(guichet);
+        guichet.ajouterSuccesseur(tob);
+
+        monde.ajouter(zoo, tob, guichet);
+
+        monde.aCommeEntree(zoo);
+        monde.aCommeSortie(tob);
+
+        Simulation s = new Simulation();
+        s.setNbClients(10);
+        s.simuler(monde);
     }
 }

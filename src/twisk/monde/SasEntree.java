@@ -28,11 +28,11 @@ class SasEntree extends Activite {
 
     @Override
     public String toC(){
-        Etape successeur = getSuccesseur();
+        String suite = super.toC();
         String profil = "\n//méthode simulation pour simuler un monde\n" +
                 "void simulation(int ids){\n" +
                 "\n\t//on commence par entrer dans le sasEntrée\n" +
                 "\tentrer(" + getNom() + getNumero() +");\n";
-        return includes() + constantes() + profil + delai() + transfert() + successeur.toC();
+        return includes() + constantes() + profil + suite;
     }
 }
