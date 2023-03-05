@@ -30,62 +30,17 @@ public class Simulation {
      * @param monde mode qui est simulé
      */
     public void simuler(Monde monde){
-
-        String codeC = monde.toC();
-
-        KitC kit = new KitC();
-        kit.creerEnvironment();
-        kit.creerFichier(codeC);
-        kit.compilation();
-        kit.construireLaLibrairie();
-
-
-        System.out.println("Le monde:");
-        System.out.println(monde);
-        //System.out.println("Le code C généré:");
-        //System.out.println(monde.toC());
-        System.load("/tmp/twisk/libTwisk.so") ;
-
-        int[] pid = null;
+        //initialisation
+        initialisationSimuler(monde);
         int nbEtapes = monde.nbEtapes();
-        int nbGuichets = monde.nbGuichet();
         int[] tab = new int[(nbClients+1)*nbEtapes];
-        int[] tabJetonsGuichet = new int[nbGuichets];
-
-        //initialisation des jetons de guichet
-        int j=0;
-        for(Etape etape : monde){
-            if(etape.estUnGuichet()){
-                tabJetonsGuichet[j]=etape.getNbJetons();
-                j++;
-            }
-        }
-
-        //affichage des clients du monde (les PID)
-        pid = start_simulation(nbEtapes, nbGuichets, nbClients, tabJetonsGuichet);
-        System.out.println("les clients :  ");
-        for(int i=0; i<nbClients; i++){
-            System.out.print(pid[i]+" | ");
-        }
-        System.out.println("\n");
-
+        int[] tabJetonsGuichet = initialisationTabGuichets(monde);
+        //affichage des clients
+        affichageDesClients(tabJetonsGuichet,monde);
         //affichage du monde au cours du temps
-        while(tab[nbClients+1] != nbClients){//on regarde tab[nbClients+1] car la sortie se trouve à la place nb+1
-            tab = ou_sont_les_clients(nbEtapes, nbClients) ;
-            afficherEntree(tab);
-            for(int i = 1; i<nbEtapes-1; i++)//affichage de toutes les étapes
-                afficherActivity(tab,i,nbClients, monde);
-            afficherSortie(tab,nbClients);
-            System.out.print("\n");
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
-        }
+        affichageEtapesDuMonde(monde,tab);
         System.out.println("\n");
         nettoyage();
-
     }
 
     /**
@@ -110,6 +65,39 @@ public class Simulation {
      * méthode qui permet de nettoyer le monde
      */
     public native void nettoyage() ;
+
+
+    /**
+     * méthode qui permet d'afficher les clients du monde
+     * @param tabJetonsGuichet tableau des jetons du monde
+     * @param monde monde dans lequel se trouve les clients
+     */
+    private void affichageDesClients(int[] tabJetonsGuichet, Monde monde){
+        //affichage des clients du monde (les PID)
+        int[] pid = start_simulation(monde.nbEtapes(), monde.nbGuichet(), nbClients, tabJetonsGuichet);
+        System.out.println("les clients :  ");
+        for(int i=0; i<nbClients; i++){
+            System.out.print(pid[i]+" | ");
+        }
+        System.out.println("\n");
+    }
+
+    /**
+     * affichage de toutes les étapes du monde
+     * @param monde monde où se trouve les étapes
+     * @param tab tableau avec les étapes et les clients
+     */
+    private void affichageEtapesDuMonde(Monde monde, int[] tab){
+        while(tab[nbClients+1] != nbClients) {//on regarde tab[nbClients+1] car la sortie se trouve à la place nb+1
+            tab = ou_sont_les_clients(monde.nbEtapes(), nbClients);
+            afficherEntree(tab);
+            for (int i = 1; i < monde.nbEtapes() - 1; i++)//affichage de toutes les étapes
+                afficherEtape(tab, monde.getEtape(i + 1));
+            afficherSortie(tab, nbClients);
+            System.out.print("\n");
+            sleep();
+        }
+    }
 
     /**
      * fonction qui affiche une sortie
@@ -137,17 +125,64 @@ public class Simulation {
     }
 
     /**
-     * fonction qui affiche une activité
+     * fonction qui affiche une etape
      * @param tab tableau d'étapes
-     * @param numero numéro de l'activité
-     * @param nbClients nombre de clients
      */
-    void afficherActivity(int[] tab, int numero, int nbClients, Monde monde){
-        int positionEtape = (nbClients+1)*(1+numero);
-        System.out.print("Activité "+numero+" ("+monde.getEtape(numero+1).getNom()+"): "+tab[positionEtape]+" client(s) :  ");
+    void afficherEtape(int[] tab, Etape etape){
+        int positionEtape = (nbClients+1)*(etape.getNumero());
+        System.out.print("Etape "+(etape.getNumero()-1)+" ("+etape.getNom()+"): "+tab[positionEtape]+" client(s) :  ");
         for(int i=0; i<tab[positionEtape]; i++){
             System.out.print(tab[positionEtape+i+1]+" | ");
         }
         System.out.print("\n");
+    }
+
+    /**
+     * méthode qui permet la mise en place de la methode simuler
+     * @param monde monde que l'on va simuler
+     */
+    private void initialisationSimuler(Monde monde){
+        String codeC = monde.toC();
+
+        KitC kit = new KitC();
+        kit.creerEnvironment();
+        kit.creerFichier(codeC);
+        kit.compilation();
+        kit.construireLaLibrairie();
+
+        System.out.println("Le monde:");
+        System.out.println(monde);
+        //System.out.println("Le code C généré:");
+        //System.out.println(monde.toC());
+        System.load("/tmp/twisk/libTwisk.so") ;
+    }
+
+    /**
+     * méthode qui initialise le tableau des jetons de guichet
+     * @param monde monde dans lequel se trouve les guichets
+     * @return le tableau de jetons
+     */
+    private int[] initialisationTabGuichets(Monde monde){
+        int[] tabJetonsGuichet = new int[monde.nbGuichet()];
+        //initialisation des jetons de guichet
+        int j=0;
+        for(Etape etape : monde){
+            if(etape.estUnGuichet()){
+                tabJetonsGuichet[j]=etape.getNbJetons();
+                j++;
+            }
+        }
+        return tabJetonsGuichet;
+    }
+
+    /**
+     * méthode qui met en pause le programme
+     */
+    private void sleep(){
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
