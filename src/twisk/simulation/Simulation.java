@@ -42,8 +42,8 @@ public class Simulation {
 
         System.out.println("Le monde:");
         System.out.println(monde);
-        System.out.println("Le code C généré:");
-        System.out.println(monde.toC());
+        //System.out.println("Le code C généré:");
+        //System.out.println(monde.toC());
         System.load("/tmp/twisk/libTwisk.so") ;
 
         int[] pid = null;
@@ -65,7 +65,7 @@ public class Simulation {
         pid = start_simulation(nbEtapes, nbGuichets, nbClients, tabJetonsGuichet);
         System.out.println("les clients :  ");
         for(int i=0; i<nbClients; i++){
-            System.out.println(pid[i]+",");
+            System.out.print(pid[i]+" | ");
         }
         System.out.println("\n");
 
@@ -74,9 +74,9 @@ public class Simulation {
             tab = ou_sont_les_clients(nbEtapes, nbClients) ;
             afficherEntree(tab);
             for(int i = 1; i<nbEtapes-1; i++)//affichage de toutes les étapes
-                afficherActivity(tab,i,nbClients);
+                afficherActivity(tab,i,nbClients, monde);
             afficherSortie(tab,nbClients);
-            System.out.println("\n");
+            System.out.print("\n");
             try {
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
@@ -117,11 +117,11 @@ public class Simulation {
      * @param nbClients nombre de clients
      */
     private void afficherSortie(int[] tab, int nbClients){
-        System.out.println("SasSortie : "+tab[nbClients+1]+" client(s)");
+        System.out.print("SasSortie : "+tab[nbClients+1]+" client(s) :  ");
         for(int i=0; i<tab[nbClients+1]; i++){
-            System.out.println(tab[nbClients+2+i]);
+            System.out.print(tab[nbClients+2+i]+" | ");
         }
-        System.out.println("\n");
+        System.out.print("\n");
     }
 
     /**
@@ -129,11 +129,11 @@ public class Simulation {
      * @param tab tableau d'étapes
      */
     private void afficherEntree(int[] tab){
-        System.out.println("SasEntree : "+tab[0]+" client(s)    ");
+        System.out.print("SasEntree : "+tab[0]+" client(s) :  ");
         for(int i=0; i<tab[0]; i++){
-            System.out.println(tab[1+i]);
+            System.out.print(tab[1+i]+" | ");
         }
-        System.out.println("\n");
+        System.out.print("\n");
     }
 
     /**
@@ -142,12 +142,12 @@ public class Simulation {
      * @param numero numéro de l'activité
      * @param nbClients nombre de clients
      */
-    void afficherActivity(int[] tab, int numero, int nbClients){
+    void afficherActivity(int[] tab, int numero, int nbClients, Monde monde){
         int positionEtape = (nbClients+1)*(1+numero);
-        System.out.println("Activité "+numero+": "+tab[positionEtape]+" client(s)    ");
+        System.out.print("Activité "+numero+" ("+monde.getEtape(numero+1).getNom()+"): "+tab[positionEtape]+" client(s) :  ");
         for(int i=0; i<tab[positionEtape]; i++){
-            System.out.println(tab[positionEtape+i+1]);
+            System.out.print(tab[positionEtape+i+1]+" | ");
         }
-        System.out.println("\n");
+        System.out.print("\n");
     }
 }

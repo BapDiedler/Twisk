@@ -3,9 +3,10 @@ package twisk.monde;
 import java.util.Iterator;
 
 /**
- * @author Diedler et Lichtner
  *
  * Classe qui se trouve dans le package twisk.monde et qui représente le monde
+ *
+ * @author Diedler et Lichtner
  */
 public class Monde implements Iterable<Etape>{
     /**
@@ -84,13 +85,26 @@ public class Monde implements Iterable<Etape>{
     }
 
     /**
+     * méthode qui permet de récupérer une étape à l'indice donné
+     * @param i indice de l'étape
+     * @return l'étape demandée
+     */
+    public Etape getEtape(int i){
+        return lesEtapes.getEtape(i);
+    }
+
+    /**
      * methode qui affiche le monde
-     * @return le monde
+     * @return le monde sous forme de String
      */
     public String toString(){
         return lesEtapes.toString();
     }
 
+    /**
+     * méthode toC qui permet de créer le code C du monde
+     * @return le toC du monde en String
+     */
     public String toC(){
         return entree.toC()+"}";
     }

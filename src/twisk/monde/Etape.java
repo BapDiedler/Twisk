@@ -23,7 +23,6 @@ public abstract class Etape implements Iterable<Etape> {
      */
     public Etape(String nom) {
         this.nom = nom;
-        passNom();
         this.numero = FabriqueNumero.getNumeroEtape();
         this.etapes = new GestionnaireEtapes();
     }
@@ -31,11 +30,12 @@ public abstract class Etape implements Iterable<Etape> {
     /**
      * méthode qui transforme le nom en un nom valide
      */
-    private void passNom(){
-        nom = nom.replaceAll("[ :;./?,!*µ$£}=+){'#~&(]","_");
-        nom = nom.replaceAll("[éèê]","e");
-        nom = nom.replaceAll("[ûù]","u");
-        nom = nom.replaceAll("ï","i");
+    protected String passNom(){
+        String val = nom.replaceAll(" ","_")
+                .replaceAll("[éèê]","e")
+                .replaceAll("[ûù]","u")
+                .replaceAll("ï","i");
+        return val;
     }
 
     /**
@@ -164,7 +164,7 @@ public abstract class Etape implements Iterable<Etape> {
         Etape successeur = getSuccesseur();
         int numSuccesseur = successeur.getNumero();
         return "\n\t//Passage de mon activité au successeur\n" +
-                "\ttransfert("+ nom + getNumero() + "," + successeur.nom + numSuccesseur + ");\n";
+                "\ttransfert("+ passNom() + getNumero() + "," + successeur.nom + numSuccesseur + ");\n";
     }
 
     /**

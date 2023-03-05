@@ -86,10 +86,15 @@ public class Activite extends Etape {
                     "\tdelai(" + tmp + "," + delta + ");\n";
     }
 
+    /**
+     * la méthode transfert qui permet d'avoir un bout de toC
+     * @param successeur successeur avec lequel on fait le transfert
+     * @return le String du transrfert
+     */
     public String transfert(Etape successeur){
         int numSuccesseur = successeur.getNumero();
         return "\n\t//Passage de mon activité au successeur\n" +
-                "\ttransfert("+ nom + getNumero() + "," + successeur.nom + numSuccesseur + ");\n";
+                "\ttransfert("+ passNom() + getNumero() + "," + successeur.passNom() + numSuccesseur + ");\n";
     }
 
     /**
@@ -104,31 +109,39 @@ public class Activite extends Etape {
     @Override
     public String toC() {
         if(nbSuccesseurs()>1) {//si l'activité pointe vers plusieurs étapes
-            String currentC;
-            StringBuilder code = new StringBuilder("\n\tint nb = (int)(rand() % ")
-                    .append(nbSuccesseurs())
-                    .append(");\n");
-            int count = 0;
-            for (Etape etp : etapes){
-                currentC = complementToC(etp);
-                code.append("\tif (nb == ")
-                        .append(count)
-                        .append("){\n")
-                        .append(currentC)
-                        .append("\t}");
-                count++;
-            }
-            return code.toString();
+            return toCAux();
         }else{
             Etape successeur = getSuccesseur();
             return complementToC(successeur);
         }
     }
 
+    /**
+     * méthode qui gère le toC si le nombre de successeurs est plus grand que 1
+     * @return le toC de l'étape
+     */
+    private String toCAux(){
+        String currentC;
+        StringBuilder code = new StringBuilder("\n\tint nb = (int)(rand() % ")
+                .append(nbSuccesseurs())
+                .append(");\n");
+        int count = 0;
+        for (Etape etp : etapes){
+            currentC = complementToC(etp);
+            code.append("\tif (nb == ")
+                    .append(count)
+                    .append("){\n")
+                    .append(currentC)
+                    .append("\t}");
+            count++;
+        }
+        return code.toString();
+    }
+
     @Override
     public String constantes() {
         Etape successeur = getSuccesseur();
-        String val = "#define " + getNom() + getNumero() + " " + getNumero() + "\n";
+        String val = "#define " + passNom() + getNumero() + " " + getNumero() + "\n";
         for(Etape suc: etapes){
             val+=suc.constantes();
         }

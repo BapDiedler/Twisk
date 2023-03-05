@@ -15,6 +15,9 @@ public class Guichet extends Etape{
      */
     private int nbJetons;
 
+    /**
+     * numéro du semaphore du guichet
+     */
     private final int numSemaphore;
 
     /**
@@ -75,7 +78,7 @@ public class Guichet extends Etape{
     @Override
     public String toC() {
         Etape successeur = getSuccesseur();
-        String semaphore = "SEM_" + getNom() + getNumeroSemaphore();
+        String semaphore = "SEM_" + passNom() + getNumeroSemaphore();
         return "\tP(ids," + semaphore + ");\n"
             + transfert() + successeur.delai()
             + "\tV(ids," + semaphore + ");\n"
@@ -85,8 +88,8 @@ public class Guichet extends Etape{
     @Override
     public String constantes() {
         Etape successeur = getSuccesseur();
-        String semaphore = "SEM_" + getNom() + getNumeroSemaphore() + " ";
-        return "#define " + getNom() + getNumero() + " " + getNumero() +" \n#define " + semaphore + getNumeroSemaphore()
+        String semaphore = "SEM_" + passNom() + getNumeroSemaphore() + " ";
+        return "#define " + passNom() + getNumero() + " " + getNumero() +" \n#define " + semaphore + getNumeroSemaphore()
                 + "\n" + successeur.constantes();
     }
 }

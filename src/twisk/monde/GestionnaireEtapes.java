@@ -41,6 +41,15 @@ public class GestionnaireEtapes implements Iterable<Etape>{
     }
 
     /**
+     * méthode qui permet d'obtenir une étape
+     * @param i indice de l'étape
+     * @return l'étape demandée
+     */
+    public Etape getEtape(int i){
+        return etapes.get(i);
+    }
+
+    /**
      * methode qui nous permet d'itérer sur étapes
      * @return un iterator d'étape
      */

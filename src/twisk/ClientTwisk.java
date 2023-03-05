@@ -30,7 +30,7 @@ public class ClientTwisk {
         monde.aCommeSortie(tob);
 
         Simulation s = new Simulation();
-        s.setNbClients(5);
+        s.setNbClients(10);
         s.simuler(monde);
     }
 }
