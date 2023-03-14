@@ -20,14 +20,14 @@ public class ClientTwisk {
         Activite zoo = new Activite("balade au zoo", 3, 1);
         Guichet guichet = new Guichet("accès au toboggan", 2);
         Activite tob = new ActiviteRestreinte("toboggan", 2, 1);
+        Activite bob = new Activite("Bobo",2,1);
 
-        zoo.ajouterSuccesseur(guichet);
+        zoo.ajouterSuccesseur(guichet,bob);
         guichet.ajouterSuccesseur(tob);
-
-        monde.ajouter(zoo, tob, guichet);
+        monde.ajouter(zoo, tob, guichet,bob);
 
         monde.aCommeEntree(zoo);
-        monde.aCommeSortie(tob);
+        monde.aCommeSortie(tob,bob);
 
         Simulation s = new Simulation();
         s.setNbClients(10);

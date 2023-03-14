@@ -12,8 +12,17 @@ import java.util.Iterator;
  */
 public abstract class Etape implements Iterable<Etape> {
 
+    /**
+     * numéro de l'étape
+     */
     protected int numero;
+    /**
+     * nom de l'étape
+     */
     protected String nom;
+    /**
+     * successeur de notre étape
+     */
     protected GestionnaireEtapes etapes;
 
     /**
@@ -28,14 +37,11 @@ public abstract class Etape implements Iterable<Etape> {
     }
 
     /**
-     * méthode qui transforme le nom en un nom valide
+     * méthode qui transforme le nom en un nom valide pour le define
      */
     protected String passNom(){
-        String val = nom.replaceAll(" ","_")
-                .replaceAll("[éèê]","e")
-                .replaceAll("[ûù]","u")
-                .replaceAll("ï","i");
-        return val;
+        String val = nom.replaceAll("[^a-zA-Z0-9]","_");
+        return "_"+val+"_";
     }
 
     /**
@@ -44,7 +50,7 @@ public abstract class Etape implements Iterable<Etape> {
      * @param etapes étapes à ajouter
      */
     public void ajouterSuccesseur(Etape... etapes) {
-        if(etapes != null) {
+        if(etapes != null) {//si l'étape n'a pas été initialisée
             if (estUnGuichet() && nbSuccesseurs() == 0 && etapes[0].estUneActivite()) {
                 this.etapes.ajouter(etapes[0]);
             } else if (estUneActivite()) {
