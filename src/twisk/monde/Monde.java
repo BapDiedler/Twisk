@@ -12,17 +12,17 @@ public class Monde implements Iterable<Etape>{
     /**
      * Le gestionnaire d'étape du monde
      */
-    private GestionnaireEtapes lesEtapes;
+    private final GestionnaireEtapes lesEtapes;
 
     /**
      * Activité qui servira d'entrée pour notre monde
      */
-    private SasEntree entree;
+    private final SasEntree entree;
 
     /**
      * Activité qui servira de sortie pour notre monde
      */
-    private SasSortie sortie;
+    private final SasSortie sortie;
 
     /**
      * Constructeur du monde
@@ -36,13 +36,13 @@ public class Monde implements Iterable<Etape>{
 
     /**
      * Définit les entrées du monde qui seront définie comme successeur de l'entrée
-     * @param etapes
+     * @param etapes collection d'étapes que l'on ajoute au monde comme entrée
      */
     public void aCommeEntree(Etape... etapes){entree.ajouterSuccesseur(etapes);}
 
     /**
      * Définit les sorties du monde qui seront défini comme ayant comme successeur la sortie
-     * @param etapes
+     * @param etapes collection d'étapes que l'on ajoute au monde comme sortie
      */
     public void aCommeSortie(Etape... etapes){
         for(Etape e: etapes){
@@ -52,7 +52,7 @@ public class Monde implements Iterable<Etape>{
 
     /**
      * Ajoute les étapes dans le gestionnaire d'étapes
-     * @param etapes les étapes à ajouter
+     * @param etapes les étapes à ajouter dans le monde
      */
     public void ajouter(Etape... etapes){lesEtapes.ajouter(etapes);}
 

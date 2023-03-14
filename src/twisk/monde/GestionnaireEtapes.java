@@ -15,7 +15,7 @@ public class GestionnaireEtapes implements Iterable<Etape>{
      * Étapes correspond à la liste d'étapes qui représente les successeurs
      *                          d'une étape ou les éléments du twist. Monde.
      */
-    private ArrayList<Etape> etapes;
+    private final ArrayList<Etape> etapes;
 
     /**
      * constructeur de la classe GestionnaireEtapes
