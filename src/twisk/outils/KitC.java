@@ -7,6 +7,9 @@ import java.nio.file.Paths;
 
 import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
 
+/**
+ * Classe qui contient les différents outils liés aux fichiers .c
+ */
 public class KitC {
 
     public KitC(){
@@ -74,7 +77,7 @@ public class KitC {
                 File destination = new File("/tmp/twisk/" + nom) ;
                 //Path source = Paths.get(getClass().getResource("/codeC/" + nom).getPath());
                 //Path newdir = Paths.get("/tmp/twisk/");
-                //Files.copy(source, newdir.resolve(source.getFileName()), REPLACE_EXISTING);
+                //Files.copy(source, newdir.resolve(déclenchée si il y a un problèmesource.getFileName()), REPLACE_EXISTING);
                 copier(source,destination);
             }
         } catch (IOException e) {
@@ -83,7 +86,7 @@ public class KitC {
     }
 
     /**
-     * Crée le fichier client.C
+     * Crée le fichier client.c
      * @param codeC le code c généré par le toC() de la classe Monde
      */
     public void creerFichier(String codeC){
@@ -101,7 +104,12 @@ public class KitC {
 
     }
 
-
+    /**
+     * Copie octet par octet du fichier
+     * @param source Le fichier source manipulé comme un stream
+     * @param dest Le fichier de destination
+     * @throws IOException Exception normalement jamais déclenchée
+     */
     private void copier(InputStream source, File dest) throws IOException {
         InputStream sourceFile = source;
         OutputStream destinationFile = new FileOutputStream(dest) ;
