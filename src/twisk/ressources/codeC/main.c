@@ -1,4 +1,4 @@
-#include "def.h"
+a#include "def.h"
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -36,7 +36,7 @@ int main(int argc, char** argv) {
     int nbClients = 10;
     int nbEtapes = 7;
     int nbGuichets = 2;
-    int* tab = malloc(sizeof(int) * (nbClients+1)*(nbEtapes+nbGuichets) );
+    int* tab = malloc(sizeof(int) * (nbClients+1)*(nbEtapes) );
     int* tabJetonsGuichet = malloc(sizeof(int)*nbGuichets);
 
     //initialisation des jetons de guichet
