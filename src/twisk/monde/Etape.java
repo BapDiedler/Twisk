@@ -1,7 +1,6 @@
 package twisk.monde;
 
 import twisk.outils.FabriqueNumero;
-
 import java.util.Iterator;
 
 /**
@@ -89,7 +88,7 @@ public abstract class Etape implements Iterable<Etape> {
     /**
      * methode qui donne le nombre de successeurs que possède l'étape
      *
-     * @return un int
+     * @return un int étant le nombre d'étapes
      */
     public int nbSuccesseurs() {
         return etapes.nbEtapes();
@@ -97,6 +96,7 @@ public abstract class Etape implements Iterable<Etape> {
 
     /**
      * getter du numéro de l'étape
+     *
      * @return le numéro de l'étape
      */
     public int getNumero(){
@@ -105,6 +105,7 @@ public abstract class Etape implements Iterable<Etape> {
 
     /**
      * méthode qui retourne le numéro de semaphore
+     *
      * @return 0 si c'est une activité sinon le numéro du sémaphore
      */
     public int getNumeroSemaphore(){
@@ -113,13 +114,15 @@ public abstract class Etape implements Iterable<Etape> {
 
     /**
      * Donne le nom de l'étape
+     *
      * @return Le nom de l'étape
      */
     public String getNom(){ return nom;}
 
     /**
-     * Dans le cas où dans notre monde, chanque étape connait un unique successeur (sauf la sortie)
+     * Dans le cas où dans notre monde, chaque étape connait un unique successeur (sauf la sortie)
      * donne le successeur de l'étape
+     *
      * @return le successeur de l'étape
      */
     public Etape getSuccesseur(){
@@ -155,6 +158,7 @@ public abstract class Etape implements Iterable<Etape> {
 
     /**
      * Donne la chaîne de caractère qui a la fonction de delai en c.
+     *
      * @return une chaîne de caractère
      */
     public String delai(){
@@ -164,17 +168,20 @@ public abstract class Etape implements Iterable<Etape> {
     /**
      * Donne la chaîne de caractère qui correspondant à la fonction du transfert de l'Etape actuelle
      * au successeur
+     *
      * @return la chaîne de caractère du transfert
      */
     protected String transfert(){
         Etape successeur = getSuccesseur();
         int numSuccesseur = successeur.getNumero();
         return "\n\t//Passage de mon activité au successeur\n" +
-                "\ttransfert("+ passNom() + getNumero() + "," + successeur.nom + numSuccesseur + ");\n";
+                "\ttransfert("+ passNom() + getNumero() + "," +
+                successeur.nom + numSuccesseur + ");\n";
     }
 
     /**
      * Donne le code C correspondant à l'étape sous forme de String
+     *
      * @return Le code C correspondant à l'étape sous forme de String
      */
     public abstract String toC();
@@ -182,6 +189,7 @@ public abstract class Etape implements Iterable<Etape> {
     /**
      * Méthode qui renvoie le String correspondant aux constantes définies après les includes
      * dans le code C généré
+     *
      * @return le String contenant les constantes
      */
     public abstract String constantes();

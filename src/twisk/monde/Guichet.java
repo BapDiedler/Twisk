@@ -78,7 +78,9 @@ public class Guichet extends Etape{
     @Override
     public String toC() {
         Etape successeur = getSuccesseur();
+        //nom du sémaphore dans le code C
         String semaphore = "SEM_" + passNom() + getNumeroSemaphore();
+        //code C pour le passage d'un guichet à une activité
         return "\tP(ids," + semaphore + ");\n"
             + transfert() + successeur.delai()
             + "\tV(ids," + semaphore + ");\n"
@@ -88,8 +90,10 @@ public class Guichet extends Etape{
     @Override
     public String constantes() {
         Etape successeur = getSuccesseur();
+        //nom du sémaphore dans le code C
         String semaphore = "SEM_" + passNom() + getNumeroSemaphore() + " ";
-        return "#define " + passNom() + getNumero() + " " + getNumero() +" \n#define " + semaphore + getNumeroSemaphore()
+        return "#define " + passNom() + getNumero() + " " + getNumero() +
+                " \n#define " + semaphore + getNumeroSemaphore()
                 + "\n" + successeur.constantes();
     }
 }
