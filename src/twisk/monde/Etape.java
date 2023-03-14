@@ -176,7 +176,7 @@ public abstract class Etape implements Iterable<Etape> {
         int numSuccesseur = successeur.getNumero();
         return "\n\t//Passage de mon activité au successeur\n" +
                 "\ttransfert("+ passNom() + getNumero() + "," +
-                successeur.nom + numSuccesseur + ");\n";
+                successeur.passNom() + numSuccesseur + ");\n";
     }
 
     /**

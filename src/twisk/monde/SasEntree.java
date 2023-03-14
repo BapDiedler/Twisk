@@ -32,7 +32,7 @@ class SasEntree extends Activite {
         String profil = "\n//méthode simulation pour simuler un monde\n" +
                 "void simulation(int ids){\n" +
                 "\n\t//on commence par entrer dans le sasEntrée\n" +
-                "\tentrer(" + getNom() + getNumero() +");\n";
+                "\tentrer(" + passNom() + getNumero() +");\n";
         return includes() + constantes() + profil + suite;
     }
 }
