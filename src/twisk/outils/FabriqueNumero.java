@@ -49,12 +49,16 @@ public class FabriqueNumero {
         return cptEtapes++;
     }
 
+    /**
+     * méthode qui retourne le numéro du sémaphore
+     * @return le numéro du sémaphore du guichet
+     */
     public static int getNumSemaphore(){
         return numSemaphore++;
     }
 
     /**
-     * Réinitialise le compteur d'étapes à 0
+     * Réinitialise le compteur d'étapes à 0.
      */
     public void reset() {
         cptEtapes = 0;

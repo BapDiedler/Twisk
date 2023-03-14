@@ -1,8 +1,5 @@
 package twisk.monde;
 
-import java.util.Iterator;
-import java.util.Random;
-
 /**
  * Classe représentant une activité dans le monde de Twisk.
  * Cette classe étend la classe `Etape` et ajoute des informations supplémentaires sur la durée et la variance de la durée d'une activité.
@@ -14,12 +11,12 @@ public class Activite extends Etape {
     /**
      * Durée de temps de l'activité en minutes
      */
-    private int temps;
+    private final int temps;
 
     /**
      * Variance de la durée de temps de l'activité en minutes
      */
-    private int ecartTemps;
+    private final int ecartTemps;
 
     /**
      * Constructeur par défaut de la classe Activité.
@@ -94,7 +91,8 @@ public class Activite extends Etape {
     public String transfert(Etape successeur){
         int numSuccesseur = successeur.getNumero();
         return "\n\t//Passage de mon activité au successeur\n" +
-                "\ttransfert("+ passNom() + getNumero() + "," + successeur.passNom() + numSuccesseur + ");\n";
+                "\ttransfert("+ passNom() + getNumero() + "," +
+                successeur.passNom() + numSuccesseur + ");\n";
     }
 
     /**
@@ -109,7 +107,7 @@ public class Activite extends Etape {
     @Override
     public String toC() {
         if(nbSuccesseurs()>1) {//si l'activité pointe vers plusieurs étapes
-            return toCAux();
+            return toCAuxiliaire();
         }else{
             Etape successeur = getSuccesseur();
             return complementToC(successeur);
@@ -120,9 +118,9 @@ public class Activite extends Etape {
      * méthode qui gère le toC si le nombre de successeurs est plus grand que 1
      * @return le toC de l'étape
      */
-    private String toCAux(){
+    private String toCAuxiliaire(){
         String currentC;
-        StringBuilder code = new StringBuilder("\n\tint nb = (int)(rand() % ")
+        StringBuilder code = new StringBuilder("\n\tsrand(getpid());\n\tint nb = (int)(rand() % ")
                 .append(nbSuccesseurs())
                 .append(");\n");
         int count = 0;
