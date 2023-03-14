@@ -12,6 +12,9 @@ import twisk.outils.KitC;
  */
 public class Simulation {
 
+    /**
+     * Le nombre de clients
+     */
     private int nbClients;
 
     /**
@@ -21,13 +24,17 @@ public class Simulation {
         nbClients = 0;
     }
 
+    /**
+     * Change le nombre de clients
+     * @param nbClients Le nouveau nombre de clients
+     */
     public void setNbClients(int nbClients) {
         this.nbClients = nbClients;
     }
 
     /**
      * méthode qui permet de faire une simulation du monde
-     * @param monde mode qui est simulé
+     * @param monde monde qui est simulé
      */
     public void simuler(Monde monde){
         //initialisation
@@ -49,15 +56,15 @@ public class Simulation {
      * @param nbGuichets nombre de guichets
      * @param nbClients nombre de clients
      * @param tabJetonsGuichets nombre de jetons dans les guichets
-     * @return tableau retenant les clients
+     * @return tableau contenant les clients
      */
     public native int[] start_simulation(int nbEtapes, int nbGuichets, int nbClients, int[] tabJetonsGuichets);
 
     /**
-     * méthode qui donne la place des clients dans le monde
+     * méthode qui donne l'emplacement des clients dans le monde
      * @param nbEtapes nombre d'étapes
      * @param nbClients nombre de clients
-     * @return un tableau avec la position des clients
+     * @return un tableau qui contient l'emplacement des clients
      */
     public native int[] ou_sont_les_clients(int nbEtapes, int nbClients);
 
