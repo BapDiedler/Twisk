@@ -4,18 +4,30 @@ import twisk.monde.Etape;
 import twisk.monde.Monde;
 import twisk.outils.KitC;
 
+import java.util.Iterator;
+
 /**
  * @author Diedler et Litchner
  *
  * cette classe permet de simuler le monde cré par le client dans un premier temps l'affichage se
  *                      fait sur la sortie standard.
  */
-public class Simulation {
+public class Simulation implements Iterable<Client>{
 
     /**
      * Le nombre de clients
      */
     private int nbClients;
+
+    /**
+     * gestionnaires pour les clients du monde
+     */
+    private GestionnaireClients gestionnaireClients;
+
+    /**
+     * kitC pour pouvoir manipuler le monde
+     */
+    private KitC kitC;
 
     /**
      * constructeur de la simulation
@@ -82,6 +94,7 @@ public class Simulation {
     private void affichageDesClients(int[] tabJetonsGuichet, Monde monde){
         //affichage des clients du monde (les PID)
         int[] pid = start_simulation(monde.nbEtapes(), monde.nbGuichet(), nbClients, tabJetonsGuichet);
+        this.gestionnaireClients = new GestionnaireClients(pid);
         System.out.println("les clients :  ");
         for(int i=0; i<nbClients; i++){
             System.out.print(pid[i]+" | ");
@@ -97,12 +110,35 @@ public class Simulation {
     private void affichageEtapesDuMonde(Monde monde, int[] tab){
         while(tab[nbClients+1] != nbClients) {//on regarde tab[nbClients+1] car la sortie se trouve à la place nb+1
             tab = ou_sont_les_clients(monde.nbEtapes(), nbClients);
+            miseAjourClient(monde,tab);
             afficherEntree(tab);
             for (int i = 1; i < monde.nbEtapes() - 1; i++)//affichage de toutes les étapes
                 afficherEtape(tab, monde.getEtape(i + 1));
             afficherSortie(tab, nbClients);
             System.out.print("\n");
             sleep();
+        }
+    }
+
+
+    /**
+     * méthode qui permet de mettre à jour les clients du monde
+     *
+     * @param tab tableau dans lequel se trouve les clients du monde
+     */
+    private void miseAjourClient(Monde monde, int[] tab){
+        int nbClientsEtape;
+        int numClient;
+        int numeroEtape = -1;
+        Etape etape;
+        for(int i=0; i<tab.length; i+=(nbClients+1)){
+            nbClientsEtape = tab[i];
+            numeroEtape++;
+            for(int j=1+i; j<=nbClientsEtape+i; j++){
+                numClient = tab[j];
+                etape = monde.getEtape(numeroEtape);
+                gestionnaireClients.allerA(numClient,etape,0);
+            }
         }
     }
 
@@ -191,5 +227,10 @@ public class Simulation {
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    @Override
+    public Iterator<Client> iterator() {
+        return gestionnaireClients.iterator();
     }
 }
