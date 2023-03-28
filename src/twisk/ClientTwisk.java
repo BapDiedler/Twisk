@@ -19,9 +19,14 @@ import java.lang.reflect.Method;
 public class ClientTwisk {
 
     /**
-     * Le monde actif
+     * Le premier monde crée
      */
-    private Monde monde;
+    private Monde premierMonde;
+
+    /**
+     * Le deuxième monde crée
+     */
+    private Monde deuxiemeMonde;
 
     /**
      * Classe simulation chargée par le ClassLoaderPerso
@@ -50,10 +55,12 @@ public class ClientTwisk {
     public ClientTwisk() throws TwiskClassLoaderException {
         chargeSimulationClass();
         initSimulation();
-        definePremierMonde();
+        creePremierMonde();
         chargeSetNbClients();
         chargeSimulation();
-        startSimulation();
+        startSimulation(premierMonde);
+        creeDeuxiemeMonde();
+        startSimulation(deuxiemeMonde);
     }
 
     /**
@@ -117,10 +124,10 @@ public class ClientTwisk {
     }
 
     /**
-     * Cette méthode crée le premier monde
+     * Crée le premier monde
      */
-    private void definePremierMonde(){
-        monde = new Monde();
+    private void creePremierMonde(){
+        premierMonde = new Monde();
 
         Activite zoo = new Activite("balade au zoo", 3, 1);
         Guichet guichet = new Guichet("accès au toboggan", 2);
@@ -129,21 +136,41 @@ public class ClientTwisk {
 
         zoo.ajouterSuccesseur(guichet,bob);
         guichet.ajouterSuccesseur(tob);
-        monde.ajouter(zoo, tob, guichet,bob);
+        premierMonde.ajouter(zoo, tob, guichet,bob);
 
-        monde.aCommeEntree(zoo);
-        monde.aCommeSortie(tob,bob);
-
-        //Simulation s = new Simulation();
-        //s.setNbClients(10);
-        //s.simuler(monde);
+        premierMonde.aCommeEntree(zoo);
+        premierMonde.aCommeSortie(tob,bob);
     }
 
     /**
-     * Défini le nombre de clients puis lance la simulation
+     *
+     */
+    private void creeDeuxiemeMonde(){
+        deuxiemeMonde = new Monde();
+        Activite jardin = new Activite("Promenade au jardin", 5,4);
+        Guichet queueBoutique = new Guichet("Boutique souvenirs",3);
+        ActiviteRestreinte boutique = new ActiviteRestreinte("Boutique",3,2);
+        Guichet queueMusee = new Guichet("Queue du musée",5);
+        ActiviteRestreinte musee = new ActiviteRestreinte("Visite du musée", 3,1);
+        Activite art = new Activite("Activité créative",2,1);
+
+        jardin.ajouterSuccesseur(queueMusee,queueBoutique);
+        queueBoutique.ajouterSuccesseur(boutique);
+        queueMusee.ajouterSuccesseur(musee);
+        musee.ajouterSuccesseur(art);
+        deuxiemeMonde.ajouter(jardin,queueBoutique,queueMusee,musee,art);
+
+        deuxiemeMonde.aCommeEntree(jardin);
+        deuxiemeMonde.aCommeSortie(art,boutique);
+
+    }
+
+    /**
+     * Défini le nombre de clients puis lance la simulation sur le monde passé en paramètre
+     * @param monde Le monde sur lequel on lance la simulation
      * @throws TwiskClassLoaderException Exception levée en cas de soucis lié au ClassLoaderPerso
      */
-    private void startSimulation() throws TwiskClassLoaderException {
+    private void startSimulation(Monde monde) throws TwiskClassLoaderException {
         try {
             setNbClients.invoke(sim,10);
         } catch (IllegalAccessException e) {
@@ -153,6 +180,7 @@ public class ClientTwisk {
         }
 
         try {
+            System.out.println("\n\nDébut de la simulation:\n\n");
             simuler.invoke(sim,monde);
         } catch (IllegalAccessException e) {
             throw new TwiskClassLoaderException("Manque d'accès à la méthode setNbClients");
