@@ -1,10 +1,13 @@
 package twisk;
 
-import twisk.exception.TwiskClassNotFound;
+import twisk.exception.TwiskClassLoaderException;
+import twisk.exception.TwiskException;
 import twisk.monde.*;
 import twisk.outils.ClassLoaderPerso;
-import twisk.outils.KitC;
 import twisk.simulation.Simulation;
+
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 
 /**
  * cette classe se trouve dans le package twisk et représente la partie client du projet
@@ -14,14 +17,37 @@ import twisk.simulation.Simulation;
 
 public class ClientTwisk {
 
-    public ClientTwisk() throws TwiskClassNotFound {
+    public ClientTwisk() throws TwiskClassLoaderException{
         ClassLoader parent = this.getClass().getClassLoader();
         ClassLoaderPerso classLoader = new ClassLoaderPerso(parent);
+        Class<?> simulationClass;
         try {
-            classLoader.loadClass("twisk.simulation.Simulation");
+            simulationClass = classLoader.loadClass("twisk.simulation.Simulation");
         } catch (ClassNotFoundException e) {
-            throw new TwiskClassNotFound("La classe qui doit être chargée par le ClassLoaderPerso n'existe pas.");
+            throw new TwiskClassLoaderException("La classe qui doit être chargée par le ClassLoaderPerso n'existe pas.");
         }
+        Constructor cons;
+        try {
+            cons = simulationClass.getConstructor();
+        } catch (NoSuchMethodException e) {
+            throw new TwiskClassLoaderException("Le constructeur par défaut n'a pas été trouvé");
+        }
+        try {
+            Object sim = cons.newInstance();
+        } catch (InstantiationException e) {
+            throw new TwiskClassLoaderException("Simulation n'a pas pu être instanciée");
+        } catch (IllegalAccessException e) {
+            throw new TwiskClassLoaderException("L'utilisateur n'a pas les droits sur le fichier Simulation");
+        } catch (InvocationTargetException e) {
+            throw new TwiskClassLoaderException("Problème lors de l'instanciation de l'objet Simulation");
+        }
+        gerePremierMonde();
+    }
+
+    /**
+     * Cette méthode crée et simule le premier monde
+     */
+    private void gerePremierMonde(){
         Monde monde = new Monde();
 
         Activite zoo = new Activite("balade au zoo", 3, 1);
@@ -40,7 +66,8 @@ public class ClientTwisk {
         s.setNbClients(10);
         s.simuler(monde);
     }
-    public static void main(String[] args) throws TwiskClassNotFound {
+
+    public static void main(String[] args) throws TwiskClassLoaderException {
         new ClientTwisk();
     }
 }
