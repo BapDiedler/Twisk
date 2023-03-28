@@ -41,4 +41,22 @@ public class Client {
         this.etape = etape;
         this.rang = rang;
     }
+
+
+    /**
+     * getter sur l'étape du client
+     * @return l'étape sur laquelle le client se trouve
+     */
+    public Etape getEtape(){
+        return etape;
+    }
+
+
+    /**
+     * méthode qui permet de récupérer la valeur du rang
+     * @return la valeur du rang
+     */
+    public int getRang() {
+        return rang;
+    }
 }
