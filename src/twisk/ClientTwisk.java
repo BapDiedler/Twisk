@@ -1,6 +1,8 @@
 package twisk;
 
+import twisk.exception.TwiskClassNotFound;
 import twisk.monde.*;
+import twisk.outils.ClassLoaderPerso;
 import twisk.outils.KitC;
 import twisk.simulation.Simulation;
 
@@ -11,10 +13,15 @@ import twisk.simulation.Simulation;
  */
 
 public class ClientTwisk {
-    public static void main(String[] args) {
 
-
-
+    public ClientTwisk() throws TwiskClassNotFound {
+        ClassLoader parent = this.getClass().getClassLoader();
+        ClassLoaderPerso classLoader = new ClassLoaderPerso(parent);
+        try {
+            classLoader.loadClass("twisk.simulation.Simulation");
+        } catch (ClassNotFoundException e) {
+            throw new TwiskClassNotFound("La classe qui doit être chargée par le ClassLoaderPerso n'existe pas.");
+        }
         Monde monde = new Monde();
 
         Activite zoo = new Activite("balade au zoo", 3, 1);
@@ -32,5 +39,8 @@ public class ClientTwisk {
         Simulation s = new Simulation();
         s.setNbClients(10);
         s.simuler(monde);
+    }
+    public static void main(String[] args) throws TwiskClassNotFound {
+        new ClientTwisk();
     }
 }
