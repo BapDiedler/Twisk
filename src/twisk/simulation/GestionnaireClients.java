@@ -69,4 +69,14 @@ public class GestionnaireClients implements Iterable<Client>{
     public Iterator<Client> iterator() {
         return clients.values().iterator();
     }
+
+
+    /**
+     * méthode qui permet de récupérer les clients
+     * @param pid pid du client
+     * @return le client
+     */
+    public Client getClient(int pid){
+        return clients.get(pid);
+    }
 }
