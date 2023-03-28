@@ -59,8 +59,12 @@ public class ClientTwisk {
         chargeSetNbClients();
         chargeSimulation();
         startSimulation(premierMonde);
+        Simulation simulation = new Simulation();
+        //simulation.simuler(premierMonde);
         creeDeuxiemeMonde();
-        startSimulation(deuxiemeMonde);
+        //startSimulation(deuxiemeMonde);
+        simulation.setNbClients(10);
+        simulation.simuler(deuxiemeMonde);
     }
 
     /**
@@ -152,16 +156,14 @@ public class ClientTwisk {
         ActiviteRestreinte boutique = new ActiviteRestreinte("Boutique",3,2);
         Guichet queueMusee = new Guichet("Queue du musée",5);
         ActiviteRestreinte musee = new ActiviteRestreinte("Visite du musée", 3,1);
-        Activite art = new Activite("Activité créative",2,1);
 
         jardin.ajouterSuccesseur(queueMusee,queueBoutique);
         queueBoutique.ajouterSuccesseur(boutique);
         queueMusee.ajouterSuccesseur(musee);
-        musee.ajouterSuccesseur(art);
-        deuxiemeMonde.ajouter(jardin,queueBoutique,queueMusee,musee,art);
+        deuxiemeMonde.ajouter(jardin,queueBoutique,queueMusee,musee);
 
         deuxiemeMonde.aCommeEntree(jardin);
-        deuxiemeMonde.aCommeSortie(art,boutique);
+        deuxiemeMonde.aCommeSortie(musee,boutique);
 
     }
 
@@ -178,14 +180,12 @@ public class ClientTwisk {
         } catch (InvocationTargetException e) {
             throw new TwiskClassLoaderException("Problème lors de l'appel de la méthode setNbClients");
         }
-
         try {
-            System.out.println("\n\nDébut de la simulation:\n\n");
             simuler.invoke(sim,monde);
         } catch (IllegalAccessException e) {
-            throw new TwiskClassLoaderException("Manque d'accès à la méthode setNbClients");
+            throw new TwiskClassLoaderException("Manque d'accès à la méthode simuler");
         } catch (InvocationTargetException e) {
-            throw new TwiskClassLoaderException("Problème lors de l'appel de la méthode setNbClients");
+            throw new TwiskClassLoaderException("Problème lors de l'appel de la méthode simuler");
         }
     }
 

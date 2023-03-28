@@ -14,9 +14,9 @@ public class FabriqueNumero {
     private static int cptEtapes;
 
     /**
-     * Instance unique de la classe FabriqueNumero
+     * Compteur de libraire libTwisk.so
      */
-    private static final FabriqueNumero instance = new FabriqueNumero();
+    private static int cptLibrairie;
 
     /**
      * Compteur de sémaphore
@@ -24,11 +24,17 @@ public class FabriqueNumero {
     private static int numSemaphore;
 
     /**
+     * Instance unique de la classe FabriqueNumero
+     */
+    private static final FabriqueNumero instance = new FabriqueNumero();
+
+    /**
      * Constructeur privé pour empêcher la création d'une autre instance de la classe en dehors de celle déjà déclarée.
      */
     private FabriqueNumero() {
         cptEtapes = 0;
         numSemaphore = 1;
+        cptLibrairie = 1;
     }
 
     /**
@@ -56,6 +62,18 @@ public class FabriqueNumero {
     public static int getNumSemaphore(){
         return numSemaphore++;
     }
+
+    /**
+     * Retourne le compteur de librarie
+     * @return le numéro de librairie actuelle
+     */
+    public static int getCptLibrairie(){return cptLibrairie++;}
+
+    /**
+     * Donne le numéro de la librairie actuelle sans l'incrémenter
+     * @return le numéro de la librairie actuelle
+     */
+    public static int getCurrentCptLibrairie(){return cptLibrairie-1;}
 
     /**
      * Réinitialise le compteur d'étapes à 0.

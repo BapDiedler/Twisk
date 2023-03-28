@@ -2,6 +2,7 @@ package twisk.simulation;
 
 import twisk.monde.Etape;
 import twisk.monde.Monde;
+import twisk.outils.FabriqueNumero;
 import twisk.outils.KitC;
 
 import java.util.Iterator;
@@ -200,7 +201,8 @@ public class Simulation implements Iterable<Client>{
         System.out.println(monde);
         System.out.println("Le code C généré:");
         System.out.println(monde.toC());
-        System.load("/tmp/twisk/libTwisk.so") ;
+        int numLibrairie = FabriqueNumero.getCurrentCptLibrairie();
+        System.load("/tmp/twisk/libTwisk" + numLibrairie +".so") ;
     }
 
     /**

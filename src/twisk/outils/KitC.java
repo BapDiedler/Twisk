@@ -44,8 +44,9 @@ public class KitC {
     public void construireLaLibrairie(){
         Runtime runtime = Runtime.getRuntime();
         try {
+            int numLibrairie = FabriqueNumero.getCptLibrairie();
             String command = "gcc -shared /tmp/twisk/programmeC.o /tmp/twisk/codeNatif.o /tmp/twisk/client.o"+
-                    " -o /tmp/twisk/libTwisk.so";
+                    " -o /tmp/twisk/libTwisk"+ numLibrairie +".so";
             Process process = runtime.exec(command);
             // récupération des messages sur la sortie standard et la sortie d’erreur de la commande exécutée
             // à reprendre éventuellement et à adapter à votre code
