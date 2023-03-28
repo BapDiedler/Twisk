@@ -8,6 +8,7 @@ import twisk.simulation.Simulation;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 
 /**
  * cette classe se trouve dans le package twisk et représente la partie client du projet
@@ -17,15 +18,63 @@ import java.lang.reflect.InvocationTargetException;
 
 public class ClientTwisk {
 
-    public ClientTwisk() throws TwiskClassLoaderException{
+    /**
+     * Le monde actif
+     */
+    private Monde monde;
+
+    /**
+     * Classe simulation chargée par le ClassLoaderPerso
+     */
+    private Class<?> simulationClass;
+
+    /**
+     * L'object Simulation
+     */
+    private Object sim;
+
+    /**
+     * Fonction de Simulation qui permet de définir le nombre de clients
+     */
+    private Method setNbClients;
+
+    /**
+     * Fonction de Simulation qui permet de simuler
+     */
+    private Method simuler;
+
+    /**
+     * S'occupe de la simulation des mondes
+     * @throws TwiskClassLoaderException Exception levée en cas de soucis lié au ClassLoaderPerso
+     */
+    public ClientTwisk() throws TwiskClassLoaderException {
+        chargeSimulationClass();
+        initSimulation();
+        definePremierMonde();
+        chargeSetNbClients();
+        chargeSimulation();
+        startSimulation();
+    }
+
+    /**
+     * Utilise le ClassLoaderPerso pour charger la classe simuler
+     * @throws TwiskClassLoaderException Exception levée en cas de soucis lié au ClassLoaderPerso
+     */
+    private void chargeSimulationClass() throws TwiskClassLoaderException {
         ClassLoader parent = this.getClass().getClassLoader();
         ClassLoaderPerso classLoader = new ClassLoaderPerso(parent);
-        Class<?> simulationClass;
         try {
             simulationClass = classLoader.loadClass("twisk.simulation.Simulation");
         } catch (ClassNotFoundException e) {
             throw new TwiskClassLoaderException("La classe qui doit être chargée par le ClassLoaderPerso n'existe pas.");
         }
+    }
+
+    /**
+     * Initialisation de l'object Simulation
+     * @throws TwiskClassLoaderException Exception levée en cas de soucis lié au ClassLoaderPerso
+     */
+    private void initSimulation() throws TwiskClassLoaderException {
         Constructor cons;
         try {
             cons = simulationClass.getConstructor();
@@ -33,7 +82,7 @@ public class ClientTwisk {
             throw new TwiskClassLoaderException("Le constructeur par défaut n'a pas été trouvé");
         }
         try {
-            Object sim = cons.newInstance();
+            sim = cons.newInstance();
         } catch (InstantiationException e) {
             throw new TwiskClassLoaderException("Simulation n'a pas pu être instanciée");
         } catch (IllegalAccessException e) {
@@ -41,14 +90,37 @@ public class ClientTwisk {
         } catch (InvocationTargetException e) {
             throw new TwiskClassLoaderException("Problème lors de l'instanciation de l'objet Simulation");
         }
-        gerePremierMonde();
     }
 
     /**
-     * Cette méthode crée et simule le premier monde
+     * Charge la méthode setNbClients de Simulation
+     * @throws TwiskClassLoaderException Exception levée en cas de soucis lié au ClassLoaderPerso
      */
-    private void gerePremierMonde(){
-        Monde monde = new Monde();
+    private void chargeSetNbClients() throws TwiskClassLoaderException {
+        try {
+            setNbClients = simulationClass.getMethod("setNbClients",int.class);
+        } catch (NoSuchMethodException e) {
+            throw new TwiskClassLoaderException("La méthode setNbClients n'a pas été trouvée");
+        }
+    }
+
+    /**
+     * Charge la méthode simulation de Simulation
+     * @throws TwiskClassLoaderException Exception levée en cas de soucis lié au ClassLoaderPerso
+     */
+    private void chargeSimulation() throws TwiskClassLoaderException {
+        try {
+            simuler = simulationClass.getMethod("simuler",Monde.class);
+        } catch (NoSuchMethodException e) {
+            throw new TwiskClassLoaderException("La méthode setNbClients n'a pas été trouvée");
+        }
+    }
+
+    /**
+     * Cette méthode crée le premier monde
+     */
+    private void definePremierMonde(){
+        monde = new Monde();
 
         Activite zoo = new Activite("balade au zoo", 3, 1);
         Guichet guichet = new Guichet("accès au toboggan", 2);
@@ -62,9 +134,31 @@ public class ClientTwisk {
         monde.aCommeEntree(zoo);
         monde.aCommeSortie(tob,bob);
 
-        Simulation s = new Simulation();
-        s.setNbClients(10);
-        s.simuler(monde);
+        //Simulation s = new Simulation();
+        //s.setNbClients(10);
+        //s.simuler(monde);
+    }
+
+    /**
+     * Défini le nombre de clients puis lance la simulation
+     * @throws TwiskClassLoaderException Exception levée en cas de soucis lié au ClassLoaderPerso
+     */
+    private void startSimulation() throws TwiskClassLoaderException {
+        try {
+            setNbClients.invoke(sim,10);
+        } catch (IllegalAccessException e) {
+            throw new TwiskClassLoaderException("Manque d'accès à la méthode setNbClients");
+        } catch (InvocationTargetException e) {
+            throw new TwiskClassLoaderException("Problème lors de l'appel de la méthode setNbClients");
+        }
+
+        try {
+            simuler.invoke(sim,monde);
+        } catch (IllegalAccessException e) {
+            throw new TwiskClassLoaderException("Manque d'accès à la méthode setNbClients");
+        } catch (InvocationTargetException e) {
+            throw new TwiskClassLoaderException("Problème lors de l'appel de la méthode setNbClients");
+        }
     }
 
     public static void main(String[] args) throws TwiskClassLoaderException {
