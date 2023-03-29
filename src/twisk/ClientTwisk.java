@@ -4,6 +4,7 @@ import twisk.exception.TwiskClassLoaderException;
 import twisk.exception.TwiskException;
 import twisk.monde.*;
 import twisk.outils.ClassLoaderPerso;
+import twisk.outils.FabriqueNumero;
 import twisk.simulation.Simulation;
 
 import java.lang.reflect.Constructor;
@@ -59,12 +60,9 @@ public class ClientTwisk {
         chargeSetNbClients();
         chargeSimulation();
         startSimulation(premierMonde);
-        Simulation simulation = new Simulation();
-        //simulation.simuler(premierMonde);
         creeDeuxiemeMonde();
-        //startSimulation(deuxiemeMonde);
-        simulation.setNbClients(10);
-        simulation.simuler(deuxiemeMonde);
+        startSimulation(deuxiemeMonde);
+
     }
 
     /**
@@ -144,6 +142,7 @@ public class ClientTwisk {
 
         premierMonde.aCommeEntree(zoo);
         premierMonde.aCommeSortie(tob,bob);
+        FabriqueNumero.reset();
     }
 
     /**
@@ -160,7 +159,7 @@ public class ClientTwisk {
         jardin.ajouterSuccesseur(queueMusee,queueBoutique);
         queueBoutique.ajouterSuccesseur(boutique);
         queueMusee.ajouterSuccesseur(musee);
-        deuxiemeMonde.ajouter(jardin,queueBoutique,queueMusee,musee);
+        deuxiemeMonde.ajouter(jardin,queueBoutique,queueMusee,musee,boutique);
 
         deuxiemeMonde.aCommeEntree(jardin);
         deuxiemeMonde.aCommeSortie(musee,boutique);

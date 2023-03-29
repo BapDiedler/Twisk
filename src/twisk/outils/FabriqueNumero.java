@@ -78,7 +78,7 @@ public class FabriqueNumero {
     /**
      * Réinitialise le compteur d'étapes à 0.
      */
-    public void reset() {
+    public static void reset() {
         cptEtapes = 0;
     }
 }
