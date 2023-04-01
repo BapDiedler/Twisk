@@ -128,8 +128,7 @@ public class Simulation implements Iterable<Client>{
      * @param tab tableau dans lequel se trouve les clients du monde
      */
     private void miseAjourClient(Monde monde, int[] tab){
-        int nbClientsEtape;
-        int numClient;
+        int nbClientsEtape ,numClient;
         int numeroEtape = -1;
         Etape etape;
         for(int i=0; i<tab.length; i+=(nbClients+1)){
