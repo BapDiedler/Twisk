@@ -50,7 +50,7 @@ public class ClientTwisk {
     private Method simuler;
 
     /**
-     * S'occupe de la simulation des mondes
+     * constructeur de la classe qui s'occupe de la simulation des mondes
      * @throws TwiskClassLoaderException Exception levée en cas de soucis lié au ClassLoaderPerso
      */
     public ClientTwisk() throws TwiskClassLoaderException {
@@ -146,15 +146,15 @@ public class ClientTwisk {
     }
 
     /**
-     *
+     * création du deuxième monde
      */
     private void creeDeuxiemeMonde(){
         deuxiemeMonde = new Monde();
         Activite jardin = new Activite("Promenade au jardin", 5,4);
         Guichet queueBoutique = new Guichet("Boutique souvenirs",3);
         ActiviteRestreinte boutique = new ActiviteRestreinte("Boutique",3,2);
-        Guichet queueMusee = new Guichet("Queue du musée",5);
-        ActiviteRestreinte musee = new ActiviteRestreinte("Visite du musée", 3,1);
+        Guichet queueMusee = new Guichet("Queue du musée",1);
+        ActiviteRestreinte musee = new ActiviteRestreinte("Visite du musée", 5,1);
 
         jardin.ajouterSuccesseur(queueMusee,queueBoutique);
         queueBoutique.ajouterSuccesseur(boutique);
@@ -173,7 +173,7 @@ public class ClientTwisk {
      */
     private void startSimulation(Monde monde) throws TwiskClassLoaderException {
         try {
-            setNbClients.invoke(sim,10);
+            setNbClients.invoke(sim,15);
         } catch (IllegalAccessException e) {
             throw new TwiskClassLoaderException("Manque d'accès à la méthode setNbClients");
         } catch (InvocationTargetException e) {

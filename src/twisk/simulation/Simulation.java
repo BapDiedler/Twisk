@@ -138,10 +138,7 @@ public class Simulation implements Iterable<Client>{
             for(int j=1+i; j<=nbClientsEtape+i; j++){
                 numClient = tab[j];
                 etape = monde.getEtape(numeroEtape);
-                if(etape.estUnGuichet())
-                    gestionnaireClients.allerA(numClient,etape,j-i-1);
-                else
-                    gestionnaireClients.allerA(numClient,etape,0);
+                gestionnaireClients.allerA(numClient,etape,j-i-1);
             }
         }
     }
