@@ -96,6 +96,9 @@ public class Simulation implements Iterable<Client>{
         //affichage des clients du monde (les PID)
         int[] pid = start_simulation(monde.nbEtapes(), monde.nbGuichet(), nbClients, tabJetonsGuichet);
         this.gestionnaireClients = new GestionnaireClients(pid);
+        for(int i=0; i< tabJetonsGuichet.length; i++){
+            System.out.println(tabJetonsGuichet[i]);
+        }
         System.out.println("les clients :  ");
         for(int i=0; i<nbClients; i++){
             System.out.print(pid[i]+" | ");
