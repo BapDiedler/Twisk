@@ -78,7 +78,12 @@ public class FabriqueNumero {
     /**
      * Réinitialise le compteur d'étapes à 0.
      */
-    public static void reset() {
+    public static void resetCptEtapes() {
         cptEtapes = 0;
     }
+
+    /**
+     * Réinitialise le compteur de sémaphore à 0.
+     */
+    public static void resetCptSem(){numSemaphore = 1;}
 }

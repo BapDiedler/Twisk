@@ -56,9 +56,9 @@ public class ClientTwisk {
     public ClientTwisk() throws TwiskClassLoaderException {
         chargeSimulationClass();
         initSimulation();
-        creePremierMonde();
         chargeSetNbClients();
         chargeSimulation();
+        creePremierMonde();
         startSimulation(premierMonde);
         creeDeuxiemeMonde();
         startSimulation(deuxiemeMonde);
@@ -129,6 +129,7 @@ public class ClientTwisk {
      * Crée le premier monde
      */
     private void creePremierMonde(){
+        resetCompteurs();
         premierMonde = new Monde();
 
         Activite zoo = new Activite("balade au zoo", 3, 1);
@@ -142,19 +143,27 @@ public class ClientTwisk {
 
         premierMonde.aCommeEntree(zoo);
         premierMonde.aCommeSortie(tob,bob);
-        FabriqueNumero.reset();
+    }
+
+    /**
+     * Réinitialise les compteurs d'étapes et de sémaphores. Utile avant de créer un nouveau monde
+     */
+    private void resetCompteurs(){
+        FabriqueNumero.resetCptEtapes();
+        FabriqueNumero.resetCptSem();
     }
 
     /**
      * création du deuxième monde
      */
     private void creeDeuxiemeMonde(){
+        resetCompteurs();
         deuxiemeMonde = new Monde();
         Activite jardin = new Activite("Promenade au jardin", 5,4);
         Guichet queueBoutique = new Guichet("Boutique souvenirs",3);
         ActiviteRestreinte boutique = new ActiviteRestreinte("Boutique",3,2);
         Guichet queueMusee = new Guichet("Queue du musée",1);
-        ActiviteRestreinte musee = new ActiviteRestreinte("Visite du musée", 5,1);
+        ActiviteRestreinte musee = new ActiviteRestreinte("Visite du musée", 5,3);
 
         jardin.ajouterSuccesseur(queueMusee,queueBoutique);
         queueBoutique.ajouterSuccesseur(boutique);
