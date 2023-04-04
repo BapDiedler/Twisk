@@ -198,6 +198,7 @@ public class Simulation implements Iterable<Client>{
         System.out.println("Le code C généré:");
         System.out.println(monde.toC());
         int numLibrairie = FabriqueNumero.getCurrentCptLibrairie();
+        System.out.println("La librairie utilisée: " + "/tmp/twisk/libTwisk" + numLibrairie +".so");
         System.load("/tmp/twisk/libTwisk" + numLibrairie +".so") ;
     }
 
