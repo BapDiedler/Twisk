@@ -60,6 +60,7 @@ public class ClientTwisk {
         chargeSimulation();
         creePremierMonde();
         startSimulation(premierMonde);
+        chargeSimulationClass();
         creeDeuxiemeMonde();
         startSimulation(deuxiemeMonde);
 
@@ -70,6 +71,7 @@ public class ClientTwisk {
      * @throws TwiskClassLoaderException Exception levée en cas de soucis lié au ClassLoaderPerso
      */
     private void chargeSimulationClass() throws TwiskClassLoaderException {
+        simulationClass = null;
         ClassLoader parent = this.getClass().getClassLoader();
         ClassLoaderPerso classLoader = new ClassLoaderPerso(parent);
         try {
@@ -156,7 +158,7 @@ public class ClientTwisk {
     /**
      * création du deuxième monde
      */
-    private void creeDeuxiemeMonde(){
+    /**private void creeDeuxiemeMonde(){
         resetCompteurs();
         deuxiemeMonde = new Monde();
         Activite jardin = new Activite("Promenade au jardin", 5,4);
@@ -173,7 +175,29 @@ public class ClientTwisk {
         deuxiemeMonde.aCommeEntree(jardin);
         deuxiemeMonde.aCommeSortie(musee,boutique);
 
+    }*/
+
+    private void creeDeuxiemeMonde(){
+        resetCompteurs();
+        deuxiemeMonde = new Monde();
+        Activite jardin = new Activite("Promenade au jardin", 5,4);
+        Guichet queueBoutique = new Guichet("Boutique souvenirs",3);
+        ActiviteRestreinte boutique = new ActiviteRestreinte("Boutique",3,2);
+        Guichet queueMusee = new Guichet("Queue du musée",1);
+        ActiviteRestreinte musee = new ActiviteRestreinte("Visite du musée", 5,3);
+
+        jardin.ajouterSuccesseur(queueMusee);
+        queueBoutique.ajouterSuccesseur(boutique);
+        boutique.ajouterSuccesseur(queueMusee);
+        queueMusee.ajouterSuccesseur(musee);
+        deuxiemeMonde.ajouter(jardin,queueBoutique,queueMusee,musee,boutique);
+
+        deuxiemeMonde.aCommeEntree(jardin);
+        deuxiemeMonde.aCommeSortie(musee);
+
     }
+
+
 
     /**
      * Défini le nombre de clients puis lance la simulation sur le monde passé en paramètre
