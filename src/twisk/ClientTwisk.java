@@ -50,7 +50,7 @@ public class ClientTwisk {
     private Method simuler;
 
     /**
-     * S'occupe de la simulation des mondes
+     * constructeur de la classe qui s'occupe de la simulation des mondes
      * @throws TwiskClassLoaderException Exception levée en cas de soucis lié au ClassLoaderPerso
      */
     public ClientTwisk() throws TwiskClassLoaderException {
