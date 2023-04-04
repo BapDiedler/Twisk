@@ -128,8 +128,7 @@ public class Simulation implements Iterable<Client>{
      * @param tab tableau dans lequel se trouve les clients du monde
      */
     private void miseAjourClient(Monde monde, int[] tab){
-        int nbClientsEtape;
-        int numClient;
+        int nbClientsEtape ,numClient;
         int numeroEtape = -1;
         Etape etape;
         for(int i=0; i<tab.length; i+=(nbClients+1)){
@@ -138,10 +137,7 @@ public class Simulation implements Iterable<Client>{
             for(int j=1+i; j<=nbClientsEtape+i; j++){
                 numClient = tab[j];
                 etape = monde.getEtape(numeroEtape);
-                if(etape.estUnGuichet())
-                    gestionnaireClients.allerA(numClient,etape,j-i-1);
-                else
-                    gestionnaireClients.allerA(numClient,etape,0);
+                gestionnaireClients.allerA(numClient,etape,j-i-1);
             }
         }
     }
@@ -191,11 +187,11 @@ public class Simulation implements Iterable<Client>{
     private void initialisationSimuler(Monde monde){
         String codeC = monde.toC();
 
-        KitC kit = new KitC();
-        kit.creerEnvironment();
-        kit.creerFichier(codeC);
-        kit.compilation();
-        kit.construireLaLibrairie();
+        kitC = new KitC();
+        kitC.creerEnvironment();
+        kitC.creerFichier(codeC);
+        kitC.compilation();
+        kitC.construireLaLibrairie();
 
         System.out.println("Le monde:");
         System.out.println(monde);

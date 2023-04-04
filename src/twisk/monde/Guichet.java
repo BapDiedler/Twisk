@@ -82,7 +82,7 @@ public class Guichet extends Etape{
         String semaphore = "SEM_" + passNom() + getNumeroSemaphore();
         //code C pour le passage d'un guichet à une activité
         return "\tP(ids," + semaphore + ");\n"
-            + transfert() + successeur.delai()
+            + transfert() + successeur.delai() + "\n"
             + "\tV(ids," + semaphore + ");\n"
             + successeur.toC();
     }
