@@ -132,17 +132,23 @@ public class ClientTwisk {
         resetCompteurs();
         premierMonde = new Monde();
 
-        Activite zoo = new Activite("balade au zoo", 3, 1);
-        Guichet guichet = new Guichet("accès au toboggan", 2);
-        Activite tob = new ActiviteRestreinte("toboggan", 2, 1);
-        Activite bob = new Activite("Bobo",2,1);
+        Activite act1 = new Activite("act1", 3, 1);
+        Guichet guichet1 = new Guichet("guichet1", 2);
+        Activite tob = new ActiviteRestreinte(  "toboggan", 2, 1);
+        Activite activite2 = new ActiviteRestreinte("activite2",3,2);
+        Guichet guichet2 = new Guichet("guichet2", 1);
+        Activite activite3 = new Activite("azertyu",3,2);
 
-        zoo.ajouterSuccesseur(guichet,bob);
-        guichet.ajouterSuccesseur(tob);
-        premierMonde.ajouter(zoo, tob, guichet,bob);
 
-        premierMonde.aCommeEntree(zoo);
-        premierMonde.aCommeSortie(tob,bob);
+        act1.ajouterSuccesseur(guichet1);
+        guichet1.ajouterSuccesseur(tob);
+        tob.ajouterSuccesseur(activite3);
+        activite3.ajouterSuccesseur(guichet2);
+        guichet2.ajouterSuccesseur(activite2);
+        premierMonde.ajouter(act1, activite2, tob, activite3,guichet2,guichet1);
+
+        premierMonde.aCommeEntree(act1);
+        premierMonde.aCommeSortie(activite2);
     }
 
     /**
