@@ -54,16 +54,24 @@ public class ClientTwisk {
      * @throws TwiskClassLoaderException Exception levée en cas de soucis lié au ClassLoaderPerso
      */
     public ClientTwisk() throws TwiskClassLoaderException {
+        preparationSimulation();
+        creePremierMonde();
+        startSimulation(premierMonde);
+        preparationSimulation();
+        creeDeuxiemeMonde();
+        startSimulation(deuxiemeMonde);
+
+    }
+
+    /**
+     * Charge tout ce qui est nécessaire pour lancer la simulation. Nécessaire entre chaque simulation
+     * @throws TwiskClassLoaderException Exception levée en cas de soucis lié au ClassLoaderPerso
+     */
+    private void preparationSimulation() throws TwiskClassLoaderException {
         chargeSimulationClass();
         initSimulation();
         chargeSetNbClients();
         chargeSimulation();
-        creePremierMonde();
-        startSimulation(premierMonde);
-        chargeSimulationClass();
-        creeDeuxiemeMonde();
-        startSimulation(deuxiemeMonde);
-
     }
 
     /**
