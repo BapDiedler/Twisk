@@ -213,11 +213,9 @@ public class Simulation implements Iterable<Client>{
     private int[] initialisationTabGuichets(Monde monde){
         int[] tabJetonsGuichet = new int[monde.nbGuichet()];
         //initialisation des jetons de guichet
-        int j=0;
         for(Etape etape : monde){
             if(etape.estUnGuichet()){
-                tabJetonsGuichet[j]=etape.getNbJetons();
-                j++;
+                tabJetonsGuichet[etape.getNumeroSemaphore()-1] = etape.getNbJetons();
             }
         }
         return tabJetonsGuichet;
