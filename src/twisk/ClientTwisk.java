@@ -60,7 +60,6 @@ public class ClientTwisk {
         preparationSimulation();
         creeDeuxiemeMonde();
         startSimulation(deuxiemeMonde);
-
     }
 
     /**
@@ -166,14 +165,14 @@ public class ClientTwisk {
     /**
      * création du deuxième monde
      */
-    /**private void creeDeuxiemeMonde(){
+    private void creeDeuxiemeMonde(){
         resetCompteurs();
         deuxiemeMonde = new Monde();
-        Activite jardin = new Activite("Promenade au jardin", 5,4);
-        Guichet queueBoutique = new Guichet("Boutique souvenirs",3);
+        Activite jardin = new Activite("Promenade au jardin", 3,2);
+        Guichet queueBoutique = new Guichet("Boutique souvenirs",1);
         ActiviteRestreinte boutique = new ActiviteRestreinte("Boutique",3,2);
         Guichet queueMusee = new Guichet("Queue du musée",1);
-        ActiviteRestreinte musee = new ActiviteRestreinte("Visite du musée", 5,3);
+        ActiviteRestreinte musee = new ActiviteRestreinte("Visite du musée", 3,2);
 
         jardin.ajouterSuccesseur(queueMusee,queueBoutique);
         queueBoutique.ajouterSuccesseur(boutique);
@@ -183,9 +182,9 @@ public class ClientTwisk {
         deuxiemeMonde.aCommeEntree(jardin);
         deuxiemeMonde.aCommeSortie(musee,boutique);
 
-    }*/
+    }
 
-    private void creeDeuxiemeMonde(){
+    /**private void creeDeuxiemeMonde(){
         resetCompteurs();
         deuxiemeMonde = new Monde();
         Activite jardin = new Activite();
@@ -201,7 +200,7 @@ public class ClientTwisk {
         salon.ajouterSuccesseur(salle_de_bain);
         salle_de_bain.ajouterSuccesseur(chambre);
         deuxiemeMonde.aCommeSortie(chambre);
-    }
+    }*/
 
 
 
