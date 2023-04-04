@@ -180,21 +180,19 @@ public class ClientTwisk {
     private void creeDeuxiemeMonde(){
         resetCompteurs();
         deuxiemeMonde = new Monde();
-        Activite jardin = new Activite("Promenade au jardin", 5,4);
-        Guichet queueBoutique = new Guichet("Boutique souvenirs",3);
-        ActiviteRestreinte boutique = new ActiviteRestreinte("Boutique",3,2);
-        Guichet queueMusee = new Guichet("Queue du musée",1);
-        ActiviteRestreinte musee = new ActiviteRestreinte("Visite du musée", 5,3);
+        Activite jardin = new Activite();
+        Activite cuisine = new Activite();
+        Activite salon = new Activite();
+        Activite salle_de_bain = new Activite();
+        Activite chambre = new Activite();
 
-        jardin.ajouterSuccesseur(queueMusee);
-        queueBoutique.ajouterSuccesseur(boutique);
-        boutique.ajouterSuccesseur(queueMusee);
-        queueMusee.ajouterSuccesseur(musee);
-        deuxiemeMonde.ajouter(jardin,queueBoutique,queueMusee,musee,boutique);
-
+        deuxiemeMonde.ajouter(jardin,cuisine,salon,salle_de_bain,chambre);
         deuxiemeMonde.aCommeEntree(jardin);
-        deuxiemeMonde.aCommeSortie(musee);
-
+        jardin.ajouterSuccesseur(cuisine);
+        cuisine.ajouterSuccesseur(salon);
+        salon.ajouterSuccesseur(salle_de_bain);
+        salle_de_bain.ajouterSuccesseur(chambre);
+        deuxiemeMonde.aCommeSortie(chambre);
     }
 
 
