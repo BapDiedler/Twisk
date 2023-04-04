@@ -187,11 +187,11 @@ public class Simulation implements Iterable<Client>{
     private void initialisationSimuler(Monde monde){
         String codeC = monde.toC();
 
-        KitC kit = new KitC();
-        kit.creerEnvironment();
-        kit.creerFichier(codeC);
-        kit.compilation();
-        kit.construireLaLibrairie();
+        kitC = new KitC();
+        kitC.creerEnvironment();
+        kitC.creerFichier(codeC);
+        kitC.compilation();
+        kitC.construireLaLibrairie();
 
         System.out.println("Le monde:");
         System.out.println(monde);
