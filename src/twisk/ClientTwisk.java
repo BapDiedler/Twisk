@@ -184,24 +184,6 @@ public class ClientTwisk {
 
     }
 
-    /**private void creeDeuxiemeMonde(){
-        resetCompteurs();
-        deuxiemeMonde = new Monde();
-        Activite jardin = new Activite();
-        Activite cuisine = new Activite();
-        Activite salon = new Activite();
-        Activite salle_de_bain = new Activite();
-        Activite chambre = new Activite();
-
-        deuxiemeMonde.ajouter(jardin,cuisine,salon,salle_de_bain,chambre);
-        deuxiemeMonde.aCommeEntree(jardin);
-        jardin.ajouterSuccesseur(cuisine);
-        cuisine.ajouterSuccesseur(salon);
-        salon.ajouterSuccesseur(salle_de_bain);
-        salle_de_bain.ajouterSuccesseur(chambre);
-        deuxiemeMonde.aCommeSortie(chambre);
-    }*/
-
 
 
     /**
