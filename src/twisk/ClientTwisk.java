@@ -54,18 +54,23 @@ public class ClientTwisk {
      * @throws TwiskClassLoaderException Exception levée en cas de soucis lié au ClassLoaderPerso
      */
     public ClientTwisk() throws TwiskClassLoaderException {
+        preparationSimulation();
+        creePremierMonde();
+        startSimulation(premierMonde);
+        preparationSimulation();
+        creeDeuxiemeMonde();
+        startSimulation(deuxiemeMonde);
+    }
+
+    /**
+     * Charge tout ce qui est nécessaire pour lancer la simulation. Nécessaire entre chaque simulation
+     * @throws TwiskClassLoaderException Exception levée en cas de soucis lié au ClassLoaderPerso
+     */
+    private void preparationSimulation() throws TwiskClassLoaderException {
         chargeSimulationClass();
         initSimulation();
-        creePremierMonde();
         chargeSetNbClients();
         chargeSimulation();
-        startSimulation(premierMonde);
-        initSimulation();
-        creeDeuxiemeMonde();
-        chargeSetNbClients();
-        chargeSimulation();
-        startSimulation(deuxiemeMonde);
-
     }
 
     /**
@@ -73,6 +78,7 @@ public class ClientTwisk {
      * @throws TwiskClassLoaderException Exception levée en cas de soucis lié au ClassLoaderPerso
      */
     private void chargeSimulationClass() throws TwiskClassLoaderException {
+        simulationClass = null;
         ClassLoader parent = this.getClass().getClassLoader();
         ClassLoaderPerso classLoader = new ClassLoaderPerso(parent);
         try {
@@ -132,32 +138,47 @@ public class ClientTwisk {
      * Crée le premier monde
      */
     private void creePremierMonde(){
+        resetCompteurs();
         premierMonde = new Monde();
 
-        Activite zoo = new Activite("balade au zoo", 3, 1);
-        Guichet guichet = new Guichet("accès au toboggan", 2);
-        Activite tob = new ActiviteRestreinte("toboggan", 2, 1);
-        Activite bob = new Activite("Bobo",2,1);
+        Activite act1 = new Activite("act1", 3, 1);
+        Guichet guichet1 = new Guichet("guichet1", 2);
+        Activite tob = new ActiviteRestreinte(  "toboggan", 2, 1);
+        Activite activite2 = new ActiviteRestreinte("activite2",3,2);
+        Guichet guichet2 = new Guichet("guichet2", 1);
+        Activite activite3 = new Activite("azertyu",3,2);
 
-        zoo.ajouterSuccesseur(guichet,bob);
-        guichet.ajouterSuccesseur(tob);
-        premierMonde.ajouter(zoo, tob, guichet,bob);
 
-        premierMonde.aCommeEntree(zoo);
-        premierMonde.aCommeSortie(tob,bob);
-        FabriqueNumero.reset();
+        act1.ajouterSuccesseur(guichet1);
+        guichet1.ajouterSuccesseur(tob);
+        tob.ajouterSuccesseur(activite3);
+        activite3.ajouterSuccesseur(guichet2);
+        guichet2.ajouterSuccesseur(activite2);
+        premierMonde.ajouter(act1, activite2, tob, activite3,guichet2,guichet1);
+
+        premierMonde.aCommeEntree(act1);
+        premierMonde.aCommeSortie(activite2);
+    }
+
+    /**
+     * Réinitialise les compteurs d'étapes et de sémaphores. Utile avant de créer un nouveau monde
+     */
+    private void resetCompteurs(){
+        FabriqueNumero.resetCptEtapes();
+        FabriqueNumero.resetCptSem();
     }
 
     /**
      * création du deuxième monde
      */
     private void creeDeuxiemeMonde(){
+        resetCompteurs();
         deuxiemeMonde = new Monde();
-        Activite jardin = new Activite("Promenade au jardin", 5,4);
-        Guichet queueBoutique = new Guichet("Boutique souvenirs",3);
+        Activite jardin = new Activite("Promenade au jardin", 3,2);
+        Guichet queueBoutique = new Guichet("Boutique souvenirs",1);
         ActiviteRestreinte boutique = new ActiviteRestreinte("Boutique",3,2);
         Guichet queueMusee = new Guichet("Queue du musée",1);
-        ActiviteRestreinte musee = new ActiviteRestreinte("Visite du musée", 5,1);
+        ActiviteRestreinte musee = new ActiviteRestreinte("Visite du musée", 3,2);
 
         jardin.ajouterSuccesseur(queueMusee,queueBoutique);
         queueBoutique.ajouterSuccesseur(boutique);
@@ -165,9 +186,11 @@ public class ClientTwisk {
         deuxiemeMonde.ajouter(jardin,queueBoutique,queueMusee,musee,boutique);
 
         deuxiemeMonde.aCommeEntree(jardin);
-        deuxiemeMonde.aCommeSortie(boutique,musee);
+        deuxiemeMonde.aCommeSortie(musee,boutique);
 
     }
+
+
 
     /**
      * Défini le nombre de clients puis lance la simulation sur le monde passé en paramètre
@@ -176,7 +199,7 @@ public class ClientTwisk {
      */
     private void startSimulation(Monde monde) throws TwiskClassLoaderException {
         try {
-            setNbClients.invoke(sim,10);
+            setNbClients.invoke(sim,15);
         } catch (IllegalAccessException e) {
             throw new TwiskClassLoaderException("Manque d'accès à la méthode setNbClients");
         } catch (InvocationTargetException e) {
