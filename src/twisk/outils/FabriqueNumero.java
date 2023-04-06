@@ -82,4 +82,5 @@ public class FabriqueNumero {
         cptEtapes = 0;
         numSemaphore = 1;
     }
+
 }
