@@ -60,7 +60,10 @@ public class ClientTwisk {
         chargeSetNbClients();
         chargeSimulation();
         startSimulation(premierMonde);
+        initSimulation();
         creeDeuxiemeMonde();
+        chargeSetNbClients();
+        chargeSimulation();
         startSimulation(deuxiemeMonde);
 
     }
@@ -162,7 +165,7 @@ public class ClientTwisk {
         deuxiemeMonde.ajouter(jardin,queueBoutique,queueMusee,musee,boutique);
 
         deuxiemeMonde.aCommeEntree(jardin);
-        deuxiemeMonde.aCommeSortie(musee,boutique);
+        deuxiemeMonde.aCommeSortie(boutique,musee);
 
     }
 
@@ -173,7 +176,7 @@ public class ClientTwisk {
      */
     private void startSimulation(Monde monde) throws TwiskClassLoaderException {
         try {
-            setNbClients.invoke(sim,15);
+            setNbClients.invoke(sim,10);
         } catch (IllegalAccessException e) {
             throw new TwiskClassLoaderException("Manque d'accès à la méthode setNbClients");
         } catch (InvocationTargetException e) {

@@ -80,5 +80,6 @@ public class FabriqueNumero {
      */
     public static void reset() {
         cptEtapes = 0;
+        numSemaphore = 1;
     }
 }
