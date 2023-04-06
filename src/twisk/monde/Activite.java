@@ -23,7 +23,7 @@ public class Activite extends Etape {
      * Initialise une activité vide avec un nom "activité", une durée de 0 minutes et une variance de 0 minutes.
      */
     public Activite() {
-        this("Activité", 2, 1);
+        this("Activité", 4, 1);
     }
 
     /**
@@ -33,7 +33,7 @@ public class Activite extends Etape {
      * @param nom le nom de l'activité
      */
     public Activite(String nom) {
-        this(nom, 2, 1);
+        this(nom, 4, 1);
     }
 
     /**
