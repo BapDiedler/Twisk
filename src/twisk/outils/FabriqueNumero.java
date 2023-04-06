@@ -86,4 +86,12 @@ public class FabriqueNumero {
      * Réinitialise le compteur de sémaphore à 0.
      */
     public static void resetCptSem(){numSemaphore = 1;}
+
+    /**
+     * la méthode permet de tout remettre à 0
+     */
+    public static void reset(){
+        cptEtapes=0;
+        numSemaphore=0;
+    }
 }
