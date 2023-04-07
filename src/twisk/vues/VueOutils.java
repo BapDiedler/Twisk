@@ -15,7 +15,7 @@ public class VueOutils extends TilePane implements Observateur {
     /**
      * Connaît le monde graphique
      */
-    private MondeIG monde;
+    private final MondeIG monde;
 
     /**
      * Le bouton qui permet d'ajouter des activités

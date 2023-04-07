@@ -63,10 +63,7 @@ import java.util.Random;
      * @param nom nom de l'étape
      */
     public EtapeIG(String nom){
-        defineTaille();
-        definePosition();
         defineNom(nom);
-        definePointDeControles();
         defineEntreeSortie();
     }
 
@@ -81,7 +78,7 @@ import java.util.Random;
     /**
      * Défini la position
      */
-    private void definePosition(){
+    protected void definePosition(){
         // Donne des valeurs aléatoires à la position de l'étape
         Random random = new Random();
         this.posX = random.nextInt(1000 - largeur);
@@ -100,7 +97,7 @@ import java.util.Random;
     /**
      * Défini les points de contrôles
      */
-    private void definePointDeControles(){
+    protected void definePointDeControles(){
         this.pointsControles = new ArrayList<>();
         int milieuLargeur = posX + largeur/2;
         int milieuHauteur = posY + hauteur/2;

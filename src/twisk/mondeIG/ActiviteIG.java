@@ -20,6 +20,9 @@ public class ActiviteIG extends EtapeIG {
      */
     public ActiviteIG() {
         super("Activité");
+        defineTaille();
+        definePosition();
+        definePointDeControles();
         this.delai = 3;
         this.ecart = 1;
     }

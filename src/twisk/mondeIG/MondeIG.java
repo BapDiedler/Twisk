@@ -61,8 +61,7 @@ public class MondeIG extends SujetObserve implements Iterable<EtapeIG>{
             ActiviteIG activite = new ActiviteIG();
             etapes.put(activite.getIdentifiant(), activite);
             notifierObs();
-        }
-        else{
+        }else{
             System.err.println("Erreur, type non reconnu.\n");
         }
     }
