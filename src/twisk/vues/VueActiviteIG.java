@@ -49,8 +49,8 @@ public class VueActiviteIG extends VueEtapeIG{
                     "-fx-border-radius: 30px;");
         }
         zoneClients.setAlignment(Pos.CENTER);
-        zoneClients.setPrefHeight(TailleComposants.getHauteur()*0.6);
-        zoneClients.setPrefWidth(TailleComposants.getLargeur()*0.8);
+        zoneClients.setPrefHeight(TailleComposants.getHauteurActivite()*0.6);
+        zoneClients.setPrefWidth(TailleComposants.getLargeurActivite()*0.8);
     }
 
     @Override

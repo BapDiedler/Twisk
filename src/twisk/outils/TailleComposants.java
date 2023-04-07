@@ -3,14 +3,24 @@ package twisk.outils;
 public class TailleComposants {
 
     /**
-     * La largeur de l'étape graphique
+     * La largeur de l'activité graphique
      */
-    private static int largeur;
+    private static int largeurActivite;
 
     /**
-     * La hauteur de l'étape graphique
+     * La hauteur de l'activité graphique
      */
-    private static int hauteur;
+    private static int hauteurActivite;
+
+    /**
+     * La largeur d'un guichet graphique
+     */
+    private static int largeurGuichet;
+
+    /**
+     * La hauteur d'un guichet graphique
+     */
+    private static int hauteurGuichet;
 
     /**
      * Instance unique de la classe TailleComposants
@@ -27,19 +37,33 @@ public class TailleComposants {
      * Constructeur privé. Défini les constantes
      */
     private TailleComposants(){
-        largeur = 250;
-        hauteur = 200;
+        largeurActivite = 250;
+        hauteurActivite = 200;
+        largeurGuichet = 250;
+        hauteurGuichet = 100;
     }
 
     /**
-     * Donne la largeur
+     * Donne la largeur de l'activité
      * @return la largeur
      */
-    public static int getLargeur(){return largeur;}
+    public static int getLargeurActivite(){return largeurActivite;}
 
     /**
-     * Donne la hauteur
+     * Donne la hauteur l'activité
      * @return la hauteur
      */
-    public static int getHauteur(){return hauteur;}
+    public static int getHauteurActivite(){return hauteurActivite;}
+
+    /**
+     * Donne la largeur du guichet
+     * @return la largeur
+     */
+    public static int getLargeurGuichet(){return largeurActivite;}
+
+    /**
+     * Donne la hauteur du guichet
+     * @return la hauteur
+     */
+    public static int getHauteurGuichet(){return hauteurActivite;}
 }

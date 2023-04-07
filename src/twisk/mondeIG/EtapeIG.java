@@ -57,6 +57,11 @@ import java.util.Random;
      */
     protected ArrayList<PointDeControleIG> pointsControles;
 
+    /**
+     * constructeur de la classe EtapeIG
+     *
+     * @param nom nom de l'étape
+     */
     public EtapeIG(String nom){
         defineTaille();
         definePosition();
@@ -65,9 +70,12 @@ import java.util.Random;
         defineEntreeSortie();
     }
 
-    private void defineTaille(){
-        this.hauteur = TailleComposants.getHauteur();
-        this.largeur = TailleComposants.getLargeur();
+    /**
+     * méthode permettant de changer la taille de l'étape
+     */
+    protected void defineTaille(){
+        this.hauteur = TailleComposants.getHauteurActivite();
+        this.largeur = TailleComposants.getLargeurActivite();
     }
 
     /**
