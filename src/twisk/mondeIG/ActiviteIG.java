@@ -1,5 +1,7 @@
 package twisk.mondeIG;
 
+import twisk.outils.TailleComposants;
+
 /**
  * Cette classe décrit une activité graphique
  */
@@ -27,6 +29,14 @@ public class ActiviteIG extends EtapeIG {
         this.ecart = 1;
     }
 
+    /**
+     * méthode permettant de changer la taille de l'étape
+     */
+    protected void defineTaille(){
+        this.hauteur = TailleComposants.getHauteurActivite();
+        this.largeur = TailleComposants.getLargeurActivite();
+    }
+
    @Override
     public void setDelai(int delai){
         this.delai = delai;
@@ -45,5 +55,15 @@ public class ActiviteIG extends EtapeIG {
     @Override
     public int getEcart(){
         return ecart;
+    }
+
+    @Override
+    public boolean estUnGuichet() {
+        return false;
+    }
+
+    @Override
+    public boolean estUneActivite() {
+        return true;
     }
 }

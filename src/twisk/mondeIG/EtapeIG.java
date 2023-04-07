@@ -70,10 +70,7 @@ import java.util.Random;
     /**
      * méthode permettant de changer la taille de l'étape
      */
-    protected void defineTaille(){
-        this.hauteur = TailleComposants.getHauteurActivite();
-        this.largeur = TailleComposants.getLargeurActivite();
-    }
+    protected void defineTaille(){}
 
     /**
      * Défini la position
@@ -281,4 +278,20 @@ import java.util.Random;
      * @return Le délai de l'étape si c'est une activité. -1 sinon
      */
     public int getDelai(){return -1;}
+
+    /**
+     * méthode qui permet de savoir si l'étape est un guichet
+     * @return true si l'étape est un guichet false sinon
+     */
+    public boolean estUnGuichet(){
+        return true;
+    }
+
+    /**
+     * méthode qui permet de savoir si l'étape est une activité
+     * @return true si l'étape est une activité false sinon
+     */
+    public boolean estUneActivite(){
+        return false;
+    }
 }

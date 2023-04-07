@@ -59,11 +59,11 @@ public class TailleComposants {
      * Donne la largeur du guichet
      * @return la largeur
      */
-    public static int getLargeurGuichet(){return largeurActivite;}
+    public static int getLargeurGuichet(){return largeurGuichet;}
 
     /**
      * Donne la hauteur du guichet
      * @return la hauteur
      */
-    public static int getHauteurGuichet(){return hauteurActivite;}
+    public static int getHauteurGuichet(){return hauteurGuichet;}
 }

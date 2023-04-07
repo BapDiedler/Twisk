@@ -35,8 +35,8 @@ public class EcouteurSource implements EventHandler<MouseEvent> {
         etape.setId(etape.getIdentifiant());
         ids.putString(etape.getId());
         // Création du cadre qui contiendra une capture d'écran de l'activité que l'on déplace
-        int largeur = TailleComposants.getLargeurActivite() + 40; // On ajoute le padding pour la taille
-        int hauteur = TailleComposants.getHauteurActivite() + 40;
+        int largeur = etape.getLargeur() + 40; // On ajoute le padding pour la taille
+        int hauteur = etape.getHauteur() + 40;
         WritableImage image = new WritableImage(largeur,hauteur);
         etape.snapshot(null, image);
         // Met l'image et les identifiants dans le dragboard

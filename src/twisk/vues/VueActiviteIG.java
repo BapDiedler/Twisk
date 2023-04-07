@@ -17,7 +17,7 @@ public class VueActiviteIG extends VueEtapeIG{
     /**
      * Zone destinée à contenir les clients
      */
-    private HBox zoneClients;
+    private final HBox zoneClients;
 
     /**
      * Le constructeur de VueActiviteIG
