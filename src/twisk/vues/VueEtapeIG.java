@@ -138,6 +138,7 @@ public abstract class VueEtapeIG extends VBox implements Observateur {
      * Défini la taille de la VBox
      */
     private void defineTaille(){
+        System.out.println(etape.getHauteur());
         this.setPrefHeight(etape.getHauteur());
         this.setPrefWidth(etape.getLargeur());
     }
@@ -158,6 +159,25 @@ public abstract class VueEtapeIG extends VBox implements Observateur {
     public String getIdentifiant(){
         return etape.getIdentifiant();
     }
+
+    /**
+     * getter sur la hauteur de l'étape
+     * @return la hauteur de l'étape
+     */
+    public int getHauteur(){
+        return etape.getHauteur();
+    }
+
+
+    /**
+     * getter sur la largeur de l'étape
+     * @return la largeur de l'étape
+     */
+    public int getLargeur(){
+        return etape.getLargeur();
+
+    }
+
     @Override
     public void reagir() {
         defineNomLabel();

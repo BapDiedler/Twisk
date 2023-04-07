@@ -325,6 +325,9 @@ public class MondeIG extends SujetObserve implements Iterable<EtapeIG>{
         notifierObs();
     }
 
+    /**
+     * méthode qui place une étape en mode sortie
+     */
     public void setSortiees(){
         for(EtapeIG etape: etapesSelectionne.values()){
             etape.setEstSortie();
@@ -344,7 +347,7 @@ public class MondeIG extends SujetObserve implements Iterable<EtapeIG>{
             Iterator<EtapeIG> iterator = etapesSelectionne.values().iterator();
             EtapeIG etape = iterator.next();
             int delai = Integer.parseInt(input);
-            if(delai < 1 || delai <= etape.getEcart() || delai >= 100){
+            if(delaiValide(etape,delai)){
                 etapesSelectionne.remove(etape.getIdentifiant());
                 notifierObs();
                 throw new TwiskIncorrectInput();
@@ -352,14 +355,43 @@ public class MondeIG extends SujetObserve implements Iterable<EtapeIG>{
             etape.setDelai(delai);
             etapesSelectionne.remove(etape.getIdentifiant());
             notifierObs();
-        }
-        catch (NumberFormatException e){
-            Iterator<EtapeIG> iterator = etapesSelectionne.values().iterator();
-            EtapeIG etape = iterator.next();
-            etapesSelectionne.remove(etape.getIdentifiant());
-            notifierObs();
+        }catch (NumberFormatException e){
+            deselectionneEtape();
             throw new TwiskIncorrectInput();
         }
+    }
+
+    /**
+     * test sur la validité du délai rentré
+     * @param etape étape qui se voit changer de délai
+     * @param delai nouveau délai
+     * @return true si le délai est valide false sinon
+     */
+    private boolean delaiValide(EtapeIG etape, int delai){
+        return delai < 1 || delai <= etape.getEcart() || delai >= 100;
+    }
+
+    /**
+     * test sur la validité du délai rentré
+     * @param etape étape qui se voit changer de délai
+     * @param ecart nouvel ecart
+     * @return true si l'ecart est valide false sinon
+     */
+    private boolean ecartValide(EtapeIG etape, int ecart){
+        return ecart < 1 || ecart >= etape.getDelai();
+    }
+
+    /**
+     * méthode qui désélectionne toutes les étapes
+     */
+    private void deselectionneEtape(){
+        EtapeIG etape;
+        Iterator<EtapeIG> iterator = etapesSelectionne.values().iterator();
+        while(iterator.hasNext()) {
+            etape = iterator.next();
+            etapesSelectionne.remove(etape.getIdentifiant());
+        }
+        notifierObs();
     }
 
     /**
@@ -372,7 +404,7 @@ public class MondeIG extends SujetObserve implements Iterable<EtapeIG>{
             int ecart = Integer.parseInt(input);
             Iterator<EtapeIG> iterator = etapesSelectionne.values().iterator();
             EtapeIG etape = iterator.next();
-            if (ecart < 1 || ecart >= etape.getDelai()) {
+            if (ecartValide(etape,ecart)) {
                 etapesSelectionne.remove(etape.getIdentifiant());
                 notifierObs();
                 throw new TwiskIncorrectInput();
@@ -382,10 +414,7 @@ public class MondeIG extends SujetObserve implements Iterable<EtapeIG>{
             notifierObs();
         }
         catch (NumberFormatException e){
-            Iterator<EtapeIG> iterator = etapesSelectionne.values().iterator();
-            EtapeIG etape = iterator.next();
-            etapesSelectionne.remove(etape.getIdentifiant());
-            notifierObs();
+            deselectionneEtape();
             throw new TwiskIncorrectInput();
         }
     }
