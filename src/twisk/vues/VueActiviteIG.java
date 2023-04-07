@@ -4,6 +4,7 @@ import javafx.geometry.Pos;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import twisk.mondeIG.ActiviteIG;
 import twisk.mondeIG.EtapeIG;
 import twisk.mondeIG.MondeIG;
 import twisk.outils.TailleComposants;
@@ -22,9 +23,10 @@ public class VueActiviteIG extends VueEtapeIG{
      * Le constructeur de VueActiviteIG
      * @param monde le monde graphique
      * @param activite l'activite graphique
+     * @param estClique si l'activité est sélectionnée ou non
      */
-    public VueActiviteIG(MondeIG monde, EtapeIG activite, boolean estCLique){
-        super(monde,activite, estCLique);
+    public VueActiviteIG(MondeIG monde, EtapeIG activite, boolean estClique){
+        super(monde,activite, estClique);
         zoneClients = new HBox();
         this.getChildren().add(zoneClients);
         defineStyle();
