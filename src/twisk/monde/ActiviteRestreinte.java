@@ -27,7 +27,7 @@ public class ActiviteRestreinte extends Activite {
      * @param nom nom de l'activité
      */
     public ActiviteRestreinte(String nom) {
-        this(nom, 0, 0);
+        this(nom, 3, 2);
     }
 
     /**
