@@ -1,6 +1,6 @@
 package twisk.ecouteurs;
 
-import twisk.exceptions.TwiskIncorrectInput;
+import twisk.exception.TwiskIncorrectInput;
 import javafx.animation.PauseTransition;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;

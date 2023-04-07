@@ -1,7 +1,7 @@
 package twisk.mondeIG;
 
-import twisk.exceptions.TwiskArcIncorrect;
-import twisk.exceptions.TwiskIncorrectInput;
+import twisk.exception.TwiskArcIncorrect;
+import twisk.exception.TwiskIncorrectInput;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;

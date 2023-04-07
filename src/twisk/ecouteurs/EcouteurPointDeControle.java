@@ -1,6 +1,6 @@
 package twisk.ecouteurs;
 
-import twisk.exceptions.TwiskArcIncorrect;
+import twisk.exception.TwiskArcIncorrect;
 import javafx.animation.PauseTransition;
 import javafx.event.EventHandler;
 import javafx.scene.control.Alert;
