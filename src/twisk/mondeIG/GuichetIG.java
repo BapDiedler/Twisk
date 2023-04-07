@@ -15,6 +15,9 @@ public class GuichetIG extends EtapeIG{
      */
     public GuichetIG(String nom){
         super(nom);
+        defineTaille();
+        definePosition();
+        definePointDeControles();
     }
 
     /**
