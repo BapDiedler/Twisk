@@ -61,7 +61,12 @@ public class MondeIG extends SujetObserve implements Iterable<EtapeIG>{
             ActiviteIG activite = new ActiviteIG();
             etapes.put(activite.getIdentifiant(), activite);
             notifierObs();
-        }else{
+        } else if (type.equals("Guichet")) {
+            //System.out.println("Une guichet a été ajoutée !");
+            GuichetIG guichetIG = new GuichetIG();
+            etapes.put(guichetIG.getIdentifiant(), guichetIG);
+            notifierObs();
+        } else{
             System.err.println("Erreur, type non reconnu.\n");
         }
     }
