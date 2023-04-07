@@ -29,7 +29,7 @@ public class VueOutils extends TilePane implements Observateur {
         this.monde = monde;
         monde.ajouterObs(this);
         this.ajoutActivite = new Button("+");
-        ajoutActivite.setStyle("-fx-font-size: 30;");
+        ajoutActivite.setStyle("-fx-font-size: 30; -fx-font-weight: bold;");
         ajoutActivite.setMinSize(70,70);
         ajoutActivite.setOnAction(event -> monde.ajouter("Activité"));
         ajoutActivite.setTooltip(new Tooltip());
