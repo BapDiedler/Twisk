@@ -160,7 +160,7 @@ public class VueMenu extends MenuBar implements Observateur{
      */
     private void setAbleDelai(){
         boolean desactive = delai.isDisable();
-        if(monde.getNbEtapesSelectionnees()==1 && desactive){
+        if(monde.getNbEtapesSelectionnees()==1 && (!monde.unGuichetEstSelectionne()) && desactive){
             delai.setDisable(false);
         } else if (!desactive) {
             delai.setDisable(true);
@@ -172,7 +172,7 @@ public class VueMenu extends MenuBar implements Observateur{
      */
     private void setAbleEcart(){
         boolean desactive = ecart.isDisable();
-        if(monde.getNbEtapesSelectionnees()==1 && desactive){
+        if(monde.getNbEtapesSelectionnees()==1 && (!monde.unGuichetEstSelectionne()) && desactive){
             ecart.setDisable(false);
         } else if (!desactive) {
             ecart.setDisable(true);
