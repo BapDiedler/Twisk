@@ -430,4 +430,18 @@ public class MondeIG extends SujetObserve implements Iterable<EtapeIG>{
      * @return La hashmap contenant les étpaes sélectionnées
      */
     public HashMap<String,EtapeIG> getEtapes(){return etapes;}
+
+    /**
+     * Renvoie vrai si un guichet est sélectionné dans le monde
+     * @return vrai si un guichet est sléectionné, faux sinon
+     */
+    public boolean unGuichetEstSelectionne(){
+        boolean contientUnGuichet = false;
+        for (EtapeIG etape : etapesSelectionne.values()) {
+            if (etape.estUnGuichet()) {
+                contientUnGuichet = true;
+            }
+        }
+        return contientUnGuichet;
+    }
 }
