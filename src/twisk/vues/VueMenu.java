@@ -18,7 +18,7 @@ public class VueMenu extends MenuBar implements Observateur{
     /**
      * Le monde
      */
-    private MondeIG monde;
+    private final MondeIG monde;
 
     /**
      * Menu comportant l'item qui permet de quitter
@@ -54,6 +54,16 @@ public class VueMenu extends MenuBar implements Observateur{
      * Item du menu qui permet de changer l'écart
      */
     private MenuItem ecart;
+
+    /**
+     * Item du menu qui permet de changer l'entrée
+     */
+    private MenuItem entree;
+
+    /**
+     * item du menu qui permet de changer la sortie
+     */
+    private MenuItem sortie;
 
     /**
      * Constructeur de la vue
@@ -104,13 +114,15 @@ public class VueMenu extends MenuBar implements Observateur{
     private void defineMonde(){
         this.memuMonde = new Menu("Monde");
 
-        MenuItem entree = new MenuItem("Entrée");
+        entree = new MenuItem("Entrée");
         entree.setOnAction(e -> monde.setEntrees());
         memuMonde.getItems().add(entree);
+        setAbleEntree();
 
-        MenuItem sortie = new MenuItem("Sortie");
+        sortie = new MenuItem("Sortie");
         sortie.setOnAction(e -> monde.setSortiees());
         memuMonde.getItems().add(sortie);
+        setAbleSortie();
     }
 
     /**
@@ -136,7 +148,7 @@ public class VueMenu extends MenuBar implements Observateur{
      */
     private void setAbleRenommer(){
         boolean desactive = renommer.isDisable();
-        if(monde.getNbSelectionnees()==1 && desactive){
+        if(monde.getNbEtapesSelectionnees()==1 && desactive){
             renommer.setDisable(false);
         } else if (!desactive) {
             renommer.setDisable(true);
@@ -148,7 +160,7 @@ public class VueMenu extends MenuBar implements Observateur{
      */
     private void setAbleDelai(){
         boolean desactive = delai.isDisable();
-        if(monde.getNbSelectionnees()==1 && desactive){
+        if(monde.getNbEtapesSelectionnees()==1 && desactive){
             delai.setDisable(false);
         } else if (!desactive) {
             delai.setDisable(true);
@@ -160,10 +172,34 @@ public class VueMenu extends MenuBar implements Observateur{
      */
     private void setAbleEcart(){
         boolean desactive = ecart.isDisable();
-        if(monde.getNbSelectionnees()==1 && desactive){
+        if(monde.getNbEtapesSelectionnees()==1 && desactive){
             ecart.setDisable(false);
         } else if (!desactive) {
             ecart.setDisable(true);
+        }
+    }
+
+    /**
+     * rend le menu entree actif si au moins une étape est sélectionnée.
+     */
+    private void setAbleEntree(){
+        boolean desactive = entree.isDisable();
+        if(monde.getNbEtapesSelectionnees() != 0 && desactive){
+            entree.setDisable(false);
+        } else if (!desactive) {
+            entree.setDisable(true);
+        }
+    }
+
+    /**
+     * rend le menu sortie actif si au moins une étape est sélectionnée.
+     */
+    private void setAbleSortie(){
+        boolean desactive = sortie.isDisable();
+        if(monde.getNbEtapesSelectionnees() != 0 && desactive){
+            sortie.setDisable(false);
+        } else if (!desactive) {
+            sortie.setDisable(true);
         }
     }
 
@@ -172,5 +208,7 @@ public class VueMenu extends MenuBar implements Observateur{
         setAbleRenommer();
         setAbleDelai();
         setAbleEcart();
+        setAbleEntree();
+        setAbleSortie();
     }
 }
