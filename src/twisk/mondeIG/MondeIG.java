@@ -276,7 +276,7 @@ public class MondeIG extends SujetObserve implements Iterable<EtapeIG>{
      * Donne le nombre d'étapes qui sont sélectionnées
      * @return Le nombre d'étapes sélectionnées
      */
-    public int getNbSelectionnees(){
+    public int getNbEtapesSelectionnees(){
         return etapesSelectionne.size();
     }
 
