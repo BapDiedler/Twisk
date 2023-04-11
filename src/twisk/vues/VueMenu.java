@@ -1,9 +1,6 @@
 package twisk.vues;
 
-import twisk.ecouteurs.EcouteurDelai;
-import twisk.ecouteurs.EcouteurEcart;
-import twisk.ecouteurs.EcouteurRenommer;
-import twisk.ecouteurs.EcouteurSupprimer;
+import twisk.ecouteurs.*;
 import javafx.application.Platform;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
@@ -149,6 +146,7 @@ public class VueMenu extends MenuBar implements Observateur{
         setAbleEcart();
 
         jetons = new MenuItem("Jetons");
+        jetons.setOnAction(new EcouteurJetons(monde));
         parametres.getItems().add(jetons);
         setAbleJetons();
     }

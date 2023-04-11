@@ -263,9 +263,15 @@ import java.util.Random;
 
     /**
      * Change le délai. La méthode ne fait rien ici et est réecrite dans ActiviteIG
-     * @param delai le nouveau délai
+     * @param delai Le nouveau délai
      */
     public void setDelai(int delai){}
+
+    /**
+     * Change le nombre de jetons. La méthode ne fait rien ici et est réécrite dans GuichetIG
+     * @param nbJetons Le nouveau nombre de jetons
+     */
+    public void setNbJetons(int nbJetons){}
 
     /**
      * Donne l'écart de l'étape. Renvoie -1 si ce n'est pas une ActiviteIG et est réecrite dans cette dernière.

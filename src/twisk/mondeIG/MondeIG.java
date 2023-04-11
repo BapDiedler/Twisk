@@ -347,7 +347,7 @@ public class MondeIG extends SujetObserve implements Iterable<EtapeIG>{
             Iterator<EtapeIG> iterator = etapesSelectionne.values().iterator();
             EtapeIG etape = iterator.next();
             int delai = Integer.parseInt(input);
-            if(delaiValide(etape,delai)){
+            if(delaiInvalide(etape,delai)){
                 etapesSelectionne.remove(etape.getIdentifiant());
                 notifierObs();
                 throw new TwiskIncorrectInput();
@@ -362,12 +362,46 @@ public class MondeIG extends SujetObserve implements Iterable<EtapeIG>{
     }
 
     /**
+     * Change le délai de l'étape
+     * @param input L'input de l'utilisateur. Il s'agit normalement d'un nombre qui sera le nouveau délai de l'étape
+     * @throws TwiskIncorrectInput Exception levée si l'input de l'utilisateur ne peut pas être parsée en int ou est
+     * négative
+     */
+    public void setNbJetonsEtape(String input) throws TwiskIncorrectInput {
+        try {
+            Iterator<EtapeIG> iterator = etapesSelectionne.values().iterator();
+            EtapeIG etape = iterator.next();
+            int nbJetons = Integer.parseInt(input);
+            if(nbJetonsInvalide(nbJetons)){
+                etapesSelectionne.remove(etape.getIdentifiant());
+                notifierObs();
+                throw new TwiskIncorrectInput();
+            }
+            etape.setNbJetons(nbJetons);
+            etapesSelectionne.remove(etape.getIdentifiant());
+            notifierObs();
+        }catch (NumberFormatException e){
+            deselectionneEtape();
+            throw new TwiskIncorrectInput();
+        }
+    }
+
+    /**
+     * Vérifie que le nombre de jetons saisi par l'utilisateur est une valeur valide
+     * @param nbJetons La valeur saisie par l'utilisateur
+     * @return vrai si la valeur est valide, faux sinon
+     */
+    private boolean nbJetonsInvalide(int nbJetons){
+        return nbJetons <= 0;
+    }
+
+    /**
      * test sur la validité du délai rentré
      * @param etape étape qui se voit changer de délai
      * @param delai nouveau délai
      * @return true si le délai est valide false sinon
      */
-    private boolean delaiValide(EtapeIG etape, int delai){
+    private boolean delaiInvalide(EtapeIG etape, int delai){
         return delai < 1 || delai <= etape.getEcart() || delai >= 100;
     }
 
@@ -377,7 +411,7 @@ public class MondeIG extends SujetObserve implements Iterable<EtapeIG>{
      * @param ecart nouvel ecart
      * @return true si l'ecart est valide false sinon
      */
-    private boolean ecartValide(EtapeIG etape, int ecart){
+    private boolean ecartInvalide(EtapeIG etape, int ecart){
         return ecart < 1 || ecart >= etape.getDelai();
     }
 
@@ -404,7 +438,7 @@ public class MondeIG extends SujetObserve implements Iterable<EtapeIG>{
             int ecart = Integer.parseInt(input);
             Iterator<EtapeIG> iterator = etapesSelectionne.values().iterator();
             EtapeIG etape = iterator.next();
-            if (ecartValide(etape,ecart)) {
+            if (ecartInvalide(etape,ecart)) {
                 etapesSelectionne.remove(etape.getIdentifiant());
                 notifierObs();
                 throw new TwiskIncorrectInput();
