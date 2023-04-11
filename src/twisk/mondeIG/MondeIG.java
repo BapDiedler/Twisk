@@ -13,12 +13,12 @@ public class MondeIG extends SujetObserve implements Iterable<EtapeIG>{
     /**
      * Collection d'étapes graphiques. La clé est l'identifiant de l'étape
      */
-    private HashMap<String,EtapeIG> etapes;
+    private final HashMap<String,EtapeIG> etapes;
 
     /**
      * Collection des arcs du monde
      */
-    private ArrayList<ArcIG> arcs;
+    private final ArrayList<ArcIG> arcs;
 
     /**
      * Collection des arcs sélectionnés
