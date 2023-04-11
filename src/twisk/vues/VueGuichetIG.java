@@ -1,7 +1,6 @@
 package twisk.vues;
 
 import twisk.mondeIG.EtapeIG;
-import twisk.mondeIG.GuichetIG;
 import twisk.mondeIG.MondeIG;
 
 /**
