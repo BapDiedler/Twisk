@@ -104,23 +104,11 @@ public abstract class VueEtapeIG extends VBox implements Observateur {
         this.setEffect(borderglow);
     }
 
-    protected void defineNomLabel(){
-        String nom = etape.getNom();
-        titre.setText(nom);
-        Image entree = new Image(getClass().getResourceAsStream("/check-in.png"), 30,30,true,true);
-        Image sortie = new Image(getClass().getResourceAsStream("/check-out.png"), 30,30,true,true);
-        ImageView entreeView = new ImageView(entree);
-        ImageView sortieView = new ImageView(sortie);
-        if(etape.estEntreeEtEstSortie()){
-            HBox images = new HBox();
-            images.getChildren().addAll(entreeView,sortieView);
-            titre.setGraphic(images);
-        } else if (etape.getEstEntree()) {
-            titre.setGraphic(entreeView);
-        } else if (etape.getEstSortie()) {
-            titre.setGraphic(sortieView);
-        }
-    }
+    /**
+     * Défini le texte dans le label, contiendra le nom de l'étape et les infos importantes (délai et écart temps
+     * si c'est une activité, nombre de jetons si c'est un guichet)
+     */
+    protected abstract void defineNomLabel();
 
     /**
      * Définit les paramètres du label du titre de l'étape graphique
