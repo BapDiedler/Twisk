@@ -55,7 +55,7 @@ public class VueGuichetIG extends VueEtapeIG{
                 rectangle.setFill(Color.WHITE);
                 rectangle.setArcHeight(10);
                 rectangle.setArcWidth(10);
-                rectangle.setStroke(Color.WHITE);
+                rectangle.setStroke(Color.BLUE);
             }
         }
         filAttente.setSpacing(1);
