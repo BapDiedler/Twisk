@@ -39,8 +39,8 @@ public class TailleComposants {
     private TailleComposants(){
         largeurActivite = 250;
         hauteurActivite = 200;
-        largeurGuichet = 250;
-        hauteurGuichet = 100;
+        largeurGuichet = 375;
+        hauteurGuichet = 125;
     }
 
     /**
