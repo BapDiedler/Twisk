@@ -1,9 +1,6 @@
 package twisk.vues;
 
-import twisk.ecouteurs.EcouteurDelai;
-import twisk.ecouteurs.EcouteurEcart;
-import twisk.ecouteurs.EcouteurRenommer;
-import twisk.ecouteurs.EcouteurSupprimer;
+import twisk.ecouteurs.*;
 import javafx.application.Platform;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
@@ -41,7 +38,8 @@ public class VueMenu extends MenuBar implements Observateur{
     private Menu memuMonde;
 
     /**
-     * Menu comportant les items qui permettent de changer le délai et l'écart de l'activité
+     * Menu comportant les items qui permettent de changer le délai, l'écart de l'activité
+     * et le nombre de jetons du guichet
      */
     private Menu parametres;
 
@@ -54,6 +52,12 @@ public class VueMenu extends MenuBar implements Observateur{
      * Item du menu qui permet de changer l'écart
      */
     private MenuItem ecart;
+
+
+    /**
+     * Item du menu qui permet de changer le nombre de jetons
+     */
+    private MenuItem jetons;
 
     /**
      * Item du menu qui permet de changer l'entrée
@@ -140,6 +144,11 @@ public class VueMenu extends MenuBar implements Observateur{
         ecart.setOnAction(new EcouteurEcart(monde));
         parametres.getItems().add(ecart);
         setAbleEcart();
+
+        jetons = new MenuItem("Jetons");
+        jetons.setOnAction(new EcouteurJetons(monde));
+        parametres.getItems().add(jetons);
+        setAbleJetons();
     }
 
     /**
@@ -203,6 +212,18 @@ public class VueMenu extends MenuBar implements Observateur{
         }
     }
 
+    /**
+     * rend le menu jetons actif si l'unique étape sélectionnée est un guichet
+     */
+    private void setAbleJetons(){
+        boolean desactive = jetons.isDisable();
+        if(monde.getNbEtapesSelectionnees() == 1 && monde.unGuichetEstSelectionne() && desactive){
+            jetons.setDisable(false);
+        } else if (!desactive) {
+            jetons.setDisable(true);
+        }
+    }
+
     @Override
     public void reagir() {
         setAbleRenommer();
@@ -210,5 +231,6 @@ public class VueMenu extends MenuBar implements Observateur{
         setAbleEcart();
         setAbleEntree();
         setAbleSortie();
+        setAbleJetons();
     }
 }
