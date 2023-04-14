@@ -1,10 +1,11 @@
 package twisk.mondeIG;
 
+import twisk.exception.MondeException;
 import twisk.exception.TwiskArcIncorrect;
 import twisk.exception.TwiskIncorrectInput;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
+import twisk.monde.Monde;
+
+import java.util.*;
 
 /**
  * Cette classe est la classe principale du modèle
@@ -49,6 +50,85 @@ public class MondeIG extends SujetObserve implements Iterable<EtapeIG>{
         etapes.put(activite.getIdentifiant(), activite);
         this.etapesSelectionne = new HashMap<>();
         this.arcsSelectionnes = new ArrayList<>(10);
+    }
+
+    private Monde creerMonde(){
+
+    }
+
+    /**
+     * méthode qui permet de simuler le mondeIG
+     */
+    public void simuler() throws MondeException {
+        ajouterSuccesseurs();
+        verifierMondeIG();
+    }
+
+
+    /**
+     * méthode pour savoir si le monde est valide
+     * utilisation du parcours en profondeur sur un arbre non connexe pour vérifier les chemins
+     *
+     * @throws MondeException déclenchée si le monde n'est pas valide
+     */
+    private void verifierMondeIG() throws MondeException {
+        EtapeIG etapeIG;
+        ArrayList<EtapeIG> etapesGrises = new ArrayList<>(10);
+        ArrayList<EtapeIG> etapesNoires = new ArrayList<>(10);
+        for(int i=0; i<etapes.size(); i++) {
+            etapeIG = getEtape(i);
+            if (!etapeIG.possedeUneSortie()) {
+                throw new MondeException("une étape n'a pas de chemin vers une sortie");
+            }
+            if (etapeIG.getEstEntree()) {
+                parcoursProfondeur(etapesGrises,etapesNoires,etapeIG);
+            }
+        }
+        if(etapesNoires.size() != etapes.values().size()){
+            throw new MondeException("une étape n'a pas été relier par une entrée");
+        }
+    }
+
+    /**
+     * simulation d'un parcours en profondeurs
+     * @param etapesGrises étapes du parcours qui sont grisés
+     * @param etapesNoires étapes du parcours qui sont noirs
+     * @param etapeIG étape de départ du parcours
+     */
+    private void parcoursProfondeur(ArrayList<EtapeIG> etapesGrises, ArrayList<EtapeIG> etapesNoires,EtapeIG etapeIG){
+        Iterator<EtapeIG> iter;
+        EtapeIG successeur;
+        Stack<EtapeIG> pile = new Stack<>();
+        etapesGrises.add(etapeIG);
+        pile.add(etapeIG);
+        while (!pile.isEmpty()) {
+            etapeIG = pile.pop();
+            iter = etapeIG.iteratorSuccesseurs();
+            while (iter.hasNext()) {
+                successeur = iter.next();
+                if (!etapesGrises.contains(successeur)) {
+                    if (!etapesNoires.contains(successeur)) {
+                        etapesGrises.add(successeur);
+                        pile.add(successeur);
+                    }
+                }
+            }
+            etapesGrises.remove(etapeIG);
+            etapesNoires.add(etapeIG);
+        }
+    }
+
+
+    /**
+     * méthode qui permet d'ajouter les successeurs aux étapes du monde
+     */
+    public void ajouterSuccesseurs(){
+        EtapeIG depart, arrivee;
+        for(ArcIG arc: arcs){
+            depart = arc.getPremPoint().getEtape();
+            arrivee = arc.getDeuxPoint().getEtape();
+            depart.setSuccesseurs(arrivee);
+        }
     }
 
     /**
@@ -464,6 +544,10 @@ public class MondeIG extends SujetObserve implements Iterable<EtapeIG>{
      * @return La hashmap contenant les étpaes sélectionnées
      */
     public HashMap<String,EtapeIG> getEtapes(){return etapes;}
+
+    public EtapeIG getEtape(int key){
+        return etapes.get(String.valueOf(key));
+    }
 
     /**
      * Renvoie vrai si un guichet est sélectionné dans le monde

@@ -53,9 +53,19 @@ import java.util.Random;
     protected boolean estSortie;
 
     /**
+     * vrai si l'étape est précédée d'un guichet, faux sinon
+     */
+    protected boolean estRestreint = false;
+
+    /**
      * Collection de points de contrôle de l'étape
      */
     protected ArrayList<PointDeControleIG> pointsControles;
+
+    /**
+     * Collection d'étape qui sont les successeurs de l'étape
+     */
+    protected ArrayList<EtapeIG> successeurs;
 
     /**
      * constructeur de la classe EtapeIG
@@ -65,6 +75,7 @@ import java.util.Random;
     public EtapeIG(String nom){
         defineNom(nom);
         defineEntreeSortie();
+        successeurs = new ArrayList<>(10);
     }
 
     /**
@@ -190,7 +201,7 @@ import java.util.Random;
 
     /**
      * Donne la collection de point de contrôle
-     * @return
+     * @return la liste des points de contrôles
      */
     public ArrayList<PointDeControleIG> getPointsControles(){
         return pointsControles;
@@ -199,6 +210,14 @@ import java.util.Random;
     @Override
     public Iterator<PointDeControleIG> iterator(){
         return pointsControles.iterator();
+    }
+
+    /**
+     * méthode qui permet l'ajout de successeur
+     * @param successeur l'étape qui est successeur de this
+     */
+    public void setSuccesseurs(EtapeIG successeur) {
+        this.successeurs.add(successeur);
     }
 
     /**
@@ -268,6 +287,14 @@ import java.util.Random;
     public void setDelai(int delai){}
 
     /**
+     * setter sur la restriction de l'étape
+     * @param restreint vrai si l'étape est restreinte
+     */
+    public void setEstRestreint(boolean restreint){
+        this.estRestreint = restreint;
+    }
+
+    /**
      * Change le nombre de jetons. La méthode ne fait rien ici et est réécrite dans GuichetIG
      * @param nbJetons Le nouveau nombre de jetons
      */
@@ -305,5 +332,32 @@ import java.util.Random;
      */
     public boolean estUneActivite(){
         return false;
+    }
+    public boolean estUneActiviteRestreinte(){
+        return false;
+    }
+
+    /**
+     * méthode qui donne un iterator sur les successeurs de l'étape
+     * @return un iterator d'étapeIG
+     */
+    public Iterator<EtapeIG> iteratorSuccesseurs(){
+        return successeurs.iterator();
+    }
+
+    /**
+     * méthode qui permet de savoir si l'étape possède un chemin vers une sortie dans ses successeurs
+     */
+    public boolean possedeUneSortie() {
+        boolean valide = true;
+        if(estSortie){
+            return true;
+        } else if (successeurs.size()==0) {
+            return false;
+        }
+        for(EtapeIG succ : successeurs){
+            valide&=succ.possedeUneSortie();
+        }
+        return valide;
     }
 }

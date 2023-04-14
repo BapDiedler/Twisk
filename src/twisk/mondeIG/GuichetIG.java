@@ -55,7 +55,22 @@ public class GuichetIG extends EtapeIG{
         return nbJetons;
     }
 
+    /**
+     * méthode qui permet de connaitre le nombre de jetons
+     * @param nbJetons Le nouveau nombre de jetons
+     */
     public void setNbJetons(int nbJetons){
         this.nbJetons = nbJetons;
+    }
+
+    @Override
+    public boolean possedeUneSortie() {
+        boolean valide =  super.possedeUneSortie();
+        if(successeurs.size()==1){
+            successeurs.get(0).setEstRestreint(true);
+            return valide;
+        }else{
+            return false;
+        }
     }
 }
