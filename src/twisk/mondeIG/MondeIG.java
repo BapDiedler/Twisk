@@ -132,7 +132,7 @@ public class MondeIG extends SujetObserve implements Iterable<EtapeIG>{
         verifierMondeIG();
         Monde monde = creerMonde();
         Simulation simulation = new Simulation();
-        int nbClients = 10;
+        int nbClients = getNbClients();
         simulation.setNbClients(nbClients);
         simulation.simuler(monde);
     }
