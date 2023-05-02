@@ -147,7 +147,17 @@ public abstract class VueEtapeIG extends VBox implements Observateur {
      * Défini le texte dans le label, contiendra le nom de l'étape et les infos importantes (délai et écart temps
      * si c'est une activité, nombre de jetons si c'est un guichet)
      */
-    protected abstract void defineNomLabel();
+    protected void defineNomLabel(){
+        informations = new HBox();
+        infoTemps = new Label();
+        appliquerEntree();
+        if(etape.getEstEntree())
+            informations.getChildren().add(1,infoTemps);
+        else
+            informations.getChildren().add(0,infoTemps);
+        appliquerSortie();
+        titre.setText(etape.getNom());
+    }
 
     /**
      * Définit les paramètres du label du titre de l'étape graphique

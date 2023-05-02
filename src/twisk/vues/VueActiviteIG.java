@@ -60,16 +60,8 @@ public class VueActiviteIG extends VueEtapeIG{
 
     @Override
     protected void defineNomLabel(){
-        informations = new HBox();
-        infoTemps = new Label();
-        appliquerEntree();
+        super.defineNomLabel();
         String delaiEcart = etape.getDelai() + " ± " + etape.getEcart();
         infoTemps.setText(delaiEcart);
-        if(etape.getEstEntree())
-            informations.getChildren().add(1,infoTemps);
-        else
-            informations.getChildren().add(0,infoTemps);
-        appliquerSortie();
-        titre.setText(etape.getNom());
     }
 }

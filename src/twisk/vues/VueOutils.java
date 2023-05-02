@@ -9,6 +9,8 @@ import javafx.util.Duration;
 import twisk.exception.MondeException;
 import twisk.mondeIG.MondeIG;
 
+import java.util.Objects;
+
 /**
  * Cette classe représente le bouton qui permet d'ajouter une étape
  */
@@ -77,7 +79,7 @@ public class VueOutils extends TilePane implements Observateur {
      */
     private void defineJouer(){
         jouer = new Button();
-        Image image = new Image(getClass().getResourceAsStream("/jouer.png"), 70,70,true,true);
+        Image image = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/jouer.png")), 70,70,true,true);
         ImageView imageView = new ImageView(image);
         jouer.setGraphic(imageView);
         jouer.setMinSize(70,70);

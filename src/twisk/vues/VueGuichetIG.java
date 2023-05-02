@@ -73,16 +73,8 @@ public class VueGuichetIG extends VueEtapeIG{
      * méthode qui permet de mettre le nom et les attributs du guichet
      */
     protected void defineNomLabel(){
+        super.defineNomLabel();
         String jetons = etape.getNbJetons() + " jetons";
-        informations = new HBox();
-        infoTemps = new Label();
-        appliquerEntree();
         infoTemps.setText(jetons);
-        if(etape.getEstEntree())
-            informations.getChildren().add(1,infoTemps);
-        else
-            informations.getChildren().add(0,infoTemps);
-        appliquerSortie();
-        titre.setText(etape.getNom());
     }
 }
