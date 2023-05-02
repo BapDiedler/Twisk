@@ -65,9 +65,14 @@ public class VueMenu extends MenuBar implements Observateur{
     private MenuItem entree;
 
     /**
-     * item du menu qui permet de changer la sortie
+     * Item du menu qui permet de changer la sortie
      */
     private MenuItem sortie;
+
+    /**
+     * Item du menu qui permet de changer le nombre de clients
+     */
+    private MenuItem clients;
 
     /**
      * Constructeur de la vue
@@ -127,6 +132,10 @@ public class VueMenu extends MenuBar implements Observateur{
         sortie.setOnAction(e -> monde.setSortiees());
         memuMonde.getItems().add(sortie);
         setAbleSortie();
+
+        clients = new MenuItem("Nombre clients");
+        clients.setOnAction(new EcouteurClients(monde));
+        memuMonde.getItems().add(clients);
     }
 
     /**

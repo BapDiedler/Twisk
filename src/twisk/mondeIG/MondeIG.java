@@ -39,10 +39,16 @@ public class MondeIG extends SujetObserve implements Iterable<EtapeIG>{
     private HashMap<String,EtapeIG> etapesSelectionne;
 
     /**
+     * Le nombre de clients
+     */
+    private int nbClients;
+
+    /**
      * Lors de la construction, le monde contient une activité
      */
     public MondeIG(){
         super();
+        nbClients = 10;
         arcs = new ArrayList<>(10);
         etapes = new HashMap<>();
         this.premPoint = null;
@@ -50,10 +56,6 @@ public class MondeIG extends SujetObserve implements Iterable<EtapeIG>{
         etapes.put(activite.getIdentifiant(), activite);
         this.etapesSelectionne = new HashMap<>();
         this.arcsSelectionnes = new ArrayList<>(10);
-    }
-
-    private Monde creerMonde(){
-
     }
 
     /**
@@ -561,5 +563,32 @@ public class MondeIG extends SujetObserve implements Iterable<EtapeIG>{
             }
         }
         return contientUnGuichet;
+    }
+
+    /**
+     * Donne le nombre de clients dans le monde
+     * @return Le nombre de clients
+     */
+    public int getNbClients(){
+        return nbClients;
+    }
+
+    /**
+     * Change le nombre de clients dans le monde
+     * @param nbClients Le nouveau nombre de clients dans le monde
+     */
+    public void setNbClients(String nbClients) throws TwiskIncorrectInput {
+        try {
+            int nombre = Integer.parseInt(nbClients);
+            if(nombre < 1 || nombre > 50){
+                throw new TwiskIncorrectInput();
+            }
+            else{
+                this.nbClients = nombre;
+            }
+        }
+        catch (NumberFormatException e){
+            throw new TwiskIncorrectInput();
+        }
     }
 }
