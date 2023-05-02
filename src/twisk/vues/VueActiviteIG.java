@@ -1,6 +1,7 @@
 package twisk.vues;
 
 import javafx.geometry.Pos;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
@@ -8,6 +9,8 @@ import twisk.mondeIG.ActiviteIG;
 import twisk.mondeIG.EtapeIG;
 import twisk.mondeIG.MondeIG;
 import twisk.outils.TailleComposants;
+
+import java.util.Objects;
 
 /**
  * Décrit le composant graphique d'une activité
@@ -57,21 +60,16 @@ public class VueActiviteIG extends VueEtapeIG{
 
     @Override
     protected void defineNomLabel(){
-        String nom = etape.getNom();
+        informations = new HBox();
+        infoTemps = new Label();
+        appliquerEntree();
         String delaiEcart = etape.getDelai() + " ± " + etape.getEcart();
-        titre.setText(nom + ": " + delaiEcart);
-        Image entree = new Image(getClass().getResourceAsStream("/check-in.png"), 30,30,true,true);
-        Image sortie = new Image(getClass().getResourceAsStream("/check-out.png"), 30,30,true,true);
-        ImageView entreeView = new ImageView(entree);
-        ImageView sortieView = new ImageView(sortie);
-        if(etape.estEntreeEtEstSortie()){
-            HBox images = new HBox();
-            images.getChildren().addAll(entreeView,sortieView);
-            titre.setGraphic(images);
-        } else if (etape.getEstEntree()) {
-            titre.setGraphic(entreeView);
-        } else if (etape.getEstSortie()) {
-            titre.setGraphic(sortieView);
-        }
+        infoTemps.setText(delaiEcart);
+        if(etape.getEstEntree())
+            informations.getChildren().add(1,infoTemps);
+        else
+            informations.getChildren().add(0,infoTemps);
+        appliquerSortie();
+        titre.setText(etape.getNom());
     }
 }

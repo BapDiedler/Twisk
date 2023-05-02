@@ -1,5 +1,7 @@
 package twisk.vues;
 
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import twisk.ecouteurs.EcouteurEtape;
 import twisk.ecouteurs.EcouteurSource;
 import javafx.geometry.Insets;
@@ -14,6 +16,8 @@ import javafx.scene.paint.Color;
 import twisk.mondeIG.EtapeIG;
 import twisk.mondeIG.MondeIG;
 
+import java.util.Objects;
+
 
 /**
  * Décrit le composant graphique d'une étape
@@ -23,6 +27,16 @@ public abstract class VueEtapeIG extends VBox implements Observateur {
      * Titre de l'étapeIG
      */
     protected Label titre;
+
+    /**
+     * information sur l'étape comme son temps
+     */
+    protected HBox informations;
+
+    /**
+     * délai et variance de temps ou nbJetons
+     */
+    protected Label infoTemps;
 
     /**
      * Le monde graphique
@@ -105,6 +119,31 @@ public abstract class VueEtapeIG extends VBox implements Observateur {
     }
 
     /**
+     * méthode qui permet d'appliquer l'image d'entrée sur les informations
+     */
+    protected void appliquerEntree(){
+        if(etape.getEstEntree()){
+            Image entree = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/check-in.png")), 30,30,true,true);
+            ImageView entreeView = new ImageView(entree);
+            informations.getChildren().add(0,entreeView);
+        }
+    }
+
+    /**
+     * méthode qui permet d'appliquer l'image de sortie sur les informations
+     */
+    protected void appliquerSortie(){
+        if(etape.getEstSortie()){
+            Image entree = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/check-out.png")), 30,30,true,true);
+            ImageView entreeView = new ImageView(entree);
+            if(etape.getEstEntree())
+                informations.getChildren().add(2,entreeView);
+            else
+                informations.getChildren().add(1,entreeView);
+        }
+    }
+
+    /**
      * Défini le texte dans le label, contiendra le nom de l'étape et les infos importantes (délai et écart temps
      * si c'est une activité, nombre de jetons si c'est un guichet)
      */
@@ -116,9 +155,13 @@ public abstract class VueEtapeIG extends VBox implements Observateur {
     private void defineLabel(){
         titre = new Label();
         defineNomLabel();
+        Font font = Font.font("Arial", FontWeight.BOLD, 16); // Crée une police en gras avec une taille de 14 points
+        infoTemps.setFont(font);
+        infoTemps.setAlignment(Pos.CENTER);
         titre.setPrefWidth(etape.getLargeur());
         titre.setPrefHeight(etape.getHauteur()*0.4);
-        getChildren().add(titre);
+        informations.setAlignment(Pos.CENTER);
+        getChildren().addAll(informations,titre);
         reagir();
     }
 

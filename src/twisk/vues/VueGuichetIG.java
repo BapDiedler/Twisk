@@ -1,6 +1,7 @@
 package twisk.vues;
 
 import javafx.geometry.Pos;
+import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
@@ -72,21 +73,16 @@ public class VueGuichetIG extends VueEtapeIG{
      * méthode qui permet de mettre le nom et les attributs du guichet
      */
     protected void defineNomLabel(){
-        String nom = etape.getNom();
         String jetons = etape.getNbJetons() + " jetons";
-        titre.setText(nom + ": " + jetons);
-        Image entree = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/check-in.png")), 30,30,true,true);
-        Image sortie = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/check-out.png")), 30,30,true,true);
-        ImageView entreeView = new ImageView(entree);
-        ImageView sortieView = new ImageView(sortie);
-        if(etape.estEntreeEtEstSortie()){
-            HBox images = new HBox();
-            images.getChildren().addAll(entreeView,sortieView);
-            titre.setGraphic(images);
-        } else if (etape.getEstEntree()) {
-            titre.setGraphic(entreeView);
-        } else if (etape.getEstSortie()) {
-            titre.setGraphic(sortieView);
-        }
+        informations = new HBox();
+        infoTemps = new Label();
+        appliquerEntree();
+        infoTemps.setText(jetons);
+        if(etape.getEstEntree())
+            informations.getChildren().add(1,infoTemps);
+        else
+            informations.getChildren().add(0,infoTemps);
+        appliquerSortie();
+        titre.setText(etape.getNom());
     }
 }
