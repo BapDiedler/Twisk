@@ -4,7 +4,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.Tooltip;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.TilePane;
+import twisk.exception.MondeException;
 import twisk.mondeIG.MondeIG;
 
 /**
@@ -21,6 +24,8 @@ public class VueOutils extends TilePane implements Observateur {
      * Le bouton qui permet d'ajouter des activités
      */
     private Button ajoutActivite;
+
+    private Button jouer;
 
     /**
      * Menu déroulant qui permet de choisir le type d'étape à ajouter
@@ -47,7 +52,26 @@ public class VueOutils extends TilePane implements Observateur {
         monde.ajouterObs(this);
         defineBouton();
         defineMenuBouton();
-        this.getChildren().add(typeEtape);
+        defineJouer();
+        this.getChildren().addAll(typeEtape,jouer);
+    }
+
+    /**
+     * Défini le bouton qui permet de lancer la simulation
+     */
+    private void defineJouer(){
+        jouer = new Button();
+        Image image = new Image(getClass().getResourceAsStream("/jouer.png"), 70,70,true,true);
+        ImageView imageView = new ImageView(image);
+        jouer.setGraphic(imageView);
+        jouer.setMinSize(70,70);
+        jouer.setOnAction(event -> {
+            try {
+                monde.simuler();
+            } catch (MondeException e) {
+                throw new RuntimeException(e);
+            }
+        });
     }
 
     /**
