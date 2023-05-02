@@ -1,9 +1,14 @@
 package twisk.mondeIG;
 
+import twisk.CorrespondanceEtapes;
 import twisk.exception.MondeException;
 import twisk.exception.TwiskArcIncorrect;
 import twisk.exception.TwiskIncorrectInput;
+import twisk.monde.Activite;
+import twisk.monde.Etape;
+import twisk.monde.Guichet;
 import twisk.monde.Monde;
+import twisk.simulation.Simulation;
 
 import java.util.*;
 
@@ -44,6 +49,12 @@ public class MondeIG extends SujetObserve implements Iterable<EtapeIG>{
     private int nbClients;
 
     /**
+     * attribut qui permet de faire les relations entre les éléments graphiques et le monde
+     */
+    private CorrespondanceEtapes correspondanceEtapes;
+
+
+    /**
      * Lors de la construction, le monde contient une activité
      */
     public MondeIG(){
@@ -59,11 +70,71 @@ public class MondeIG extends SujetObserve implements Iterable<EtapeIG>{
     }
 
     /**
+     * méthode qui permet la création d'un monde en fonction de l'application graphique
+     *
+     * @return le monde créer
+     */
+    private Monde creerMonde(){
+        Monde monde = new Monde();
+        correspondanceEtapes = new CorrespondanceEtapes();
+        creationEtapesMonde(monde);
+        liaisonEtapes(monde);
+        return monde;
+    }
+
+    /**
+     * méthode qui crée les liens entre les étapes du monde
+     *
+     * @param monde monde où se trouve les étapes
+     */
+    private void liaisonEtapes(Monde monde){
+        EtapeIG departIG, arriveeIG;
+        Etape depart, arrivee;
+        for(ArcIG arc : arcs){
+            departIG = arc.getPremPoint().getEtape();
+            arriveeIG = arc.getDeuxPoint().getEtape();
+            depart = correspondanceEtapes.get(departIG);
+            arrivee = correspondanceEtapes.get(arriveeIG);
+            depart.ajouterSuccesseur(arrivee);
+        }
+    }
+
+    /**
+     * méthode qui permet de créer les étapes se trouvant dans le monde
+     *
+     * @param monde monde dans lequel on ajoute les étapes
+     */
+    private void creationEtapesMonde(Monde monde){
+        Etape etape;
+        for(EtapeIG etapeIG: etapes.values()){
+            if(etapeIG.estUneActivite()){
+                etape = new Activite();
+                etape.setNom(etapeIG.getNom());
+            }else{
+                etape = new Guichet(etapeIG.getNom(),etapeIG.getNbJetons());
+            }
+            if(etapeIG.getEstSortie()){
+                monde.aCommeSortie(etape);
+            }
+            if(etapeIG.getEstEntree()){
+                monde.aCommeEntree(etape);
+            }
+            monde.ajouter(etape);
+            correspondanceEtapes.ajouter(etapeIG,etape);
+        }
+    }
+
+    /**
      * méthode qui permet de simuler le mondeIG
      */
     public void simuler() throws MondeException {
         ajouterSuccesseurs();
         verifierMondeIG();
+        Monde monde = creerMonde();
+        Simulation simulation = new Simulation();
+        int nbClients = 10;
+        simulation.setNbClients(nbClients);
+        simulation.simuler(monde);
     }
 
 

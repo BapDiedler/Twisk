@@ -59,6 +59,15 @@ public abstract class Etape implements Iterable<Etape> {
     }
 
     /**
+     * setter sur le nom de l'étape
+     *
+     * @param nom nouveau nom
+     */
+    public void setNom(String nom){
+        this.nom = nom;
+    }
+
+    /**
      * getter qui nous permet de savoir si une etape est une activité
      *
      * @return vrai si l'étape est une activité sinon faux
